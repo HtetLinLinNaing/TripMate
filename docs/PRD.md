@@ -1,9 +1,11 @@
 # TripMate MVP — Product Requirements Document
 
-**Status:** Draft  
+**Status:** Aligned with confirmed plan, revision 2
 **Product:** TripMate  
 **Scope:** Mobile-first shared-trip expense tracking  
 **Currency:** Thai baht (THB) for the MVP
+
+**Governing plan:** [.dev-loop/plans/tripmate-mvp/plan-preview.json](../.dev-loop/plans/tripmate-mvp/plan-preview.json), confirmed revision 2. The plan retains the technical design, stable S/A IDs, and planned test cases. Alignment does not claim implementation or test completion.
 
 ## 1. Product summary
 
@@ -67,14 +69,14 @@ Joins through an invitation, views the ledger, contributes money, records expens
 - A person can join a private trip through a valid invitation link or code.
 - Joining requires a display name.
 - The join screen displays an invitation note or trip context before confirmation.
-- A member cannot join the same trip twice using the same account or device identity.
-- Expired, invalid, and revoked invitations must show an actionable error.
+- Membership uses a persistent anonymous Supabase Auth identity created automatically; new members enter only a display name, with no registration form. If an existing member reopens an invitation on the same browser, take them straight to their existing trip without creating another membership.
+- New joins through expired, invalid, or revoked invitations show: “This invitation is no longer valid. Ask the organiser for a new link.” Existing-member access is based on membership, not the invitation’s validity.
 
 ### FR-3: Manage the group
 
-- The group board lists joined members and the trip organiser.
-- The organiser can invite additional members and set one cash holder.
-- The organiser can start the trip once at least two members have joined.
+- The group board lists joined members and the trip organiser, and receives authorised realtime updates when invited members join.
+- The organiser can invite additional members and select one current member as cash holder. Only the organiser can assign this role or start the trip.
+- Start trip stays disabled until there are at least two active members, including the organiser.
 - The cash holder is a role for the shared-pool workflow; it does not grant ownership of other members’ funds.
 
 ### FR-4: Record a contribution
@@ -99,21 +101,22 @@ Joins through an invitation, views the ledger, contributes money, records expens
 - **Everyone:** divide the expense equally among all active trip members.
 - **Selected people:** divide the expense equally among the members chosen by the payer.
 - **Mixed:** divide one expense into named parts, each with its own amount and assigned member(s).
-- The UI must show the calculated allocation before the expense is saved.
+- Every split method shows each person’s exact calculated share before saving, including Everyone and Mixed. For ฿121 split among three people, show ฿40.34, ฿40.33, and ฿40.33 with deterministic remainder assignment.
 - Allocations must total exactly the entered expense amount. Any rounding remainder is assigned deterministically and visibly.
-- A split cannot contain zero people or a negative allocation.
+- A split must include active trip members, and every saved allocation must be greater than zero. Reject empty participant groups, invalid participants, zero or negative allocations, and allocations that do not reconcile to the expense total.
 
 ### FR-7: View the active ledger
 
-- The active ledger displays current pool balance, recent activity, total used, and prominent actions for adding funds and expenses.
-- Members can identify which entries were paid personally versus from the pool.
-- Ledger totals update after a saved contribution or expense.
-- If a shared-pool expense exceeds available funds, TripMate must warn the user and require an explicit confirmation before recording it as a negative pool balance.
+- The active ledger prominently shows remaining pool balance, with total contributed shown separately, alongside recent activity, total used, and actions for adding funds or expenses. With ฿2,000 contributed and ฿761 paid from the pool, show ฿1,239 remaining.
+- Keep the expense list simple. Opening an expense’s details shows its payer and Personal / Shared pool source.
+- Ledger totals update after a saved contribution or expense. Other authorised members viewing the trip receive realtime updates without reopening it.
+- If a shared-pool expense exceeds available funds, TripMate must warn the user and show the resulting shortfall with Cancel and Save anyway. Only explicit Save anyway confirmation records the negative pool balance.
 
 ### FR-8: View a personal bill
 
 - A member can see an itemised breakdown of shared-cost allocations and personal extras.
-- The bill shows the member’s total share, money paid into the pool, and net amount due or credit.
+- The bill shows the member’s total share, money paid into the pool, personal-payment credits, and net amount due or credit. Members can return to the shared ledger to reconcile bill items with activity.
+- Show a separate “Paid personally” credit row when applicable.
 - The calculation should be explainable from ledger entries; no total may appear without a corresponding breakdown.
 
 ## 8. Business rules and calculations
@@ -121,7 +124,7 @@ Joins through an invitation, views the ledger, contributes money, records expens
 | Metric | Definition |
 | --- | --- |
 | Shared pool balance | Contributions into the pool minus expenses paid from the shared pool |
-| Member shared-cost total | Sum of that member’s allocations from shared expenses |
+| Member shared-cost total | Sum of shared-cost allocations, excluding allocations separately shown as personal extras |
 | Member personal extras | Expenses allocated only to that member |
 | Paid into pool | Sum of contributions attributed to that member |
 | Net settlement position | Member shared-cost total + personal extras − paid into pool − personally paid expense credits |
@@ -132,7 +135,7 @@ Personal-payment credits ensure a member who personally covers a shared cost is 
 
 | Entity | Required fields |
 | --- | --- |
-| User | ID, display name, account/device identity |
+| User | Supabase Auth user ID, display name |
 | Trip | ID, name, organiser ID, start date, end date, status, currency |
 | Membership | Trip ID, user ID, role, joined date, active status |
 | Invitation | Trip ID, invitation token, status, expiry, creator ID |
@@ -152,13 +155,13 @@ Personal-payment credits ensure a member who personally covers a shared cost is 
 
 ## 11. Notifications and invitations
 
-For the MVP, TripMate provides a copyable invitation link or code. Sending messages, push notifications, email delivery, reminders, and payment requests are deferred. Members see updates when they next open the trip.
+For the MVP, TripMate provides a copyable invitation link or code. Sending messages, push notifications, email delivery, reminders, and payment requests are deferred. In-app realtime updates are included: authorised viewers see new contributions, expenses, and group-board membership changes while viewing the trip. Reopening the trip loads current persisted state.
 
 ## 12. Authentication and privacy
 
-- A lightweight sign-in or persistent device identity is required to prevent duplicate membership and associate activity with a person.
-- Trips are private: only invited members may access trip data.
-- A member may see only the trips they belong to.
+- Supabase Auth with Next.js SSR support provides persistent identity for membership, attribution, and protected sessions. Identity is created anonymously behind the scenes; joining requires only a display name. Returning access depends on retaining the anonymous session in the same browser.
+- Trips are private: only authorised active trip members may read or mutate trip data. Application access checks and Supabase Postgres Row Level Security enforce these boundaries.
+- A member may see only the trips they belong to. Realtime subscriptions must enforce the same membership restrictions and never expose another trip’s data.
 - The product stores only the information necessary for membership, ledger activity, and display names in the MVP.
 
 ## 13. Success metrics
@@ -180,4 +183,25 @@ For the MVP, TripMate provides a copyable invitation link or code. Sending messa
 
 ## 15. MVP acceptance criteria
 
-The MVP is ready for testing when a group can create and join a private trip, assign a cash holder, record THB contributions, record personal and shared-pool expenses, use all three split methods, see accurate shared-pool and personal totals, and understand each member’s resulting due/credit position without external calculations.
+These criteria retain the IDs and wording of the confirmed plan. They describe intended outcomes, not executed verification.
+
+- **A1** (S1): An organiser creates a trip with valid required details and receives a private invitation.
+- **A2** (S1, S7): A valid invite lets a person join once; invalid, expired, or revoked invitations show an actionable error. Existing members on the same browser return to their trip without another membership.
+- **A3** (S1): An organiser can assign a cash holder and start a trip only after at least two members join.
+- **A4** (S2, S5): A positive contribution updates the pool balance, contributor total, and activity feed.
+- **A5** (S3, S5): A personal or shared-pool expense records its payer, source, and amount; a negative pool balance requires confirmation.
+- **A6** (S4): Equal, selected-member, and mixed allocations total exactly to the expense amount and reject invalid participants or allocations.
+- **A7** (S3, S5): The active ledger shows current remaining pool balance, total contributed, recent activity, and total used; payer and payment source are available in expense details.
+- **A8** (S5): A member's bill itemises allocations, contributions, personal-payment credit, and resulting due or credit position.
+- **A9** (S6): The primary flows remain usable on phone, tablet, and desktop widths with accessible controls.
+- **A10** (S7): Unauthorised users cannot read or mutate a trip, including through realtime updates.
+- **A11** (S8): No payment transfer, currency conversion, or automated settlement action is exposed in the MVP.
+
+## 16. Confirmed delivery and verification approach
+
+- One responsive Next.js App Router application with TypeScript supports phone, tablet, and desktop browsers.
+- Tailwind CSS and HeroUI provide the accessible, design-aligned interface. Core Iconify collections are bundled locally.
+- Supabase provides Auth, durable Postgres storage with migrations and Row Level Security, and authorised realtime change delivery.
+- Expense records and their allocations are saved atomically. Persisted money uses THB decimal precision, exact reconciled totals, and deterministic displayed rounding.
+- The plan defines unit verification of validation, allocation and balance logic; integration verification of persistence and access boundaries; and browser verification of responsive journeys and authorised live updates. Its TC IDs remain authoritative; no passing-test claims are made here.
+- Payment processing, currency conversion, outbound notifications, receipt capture, and settlement write actions remain deferred.
