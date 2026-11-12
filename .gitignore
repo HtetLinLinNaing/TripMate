@@ -13,3 +13,4 @@ playwright-report/
 .dev-loop/reviews/
 .dev-loop/plans/**/*.chat/
 .dev-loop/pushes/
+next-env.d.ts
