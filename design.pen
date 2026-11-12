@@ -535,7 +535,7 @@
               "fill": "$forest",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "3 people are already planning this trip",
+              "content": "You’re recognised on this browser",
               "fontFamily": "$font",
               "fontSize": 13,
               "fontWeight": "normal"
@@ -547,7 +547,7 @@
               "fill": "$muted",
               "textGrowth": "fixed-width",
               "width": "fill_container",
-              "content": "You will appear on the group board immediately.",
+              "content": "Open this invitation again and we’ll take you straight to Mom Jam.",
               "fontFamily": "$font",
               "fontSize": 12,
               "fontWeight": "normal"
@@ -1004,7 +1004,7 @@
               "id": "mTkUT",
               "name": "Label",
               "fill": "$forest",
-              "content": "CHOOSE CASH HOLDER",
+              "content": "ORGANISER · CHOOSE CASH HOLDER",
               "fontFamily": "$font",
               "fontSize": 10,
               "fontWeight": "700",
@@ -1167,7 +1167,7 @@
           "id": "fdtKw",
           "name": "Pool balance",
           "width": "fill_container",
-          "height": 58,
+          "height": 68,
           "fill": "#EFF8F4",
           "cornerRadius": 12,
           "layout": "vertical",
@@ -1179,7 +1179,7 @@
               "id": "Kivb0",
               "name": "Label",
               "fill": "$forest",
-              "content": "SHARED POOL",
+              "content": "REMAINING POOL",
               "fontFamily": "$font",
               "fontSize": 10,
               "fontWeight": "700",
@@ -1190,7 +1190,7 @@
               "id": "xXfyu",
               "name": "Amount",
               "fill": "$forest",
-              "content": "฿2,000.00",
+              "content": "฿1,239.00",
               "fontFamily": "$font",
               "fontSize": 24,
               "fontWeight": "700"
@@ -1210,7 +1210,7 @@
               "id": "kMBx9",
               "name": "Label",
               "fill": "$forest",
-              "content": "FUNDS ADDED",
+              "content": "PAID FROM POOL · ฿761.00",
               "fontFamily": "$font",
               "fontSize": 10,
               "fontWeight": "700",
@@ -1330,7 +1330,7 @@
                       "id": "WD4Xz",
                       "name": "Label",
                       "fill": "#A56600",
-                      "content": "TOTAL USED",
+                      "content": "TOTAL CONTRIBUTED",
                       "fontFamily": "$font",
                       "fontSize": 10,
                       "fontWeight": "700",
@@ -1341,7 +1341,7 @@
                       "id": "OSIuX",
                       "name": "Spent",
                       "fill": "#A56600",
-                      "content": "฿761.00",
+                      "content": "฿2,000.00",
                       "fontFamily": "$font",
                       "fontSize": 24,
                       "fontWeight": "700"
@@ -1596,7 +1596,7 @@
               "id": "CqqCm",
               "name": "Dates",
               "fill": "$muted",
-              "content": "6 people · Final bill",
+              "content": "3 people · Final bill",
               "fontFamily": "$font",
               "fontSize": 13,
               "fontWeight": "normal"
@@ -1645,7 +1645,7 @@
                       "id": "zxDci",
                       "name": "Shared title",
                       "fill": "$ink",
-                      "content": "Group share · 6 people",
+                      "content": "Group share · 3 people",
                       "fontFamily": "$font",
                       "fontSize": 14,
                       "fontWeight": "700"
@@ -1657,7 +1657,7 @@
                   "id": "OJj7J",
                   "name": "Shared amount",
                   "fill": "$ink",
-                  "content": "฿921.50",
+                  "content": "฿253.67",
                   "fontFamily": "$font",
                   "fontSize": 14,
                   "fontWeight": "700"
@@ -1707,7 +1707,7 @@
                       "id": "CIduz",
                       "name": "Dinner title",
                       "fill": "$ink",
-                      "content": "Dinner",
+                      "content": "Dinner extra",
                       "fontFamily": "$font",
                       "fontSize": 14,
                       "fontWeight": "normal"
@@ -1751,7 +1751,7 @@
                   "id": "cfmvC",
                   "name": "Drink title",
                   "fill": "$ink",
-                  "content": "Drink",
+                  "content": "Drink extra",
                   "fontFamily": "$font",
                   "fontSize": 14,
                   "fontWeight": "normal"
@@ -1803,7 +1803,7 @@
                   "id": "DAcRv",
                   "name": "Trip total amount",
                   "fill": "$ink",
-                  "content": "฿968.17",
+                  "content": "฿300.34",
                   "fontFamily": "$font",
                   "fontSize": 16,
                   "fontWeight": "700"
@@ -1828,7 +1828,7 @@
               "id": "CiIyq",
               "name": "Label",
               "fill": "$forest",
-              "content": "Paid in",
+              "content": "Paid into pool",
               "fontFamily": "$font",
               "fontSize": 14,
               "fontWeight": "normal"
@@ -1838,7 +1838,40 @@
               "id": "U6wMAw",
               "name": "Amount",
               "fill": "$forest",
-              "content": "− ฿1,000.00",
+              "content": "− ฿300.00",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "TEeIq",
+          "name": "Paid personally credit",
+          "width": "fill_container",
+          "fill": "#FFF3D9",
+          "cornerRadius": 10,
+          "padding": 13,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "fGBzb",
+              "name": "Paid personally label",
+              "fill": "#A56600",
+              "content": "Paid personally",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "egQcc",
+              "name": "Paid personally amount",
+              "fill": "#A56600",
+              "content": "− ฿26.67",
               "fontFamily": "$font",
               "fontSize": 14,
               "fontWeight": "700"
@@ -1873,7 +1906,7 @@
               "id": "giADg",
               "name": "Amount",
               "fill": "$forest",
-              "content": "฿31.83",
+              "content": "฿26.33",
               "fontFamily": "$font",
               "fontSize": 24,
               "fontWeight": "700"
@@ -2163,7 +2196,7 @@
       "name": "09 Add Expense",
       "clip": true,
       "width": 390,
-      "height": 844,
+      "height": 920,
       "fill": "$bg",
       "cornerRadius": 24,
       "stroke": "$line",
@@ -2524,7 +2557,7 @@
                   "id": "jU771",
                   "name": "Description",
                   "fill": "$forest",
-                  "content": "Split equally with all 6 members",
+                  "content": "Split equally with all 3 members",
                   "fontFamily": "$font",
                   "fontSize": 11,
                   "fontWeight": "normal"
@@ -2608,6 +2641,42 @@
                   "fontWeight": "normal"
                 }
               ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "UnFk7",
+          "name": "Everyone allocation",
+          "width": "fill_container",
+          "fill": "$mint",
+          "cornerRadius": 10,
+          "layout": "vertical",
+          "gap": 5,
+          "padding": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "Wg4fi",
+              "name": "Everyone allocation label",
+              "fill": "$forest",
+              "content": "EXACT SPLIT · ฿121.00",
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "W2JNn",
+              "name": "Everyone allocation values",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "JuJu ฿40.34 · HL ฿40.33 · Pwp ฿40.33",
+              "fontFamily": "$font",
+              "fontSize": 12,
+              "fontWeight": "normal"
             }
           ]
         }
@@ -3049,7 +3118,7 @@
               "id": "p16L1b",
               "name": "Split amount",
               "fill": "$muted",
-              "content": "Equal split · ฿40.33 each",
+              "content": "JuJu ฿40.34 · HL ฿40.33 · Pwp ฿40.33",
               "fontFamily": "$font",
               "fontSize": 11,
               "fontWeight": "normal"
@@ -3066,7 +3135,7 @@
       "name": "11 Mixed expense",
       "clip": true,
       "width": 390,
-      "height": 844,
+      "height": 900,
       "fill": "$bg",
       "cornerRadius": 24,
       "stroke": "$line",
@@ -3419,6 +3488,7 @@
               "id": "QL8y0",
               "name": "Coffee part",
               "width": "fill_container",
+              "height": 66,
               "fill": "#FFFFFF",
               "cornerRadius": 8,
               "stroke": "$line",
@@ -3449,6 +3519,18 @@
                   "fontFamily": "$font",
                   "fontSize": 11,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "tMUCK",
+                  "name": "Coffee allocation",
+                  "fill": "$muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JuJu ฿23.00 · HL ฿23.00 · Pwp ฿23.00",
+                  "fontFamily": "$font",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
                 }
               ]
             },
@@ -3457,6 +3539,7 @@
               "id": "G3KPp8",
               "name": "Driver part",
               "width": "fill_container",
+              "height": 66,
               "fill": "#FFFFFF",
               "cornerRadius": 8,
               "stroke": "$line",
@@ -3487,6 +3570,924 @@
                   "fontFamily": "$font",
                   "fontSize": 11,
                   "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "Y8Fks",
+                  "name": "Driver allocation",
+                  "fill": "$muted",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "JuJu ฿25.00 · HL ฿25.00 · Pwp ฿25.00",
+                  "fontFamily": "$font",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DuGpR",
+          "name": "Mixed totals",
+          "width": "fill_container",
+          "fill": "$mint",
+          "cornerRadius": 10,
+          "layout": "vertical",
+          "gap": 4,
+          "padding": 12,
+          "children": [
+            {
+              "type": "text",
+              "id": "ubA5f",
+              "name": "Mixed totals label",
+              "fill": "$forest",
+              "content": "EACH PERSON · TOTAL",
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "LkNMw",
+              "name": "Mixed totals copy",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "JuJu ฿48.00 · HL ฿48.00 · Pwp ฿48.00",
+              "fontFamily": "$font",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "KJhsm",
+      "x": 1350,
+      "y": 0,
+      "name": "02a Invalid invitation",
+      "clip": true,
+      "width": 390,
+      "height": 470,
+      "fill": "$bg",
+      "cornerRadius": 24,
+      "stroke": "$line",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 16,
+      "padding": [
+        20,
+        18,
+        18,
+        18
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "pTBWH",
+          "name": "Status Bar",
+          "width": "fill_container",
+          "height": 30,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "qTjlX",
+              "name": "Time",
+              "fill": "$ink",
+              "content": "9:41",
+              "fontFamily": "$font",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "M3fjW",
+              "name": "Signal",
+              "fill": "$ink",
+              "content": "●●●  5G  ▰",
+              "fontFamily": "$font",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "k2Sht",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 5,
+          "children": [
+            {
+              "type": "text",
+              "id": "sML47",
+              "name": "Eyebrow",
+              "fill": "$forest",
+              "content": "MOM JAM · INVITATION",
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "J2FPaw",
+              "name": "Title",
+              "fill": "$ink",
+              "content": "This link has expired.",
+              "fontFamily": "$font",
+              "fontSize": 26,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Bijst",
+              "name": "Copy",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "This invitation is no longer valid. Ask the organiser for a new link.",
+              "lineHeight": 1.35,
+              "fontFamily": "$font",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "h14OG",
+          "name": "Invitation help",
+          "width": "fill_container",
+          "fill": "#FFF3D9",
+          "cornerRadius": 12,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 14,
+          "children": [
+            {
+              "type": "text",
+              "id": "vAG4B",
+              "name": "Invitation help label",
+              "fill": "#A56600",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "NO ACCOUNT NEEDED",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "qvWqF",
+              "name": "Invitation help copy",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "When you receive a fresh link, add only your display name to join.",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Trf4l",
+          "name": "Back to trips",
+          "width": "fill_container",
+          "height": 45,
+          "fill": "$forest",
+          "cornerRadius": 8,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "HN2Xl",
+              "name": "Button label",
+              "fill": "#FFFFFF",
+              "content": "Back",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "b3xAp",
+      "x": 1800,
+      "y": 0,
+      "name": "03a Group board waiting",
+      "clip": true,
+      "width": 390,
+      "height": 615,
+      "fill": "$bg",
+      "cornerRadius": 24,
+      "stroke": "$line",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 16,
+      "padding": [
+        20,
+        18,
+        18,
+        18
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "tzB35",
+          "name": "Status Bar",
+          "width": "fill_container",
+          "height": 30,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "exd1v",
+              "name": "Time",
+              "fill": "$ink",
+              "content": "9:41",
+              "fontFamily": "$font",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "ll9eo",
+              "name": "Signal",
+              "fill": "$ink",
+              "content": "●●●  5G  ▰",
+              "fontFamily": "$font",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "R3o89U",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 5,
+          "children": [
+            {
+              "type": "text",
+              "id": "fQMmK",
+              "name": "Eyebrow",
+              "fill": "$forest",
+              "content": "WAITING FOR GROUP",
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "MtwHh",
+              "name": "Title",
+              "fill": "$ink",
+              "content": "Mom Jam",
+              "fontFamily": "$font",
+              "fontSize": 26,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "tsJC7",
+              "name": "Copy",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "11–14 July · 1 person joined",
+              "lineHeight": 1.35,
+              "fontFamily": "$font",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "F7Uq9R",
+          "name": "Joined people",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "cornerRadius": 12,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 14,
+          "children": [
+            {
+              "type": "text",
+              "id": "jwKC5",
+              "name": "Members label",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "PEOPLE · 1 JOINED",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "m1dVh",
+              "name": "Member one",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Niran · Organiser",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 15,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "oKkaN",
+          "name": "Invite action",
+          "width": "fill_container",
+          "height": 40,
+          "fill": "$mint",
+          "cornerRadius": 8,
+          "padding": [
+            0,
+            12
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "c9YSUy",
+              "name": "Invite copy",
+              "fill": "$forest",
+              "content": "Invite people",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "hO5ij",
+              "name": "Invite action",
+              "fill": "$forest",
+              "content": "Share",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Gg7YU",
+          "name": "Cash holder selection",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "cornerRadius": 12,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 14,
+          "children": [
+            {
+              "type": "text",
+              "id": "VEJGs",
+              "name": "Cash holder label",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "ORGANISER · CHOOSE CASH HOLDER",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "h06w6",
+              "name": "Cash holder value",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Niran · Selected",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zRohP",
+          "name": "Start trip disabled",
+          "width": "fill_container",
+          "height": 45,
+          "fill": "#B9C5C0",
+          "cornerRadius": 8,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "szCxB",
+              "name": "Disabled label",
+              "fill": "#FFFFFF",
+              "content": "Start trip · needs 2 members",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "pKVCZ",
+          "name": "Minimum members note",
+          "fill": "$muted",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Start trip unlocks when another member joins.",
+          "lineHeight": 1.3,
+          "fontFamily": "$font",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "X9mObw",
+      "x": 2250,
+      "y": 0,
+      "name": "05 Expense detail",
+      "clip": true,
+      "width": 390,
+      "height": 600,
+      "fill": "$bg",
+      "cornerRadius": 24,
+      "stroke": "$line",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 16,
+      "padding": [
+        20,
+        18,
+        18,
+        18
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "usyHV",
+          "name": "Status Bar",
+          "width": "fill_container",
+          "height": 30,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "zpRmw",
+              "name": "Time",
+              "fill": "$ink",
+              "content": "9:41",
+              "fontFamily": "$font",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "z9SJz",
+              "name": "Signal",
+              "fill": "$ink",
+              "content": "●●●  5G  ▰",
+              "fontFamily": "$font",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "fF5TC",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 5,
+          "children": [
+            {
+              "type": "text",
+              "id": "FX08M",
+              "name": "Eyebrow",
+              "fill": "$forest",
+              "content": "MOM JAM · EXPENSE",
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "LIfM7",
+              "name": "Title",
+              "fill": "$ink",
+              "content": "Coffee & lunch",
+              "fontFamily": "$font",
+              "fontSize": 26,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "rpjBl",
+              "name": "Copy",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "11 July · ฿121.00",
+              "lineHeight": 1.35,
+              "fontFamily": "$font",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "sP5oN",
+          "name": "Expense payment",
+          "width": "fill_container",
+          "fill": "#FFFFFF",
+          "cornerRadius": 12,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 14,
+          "children": [
+            {
+              "type": "text",
+              "id": "zd9Lh",
+              "name": "Paid by label",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "PAID BY",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "FjKmr",
+              "name": "Paid by",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "May",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 15,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "Hxrj6",
+              "name": "Payment source label",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "PAYMENT SOURCE",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "X89hZX",
+              "name": "Payment source",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Personal",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 15,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xprUt",
+          "name": "Expense shares",
+          "width": "fill_container",
+          "fill": "#EEF7F2",
+          "cornerRadius": 12,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 14,
+          "children": [
+            {
+              "type": "text",
+              "id": "phGQZ",
+              "name": "Shares label",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "SPLIT BETWEEN 3 PEOPLE",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "X6oRFk",
+              "name": "Share values",
+              "fill": "$forest",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "JuJu ฿40.34 · HL ฿40.33 · Pwp ฿40.33",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 13,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "GJbXz",
+          "name": "Detail note",
+          "fill": "$muted",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "The group board keeps this row simple; payer and payment source live here.",
+          "lineHeight": 1.3,
+          "fontFamily": "$font",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "n3zsuU",
+          "name": "Back to ledger",
+          "width": "fill_container",
+          "height": 45,
+          "fill": "$forest",
+          "cornerRadius": 8,
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "N4LAy",
+              "name": "Button label",
+              "fill": "#FFFFFF",
+              "content": "Done",
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "E2tmpF",
+      "x": 2700,
+      "y": 0,
+      "name": "09a Negative pool confirmation",
+      "clip": true,
+      "width": 390,
+      "height": 585,
+      "fill": "$bg",
+      "cornerRadius": 24,
+      "stroke": "$line",
+      "strokeWidth": 1,
+      "layout": "vertical",
+      "gap": 16,
+      "padding": [
+        20,
+        18,
+        18,
+        18
+      ],
+      "children": [
+        {
+          "type": "frame",
+          "id": "aP5nw",
+          "name": "Status Bar",
+          "width": "fill_container",
+          "height": 30,
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "u9vEO",
+              "name": "Time",
+              "fill": "$ink",
+              "content": "9:41",
+              "fontFamily": "$font",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "Zz7wk",
+              "name": "Signal",
+              "fill": "$ink",
+              "content": "●●●  5G  ▰",
+              "fontFamily": "$font",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Gtijb",
+          "name": "Header",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 5,
+          "children": [
+            {
+              "type": "text",
+              "id": "lUHJ7",
+              "name": "Eyebrow",
+              "fill": "$forest",
+              "content": "MOM JAM · EXPENSE",
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700",
+              "letterSpacing": 1
+            },
+            {
+              "type": "text",
+              "id": "JAyIA",
+              "name": "Title",
+              "fill": "$ink",
+              "content": "Save expense?",
+              "fontFamily": "$font",
+              "fontSize": 26,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "QGzVv",
+              "name": "Copy",
+              "fill": "$muted",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Dinner · ฿1,439.00 from the shared pool",
+              "lineHeight": 1.35,
+              "fontFamily": "$font",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "zzzUN",
+          "name": "Negative pool warning",
+          "width": "fill_container",
+          "fill": "#FFF3D9",
+          "cornerRadius": 12,
+          "layout": "vertical",
+          "gap": 8,
+          "padding": 14,
+          "children": [
+            {
+              "type": "text",
+              "id": "c5MGV",
+              "name": "Warning label",
+              "fill": "#A56600",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "POOL BALANCE",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 10,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "PDp81",
+              "name": "Warning amount",
+              "fill": "#A56600",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "฿1,239.00 available",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 20,
+              "fontWeight": "700"
+            },
+            {
+              "type": "text",
+              "id": "kRuk8",
+              "name": "Warning copy",
+              "fill": "$ink",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "This expense will leave the pool ฿200 below zero.",
+              "lineHeight": 1.3,
+              "fontFamily": "$font",
+              "fontSize": 14,
+              "fontWeight": "700"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "BYs6X",
+          "name": "Confirmation note",
+          "fill": "$muted",
+          "textGrowth": "fixed-width",
+          "width": "fill_container",
+          "content": "Saving records the expense only. No payment processing or settlement action is created.",
+          "lineHeight": 1.3,
+          "fontFamily": "$font",
+          "fontSize": 12,
+          "fontWeight": "normal"
+        },
+        {
+          "type": "frame",
+          "id": "QoLyE",
+          "name": "Confirmation actions",
+          "width": "fill_container",
+          "height": 45,
+          "gap": 8,
+          "children": [
+            {
+              "type": "frame",
+              "id": "F3SI8u",
+              "name": "Cancel",
+              "width": "fill_container",
+              "fill": "$surface",
+              "cornerRadius": 8,
+              "stroke": "$line",
+              "strokeWidth": 1,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "d5ylh",
+                  "name": "Cancel label",
+                  "fill": "$ink",
+                  "content": "Cancel",
+                  "fontFamily": "$font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N8aSNO",
+              "name": "Save anyway",
+              "width": "fill_container",
+              "fill": "$coral",
+              "cornerRadius": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "H1ymFP",
+                  "name": "Save anyway label",
+                  "fill": "#FFFFFF",
+                  "content": "Save anyway",
+                  "fontFamily": "$font",
+                  "fontSize": 14,
+                  "fontWeight": "700"
                 }
               ]
             }
