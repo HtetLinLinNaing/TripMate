@@ -218,6 +218,44 @@ describe.sequential("isolated PostgreSQL schema, RLS and transactions", () => {
       (await db.query("select id from public.expenses")).rows,
     ).toHaveLength(before.rows.length);
   });
+  it("TC5 completes an active trip for its organiser and TC2 rejects other completion attempts", async () => {
+    await expect(rpc(niran, "complete_trip", [trip])).rejects.toThrow(
+      "Only the organiser",
+    );
+    await rpc(may, "complete_trip", [trip]);
+    expect(await rpc(may, "trip_snapshot", [trip])).toMatchObject({
+      trip: { status: "completed" },
+    });
+    await expect(rpc(may, "complete_trip", [trip])).rejects.toThrow(
+      "Only active trips",
+    );
+  });
+  it("TC4 rejects contributions and expenses after a trip is completed", async () => {
+    const before = await db.query(
+      "select (select count(*) from public.contributions where trip_id=$1) as contributions, (select count(*) from public.expenses where trip_id=$1) as expenses",
+      [trip],
+    );
+    await expect(
+      rpc(may, "save_contribution", [
+        trip,
+        may,
+        100000,
+        "Late cash",
+        randomUUID(),
+      ]),
+    ).rejects.toThrow("completed trip");
+    await expect(rpc(may, "save_expense", [trip, expense()])).rejects.toThrow(
+      "completed trip",
+    );
+    expect(
+      (
+        await db.query(
+          "select (select count(*) from public.contributions where trip_id=$1) as contributions, (select count(*) from public.expenses where trip_id=$1) as expenses",
+          [trip],
+        )
+      ).rows,
+    ).toEqual(before.rows);
+  });
   it("TC13 prevents outsider reads, writes and protected RPC access", async () => {
     expect(
       (await as(outsider, "select * from public.trips")).rows,

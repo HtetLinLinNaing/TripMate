@@ -63,6 +63,7 @@ const rpcArgs = {
   invitation_context: ["p_token"],
   join_trip: ["p_token", "p_name"],
   configure_trip: ["p_trip", "p_holder", "p_start"],
+  complete_trip: ["p_trip"],
   trip_snapshot: ["p_trip"],
   save_contribution: ["p_trip", "p_member", "p_cents", "p_note", "p_operation"],
   save_expense: ["p_trip", "p"],

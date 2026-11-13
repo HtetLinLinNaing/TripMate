@@ -5,10 +5,12 @@ export default function Confirmation({
   children,
   busy,
   onCancel,
+  labelledBy = "confirmation-title",
 }: {
   children: ReactNode;
   busy: boolean;
   onCancel: () => void;
+  labelledBy?: string;
 }) {
   const dialog = useRef<HTMLDialogElement>(null);
   useEffect(() => {
@@ -20,7 +22,7 @@ export default function Confirmation({
     <dialog
       ref={dialog}
       className="confirm-dialog"
-      aria-labelledby="overdraw-title"
+      aria-labelledby={labelledBy}
       onCancel={(event) => {
         event.preventDefault();
         if (!busy) onCancel();
