@@ -414,7 +414,7 @@ export default function TripMate() {
     content = (
       <div className="empty">
         <p>We couldn’t open your private session.</p>
-        <Button onPress={() => void initialise()}>Try again</Button>
+        <Button onPress={() => void initialise()}>Try Again</Button>
       </div>
     );
   else
