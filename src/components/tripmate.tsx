@@ -38,6 +38,11 @@ type Part = { label: string; amount: string; members: string[] };
 type Invitation = { id?: string; name: string; existing: boolean };
 const invalidInvite =
   "This invitation is no longer valid. Ask the organiser for a new link.";
+function tripStatusLabel(status: Trip["status"]) {
+  if (status === "draft") return "Waiting for group";
+  if (status === "active") return "Active";
+  return "Completed";
+}
 function Glyph({ name }: { name: keyof typeof icons.icons }) {
   return (
     <Icon
@@ -127,7 +132,8 @@ export default function TripMate() {
       { label: "", amount: "", members: [] },
     ]);
   const [confirmBalance, setConfirmBalance] = useState<number | null>(null),
-    [holder, setHolder] = useState("");
+    [holder, setHolder] = useState(""),
+    [confirmEnd, setConfirmEnd] = useState(false);
   const operation = useRef(""),
     submitting = useRef(false);
   const refresh = useCallback(async (id: string) => {
@@ -356,6 +362,12 @@ export default function TripMate() {
       throw e;
     }
   }
+  async function completeTrip(tripId: string) {
+    await api("", { action: "complete", trip: tripId });
+    setConfirmEnd(false);
+    await refresh(tripId);
+    setNotice("Trip completed. The ledger is now final.");
+  }
   const submit = (event: FormEvent, work: () => Promise<void>) => {
     event.preventDefault();
     void run(work);
@@ -443,7 +455,7 @@ export default function TripMate() {
                 required={false}
               />
               <Button type="submit" variant="secondary" isDisabled={busy}>
-                Open invitation
+                Open Invitation
               </Button>
             </form>
             <h2>Your trips</h2>
@@ -460,9 +472,7 @@ export default function TripMate() {
                       {t.starts_on} → {t.ends_on}
                     </small>
                   </span>
-                  <span className="tag">
-                    {t.status === "draft" ? "Waiting for group" : "Active"}
-                  </span>
+                  <span className="tag">{tripStatusLabel(t.status)}</span>
                 </button>
               ))
             ) : (
@@ -768,16 +778,35 @@ export default function TripMate() {
                 No expenses yet. Add your first shared purchase.
               </p>
             )}
-            <div className="action-grid">
-              <Button className="secondary" onPress={() => go("funds")}>
-                <Glyph name="plus" />
-                Add funds
-              </Button>
-              <Button className="primary" onPress={() => go("expense")}>
-                <Glyph name="plus" />
-                Add expense
-              </Button>
-            </div>
+            {snapshot.trip.status === "completed" ? (
+              <p className="soft">
+                <strong>Completed</strong>
+                <br />
+                This ledger is final. New funds and expenses are locked.
+              </p>
+            ) : (
+              <>
+                <div className="action-grid">
+                  <Button className="secondary" onPress={() => go("funds")}>
+                    <Glyph name="plus" />
+                    Add funds
+                  </Button>
+                  <Button className="primary" onPress={() => go("expense")}>
+                    <Glyph name="plus" />
+                    Add expense
+                  </Button>
+                </div>
+                {organiser && (
+                  <Button
+                    variant="tertiary"
+                    isDisabled={busy}
+                    onPress={() => setConfirmEnd(true)}
+                  >
+                    End trip
+                  </Button>
+                )}
+              </>
+            )}
             <Button
               className="bill-link"
               variant="tertiary"
@@ -1186,7 +1215,7 @@ export default function TripMate() {
           {view === "board"
             ? "Waiting for group"
             : view === "ledger"
-              ? "Active"
+              ? tripStatusLabel(trip?.status ?? "active")
               : view === "bill"
                 ? trip?.name
                 : "TripMate · shared expenses"}
@@ -1214,7 +1243,7 @@ export default function TripMate() {
       </footer>
       {confirmBalance !== null && (
         <Confirmation busy={busy} onCancel={() => setConfirmBalance(null)}>
-          <h2 id="overdraw-title">Pool funds are short</h2>
+          <h2 id="confirmation-title">Pool funds are short</h2>
           <p>
             This expense will leave the pool{" "}
             {money(parseMoney(amount) - confirmBalance)} below zero.
@@ -1237,6 +1266,34 @@ export default function TripMate() {
               onPress={() => void run(() => saveExpense(confirmBalance))}
             >
               Save anyway
+            </Button>
+          </div>
+        </Confirmation>
+      )}
+      {confirmEnd && trip && (
+        <Confirmation
+          busy={busy}
+          labelledBy="end-trip-title"
+          onCancel={() => setConfirmEnd(false)}
+        >
+          <h2 id="end-trip-title">End {trip.name}?</h2>
+          <p>This locks the ledger so no one can add funds or expenses.</p>
+          <p className="muted">You can still review the final balances.</p>
+          <div className="action-grid">
+            <Button
+              autoFocus
+              variant="secondary"
+              isDisabled={busy}
+              onPress={() => setConfirmEnd(false)}
+            >
+              Cancel
+            </Button>
+            <Button
+              className="primary"
+              isDisabled={busy}
+              onPress={() => void run(() => completeTrip(trip.id))}
+            >
+              End trip
             </Button>
           </div>
         </Confirmation>

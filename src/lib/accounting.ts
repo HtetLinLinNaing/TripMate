@@ -84,7 +84,7 @@ export interface Trip {
   starts_on: string;
   ends_on: string;
   notes: string;
-  status: "draft" | "active";
+  status: "draft" | "active" | "completed";
   cash_holder_id: string | null;
 }
 export interface Contribution {

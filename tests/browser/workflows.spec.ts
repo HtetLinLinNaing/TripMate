@@ -121,6 +121,18 @@ test("TC16 TC20 complete all three workflows across browser presentation, Next A
   await expect(guest.getByRole("button", { name: "Join Mom Jam" })).toHaveCount(
     0,
   );
+  await page.getByRole("button", { name: "End trip", exact: true }).click();
+  await expect(page.getByRole("dialog")).toContainText("End Mom Jam?");
+  await page.getByRole("button", { name: "End trip", exact: true }).last().click();
+  await expect(page.locator("main > .eyebrow")).toHaveText("Completed");
+  await expect(
+    page.getByText("This ledger is final. New funds and expenses are locked."),
+  ).toBeVisible();
+  await expect(
+    page.getByRole("button", { name: /Add funds|Add expense/ }),
+  ).toHaveCount(0);
+  await guest.getByRole("button", { name: "Refresh", exact: true }).click();
+  await expect(guest.locator("main > .eyebrow")).toHaveText("Completed");
   await other.close();
 });
 test("TC15 exposes no payment/settlement controls; invalid invitation explains recovery", async ({

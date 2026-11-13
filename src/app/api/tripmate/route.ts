@@ -13,7 +13,7 @@ const uuid = (value: unknown) =>
 function safeError(message: string) {
   if (message.startsWith("POOL_CONFIRM:")) return message;
   if (
-    /^(This invitation|Enter |Choose |Only the organiser|Invite one more|Start the trip|Each share|Expense parts|Operation already|Too many trips|You do not have access|Invalid |Add valid)/.test(
+    /^(This invitation|Enter |Choose |Only the organiser|Only active trips|This is a completed trip|Invite one more|Start the trip|Each share|Expense parts|Operation already|Too many trips|You do not have access|Invalid |Add valid)/.test(
       message,
     )
   )
@@ -103,6 +103,9 @@ export async function POST(request: Request) {
           p_holder: body.holder,
           p_start: body.start === true,
         };
+      } else if (body.action === "complete") {
+        name = "complete_trip";
+        args = { p_trip: body.trip };
       } else if (body.action === "contribute") {
         name = "save_contribution";
         args = {

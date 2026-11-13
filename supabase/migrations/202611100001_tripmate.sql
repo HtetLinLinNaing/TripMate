@@ -5,7 +5,7 @@ revoke all on schema tripmate_private from public;
 create table public.trips (
  id uuid primary key default gen_random_uuid(), name text not null check(length(trim(name)) between 1 and 100),
  organiser_id uuid not null references auth.users(id), starts_on date not null, ends_on date not null,
- notes text not null default '' check(length(notes)<=2000), status text not null default 'draft' check(status in ('draft','active')),
+ notes text not null default '' check(length(notes)<=2000), status text not null default 'draft' check(status in ('draft','active','completed')),
  currency text not null default 'THB' check(currency='THB'), cash_holder_id uuid references auth.users(id),
  created_at timestamptz not null default now(), check(ends_on>=starts_on)
 );
@@ -113,6 +113,15 @@ begin
  update public.trips set cash_holder_id=p_holder,status=case when p_start then 'active' else status end where id=p_trip;
 end $$;
 
+create function public.complete_trip(p_trip uuid) returns void language plpgsql security definer set search_path='' as $$
+declare t public.trips;
+begin
+ select * into t from public.trips where id=p_trip for update;
+ if t.organiser_id is distinct from auth.uid() or auth.uid() is null then raise exception 'Only the organiser can end this trip'; end if;
+ if t.status<>'active' then raise exception 'Only active trips can be completed'; end if;
+ update public.trips set status='completed' where id=p_trip;
+end $$;
+
 create function public.trip_snapshot(p_trip uuid) returns jsonb language plpgsql stable security definer set search_path='' as $$
 declare result jsonb;
 begin
@@ -130,6 +139,7 @@ declare t public.trips; prior public.contributions; entry uuid;
 begin
  select * into t from public.trips where id=p_trip for update;
  if not tripmate_private.member(p_trip) then raise exception 'You do not have access to this trip'; end if;
+ if t.status='completed' then raise exception 'This is a completed trip; no new ledger entries can be recorded'; end if;
  if t.status<>'active' then raise exception 'Start the trip before recording funds'; end if;
  if p_cents is null or p_cents<=0 or p_cents>999999999999 then raise exception 'Enter a positive THB amount'; end if;
  select * into prior from public.contributions where recorder_id=auth.uid() and operation_id=p_operation;
@@ -147,6 +157,7 @@ declare t public.trips; prior public.expenses; entry uuid; total bigint; part js
 begin
  select * into t from public.trips where id=p_trip for update;
  if not tripmate_private.member(p_trip) then raise exception 'You do not have access to this trip'; end if;
+ if t.status='completed' then raise exception 'This is a completed trip; no new ledger entries can be recorded'; end if;
  if t.status<>'active' then raise exception 'Start the trip before recording expenses'; end if;
  select * into prior from public.expenses where recorder_id=auth.uid() and operation_id=(p->>'operation')::uuid;
  if found then
@@ -189,8 +200,8 @@ begin
  return entry;
 end $$;
 
-revoke execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) from public,anon;
-grant execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) to authenticated;
+revoke execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.complete_trip(uuid),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) from public,anon;
+grant execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.complete_trip(uuid),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) to authenticated;
 
 -- Realtime SELECT uses the same membership policies. Private rows never enter public broadcasts.
 alter publication supabase_realtime add table public.trips,public.memberships,public.contributions,public.expenses;
