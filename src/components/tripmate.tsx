@@ -455,7 +455,7 @@ export default function TripMate() {
                 required={false}
               />
               <Button type="submit" variant="secondary" isDisabled={busy}>
-                Open invitation
+                Open Invitation
               </Button>
             </form>
             <h2>Your trips</h2>
