@@ -422,10 +422,6 @@ export default function TripMate() {
       case "home":
         content = (
           <>
-            <p className="intro">
-              One trip, one shared ledger. Keep the memories; we’ll keep the
-              maths clear.
-            </p>
             <Button className="primary" onPress={() => go("create")}>
               Create a trip <Glyph name="arrow-right" />
             </Button>
