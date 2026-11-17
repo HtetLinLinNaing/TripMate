@@ -269,7 +269,7 @@ export default function TripMate() {
     trip = snapshot?.trip,
     organiser = trip?.organiser_id === user;
   const memberName = (id: string) =>
-    members.find((m) => m.user_id === id)?.display_name || "Trip member";
+    members.find((m) => m.user_id === id)?.display_name || "Trip Member";
   const totals = snapshot
       ? tripTotals(snapshot.contributions, snapshot.expenses)
       : null,
