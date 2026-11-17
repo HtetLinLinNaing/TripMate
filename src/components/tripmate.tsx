@@ -286,7 +286,7 @@ export default function TripMate() {
     home: "Good trips. Clear balances.",
     create: "Start together.",
     join: "Join the trip.",
-    board: trip?.name || "Your squard",
+    board: trip?.name || "Your team",
     ledger: trip?.name || "Trip ledger",
     funds: "Add funds",
     expense: "New expense",
