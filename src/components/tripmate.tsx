@@ -473,8 +473,8 @@ export default function TripMate() {
               ))
             ) : (
               <p className="muted">
-                Your next adventure starts here. Create a trip or open a
-                friend’s invitation.
+                Your next adventure starts now. Create a trip or open a friend’s
+                invitation.
               </p>
             )}
           </>
