@@ -269,7 +269,7 @@ export default function TripMate() {
     trip = snapshot?.trip,
     organiser = trip?.organiser_id === user;
   const memberName = (id: string) =>
-    members.find((m) => m.user_id === id)?.display_name || "Trip Member";
+    members.find((m) => m.user_id === id)?.display_name || "Trip member";
   const totals = snapshot
       ? tripTotals(snapshot.contributions, snapshot.expenses)
       : null,
@@ -286,7 +286,7 @@ export default function TripMate() {
     home: "Good trips. Clear balances.",
     create: "Start together.",
     join: "Join the trip.",
-    board: trip?.name || "Your team",
+    board: trip?.name || "Your group",
     ledger: trip?.name || "Trip ledger",
     funds: "Add funds",
     expense: "New expense",
@@ -473,8 +473,8 @@ export default function TripMate() {
               ))
             ) : (
               <p className="muted">
-                Your next adventure starts now. Create a trip or open a friend’s
-                invitation.
+                Your next adventure starts here. Create a trip or open a
+                friend’s invitation.
               </p>
             )}
           </>
