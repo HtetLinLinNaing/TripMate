@@ -1,0 +1,2110 @@
+{
+  "summary": "All three approved workflows are implemented and locally verified. Hosted Supabase Auth and realtime smoke verification remains pending; browser journeys substitute the external provider.",
+  "workflows": [
+    {
+      "workflowId": "set-up-trip",
+      "references": [
+        {
+          "file": "src/app/page.tsx",
+          "fromLine": 1,
+          "toLine": 4,
+          "caption": "Responsive application entry"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "references": [
+        {
+          "file": "src/app/page.tsx",
+          "fromLine": 1,
+          "toLine": 4,
+          "caption": "Responsive application entry"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "references": [
+        {
+          "file": "src/app/page.tsx",
+          "fromLine": 1,
+          "toLine": 4,
+          "caption": "Responsive application entry"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 5,
+          "toLine": 5,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+          "testCaseId": "TC16"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 5,
+          "toLine": 5,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+          "testCaseId": "TC16"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 5,
+          "toLine": 5,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+          "testCaseId": "TC16"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "references": [
+        {
+          "file": "src/app/api/tripmate/route.ts",
+          "fromLine": 1,
+          "toLine": 138,
+          "caption": "Authenticated, no-store read and command boundary"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 101,
+          "toLine": 191,
+          "caption": "Restore session and load protected trip state"
+        }
+      ],
+      "deviations": [],
+      "note": "Implementation exists; live Supabase service wiring is not execution-verified."
+    }
+  ],
+  "steps": [
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "step": 1,
+      "text": "Enter organiser, name, dates, and optional trip details.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 477,
+          "toLine": 539,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 47,
+          "toLine": 70,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 69,
+          "toLine": 79,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "step": 2,
+      "text": "Reject missing details or an end date before the start date.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 477,
+          "toLine": 539,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 47,
+          "toLine": 70,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 69,
+          "toLine": 79,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 13,
+          "toLine": 13,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC2 rejects missing names, impossible or reversed dates",
+          "testCaseId": "TC2"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "step": 3,
+      "text": "Create the trip, organiser membership, and invitation.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 477,
+          "toLine": 539,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 47,
+          "toLine": 70,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 69,
+          "toLine": 79,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 60,
+          "toLine": 60,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC1 creates the trip, organiser and invitation atomically",
+          "testCaseId": "TC1"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "step": 1,
+      "text": "Restore or automatically create a Supabase anonymous identity; ask new members only for a display name.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/lib/supabase-browser.ts",
+          "fromLine": 14,
+          "toLine": 38,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 81,
+          "toLine": 104,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 540,
+          "toLine": 585,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "step": 2,
+      "text": "Return existing members on the same browser to their trip without creating membership; otherwise reject invalid, expired, or revoked invitations with the agreed message.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/lib/supabase-browser.ts",
+          "fromLine": 14,
+          "toLine": 38,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 81,
+          "toLine": 104,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 540,
+          "toLine": 585,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 83,
+          "toLine": 83,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC3 joins exactly once and TC18 returns an existing trip",
+          "testCaseId": "TC18"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 101,
+          "toLine": 101,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC4 refuses revoked, expired and unknown invitations for new members",
+          "testCaseId": "TC4"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 221,
+          "toLine": 221,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC13 prevents outsider reads, writes and protected RPC access",
+          "testCaseId": "TC13"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "step": 3,
+      "text": "Create the membership and show the group board.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/lib/supabase-browser.ts",
+          "fromLine": 14,
+          "toLine": 38,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 81,
+          "toLine": 104,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 540,
+          "toLine": 585,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 83,
+          "toLine": 83,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC3 joins exactly once and TC18 returns an existing trip",
+          "testCaseId": "TC3"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "step": 1,
+      "text": "Review joined members on the group board.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 586,
+          "toLine": 698,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 106,
+          "toLine": 114,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "step": 2,
+      "text": "Select a current member as the cash holder.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 586,
+          "toLine": 698,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 106,
+          "toLine": 114,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 120,
+          "toLine": 120,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC17 sets the cash holder and starts two members; non-organiser is denied",
+          "testCaseId": "TC17"
+        }
+      ]
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "step": 3,
+      "text": "Keep Start trip disabled below two active members including the organiser; allow only the organiser to start once the threshold is met.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 586,
+          "toLine": 698,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 106,
+          "toLine": 114,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 36,
+          "toLine": 36,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC5 requires organiser authority and two active members including organiser",
+          "testCaseId": "TC5"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 120,
+          "toLine": 120,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC17 sets the cash holder and starts two members; non-organiser is denied",
+          "testCaseId": "TC17"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "step": 1,
+      "text": "Choose the contributor and enter a positive THB amount with an optional note.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 791,
+          "toLine": 839,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 3,
+          "toLine": 13,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 128,
+          "toLine": 142,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "step": 2,
+      "text": "Reject a zero, negative, or malformed amount.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 791,
+          "toLine": 839,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 3,
+          "toLine": 13,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 128,
+          "toLine": 142,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 43,
+          "toLine": 43,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC7 rejects zero, negative, malformed, overflow and fractional satang",
+          "testCaseId": "TC7"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "step": 3,
+      "text": "Save the contribution and publish the updated activity.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 791,
+          "toLine": 839,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 3,
+          "toLine": 13,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 128,
+          "toLine": 142,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 129,
+          "toLine": 129,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC6 saves contributions and retries without duplicates",
+          "testCaseId": "TC6"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 1,
+      "text": "Enter the expense description, payer, source, and positive THB total.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 840,
+          "toLine": 1027,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 23,
+          "toLine": 45,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 144,
+          "toLine": 190,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 2,
+      "text": "Choose everyone, selected-member, or mixed allocation and preview every person's exact share before saving.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 840,
+          "toLine": 1027,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 23,
+          "toLine": 45,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 144,
+          "toLine": 190,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 58,
+          "toLine": 58,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC10 splits ฿121 exactly and assigns the remainder by stable ID",
+          "testCaseId": "TC10"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 70,
+          "toLine": 70,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC19 selected and mixed parts charge only their groups and reconcile",
+          "testCaseId": "TC19"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 186,
+          "toLine": 186,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+          "testCaseId": "TC19"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 3,
+      "text": "Reject empty participants, negative shares, or allocations that do not equal the total.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 840,
+          "toLine": 1027,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 23,
+          "toLine": 45,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 144,
+          "toLine": 190,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 65,
+          "toLine": 65,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC11 rejects empty, duplicate, foreign participants and non-positive shares",
+          "testCaseId": "TC11"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 186,
+          "toLine": 186,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+          "testCaseId": "TC11"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 4,
+      "text": "Warn with the resulting negative pool balance and require explicit Save anyway confirmation; Cancel leaves the expense unsaved.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 840,
+          "toLine": 1027,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 23,
+          "toLine": 45,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 144,
+          "toLine": 190,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 173,
+          "toLine": 173,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation",
+          "testCaseId": "TC9"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 5,
+      "text": "Save the expense and allocations as one ledger entry.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 840,
+          "toLine": 1027,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 23,
+          "toLine": 45,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 144,
+          "toLine": 190,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 158,
+          "toLine": 158,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC8 saves a personal expense and its exact allocations atomically",
+          "testCaseId": "TC8"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 1,
+      "text": "Confirm the viewer is an active trip member.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 191,
+          "toLine": 220,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/integration/database.test.ts",
+          "fromLine": 221,
+          "toLine": 221,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC13 prevents outsider reads, writes and protected RPC access",
+          "testCaseId": "TC13"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 2,
+      "text": "Read contributions and expenses for the trip.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 191,
+          "toLine": 220,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 3,
+      "text": "Show remaining pool balance prominently, total contributed separately, total used and recent activity; open an expense to see its payer and payment source.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 191,
+          "toLine": 220,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 5,
+          "toLine": 5,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+          "testCaseId": "TC20"
+        }
+      ]
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 4,
+      "text": "Apply authorised realtime changes to the displayed ledger.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 191,
+          "toLine": 220,
+          "caption": "Action implementation and validation"
+        }
+      ],
+      "note": "Subscription code is implemented; TC12 live authorised WebSocket delivery remains pending against hosted Supabase."
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 1,
+      "text": "Confirm the viewer is an active trip member.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 133,
+          "toLine": 160,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 2,
+      "text": "Read the viewer's allocations, contributions, and personally paid shared expenses.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 133,
+          "toLine": 160,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 3,
+      "text": "Calculate an itemised shared-cost total, pool contribution total, payer credit, and net position.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 133,
+          "toLine": 160,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 114,
+          "toLine": 114,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC14 explains allocations, extras, contributions, personal credits and net",
+          "testCaseId": "TC14"
+        },
+        {
+          "file": "tests/accounting.test.ts",
+          "fromLine": 127,
+          "toLine": 127,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC14 excludes personal payments from pool spending and includes all expenses in total used",
+          "testCaseId": "TC14"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 4,
+      "text": "Display the itemised bill with a clear due or credit label and a separate “Paid personally” credit row when applicable.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "supabase/migrations/202611100001_tripmate.sql",
+          "fromLine": 116,
+          "toLine": 126,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/lib/accounting.ts",
+          "fromLine": 133,
+          "toLine": 160,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 5,
+          "toLine": 5,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+          "testCaseId": "TC20"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 126,
+          "toLine": 126,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC15 exposes no payment/settlement controls; invalid invitation explains recovery",
+          "testCaseId": "TC15"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "step": 1,
+      "text": "Open the active ledger from the bill.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1098,
+          "toLine": 1154,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "step": 2,
+      "text": "Match bill items to visible activity and expense details.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1098,
+          "toLine": 1154,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        }
+      ]
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "step": 3,
+      "text": "Return to the bill with the shared context understood.",
+      "status": "implemented",
+      "references": [
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1098,
+          "toLine": 1154,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 699,
+          "toLine": 790,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "src/components/tripmate.tsx",
+          "fromLine": 1028,
+          "toLine": 1097,
+          "caption": "Action implementation and validation"
+        },
+        {
+          "file": "tests/browser/workflows.spec.ts",
+          "fromLine": 126,
+          "toLine": 126,
+          "caption": "Planned case implemented; see test body",
+          "role": "test",
+          "symbol": "TC15 exposes no payment/settlement controls; invalid invitation explains recovery",
+          "testCaseId": "TC15"
+        }
+      ]
+    }
+  ],
+  "unplanned": [
+    {
+      "test": "T4",
+      "reason": "supporting",
+      "note": "Cross-origin security test supporting protected mutation boundaries."
+    },
+    {
+      "test": "T5",
+      "reason": "supporting",
+      "note": "Loopback-only external-service substitute for browser integration; not a test suite."
+    },
+    {
+      "hunk": "H1",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H2",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H3",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H4",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H5",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H6",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H7",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H8",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H9",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H10",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H11",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H12",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H13",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H14",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H15",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H16",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H17",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H18",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H19",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H20",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H21",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H22",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H23",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H24",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H25",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H26",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H27",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H28",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H29",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H30",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H31",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H32",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H33",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H34",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H35",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H36",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H37",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H38",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H39",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H40",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H41",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H42",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H43",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H44",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H45",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H46",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H47",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H48",
+      "reason": "out-of-plan",
+      "note": "Pre-existing user change or framework-generated instructions; not authored as workflow code."
+    },
+    {
+      "hunk": "H49",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H50",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H51",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H52",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H53",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H54",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H55",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H56",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H57",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H58",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H59",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H60",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H61",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H62",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H63",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H64",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H65",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H66",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H67",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H68",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H69",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H70",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H71",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H72",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H73",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H74",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H75",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H76",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H77",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H78",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H79",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H80",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H81",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H82",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H83",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H84",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H85",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H86",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H87",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H88",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H89",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H90",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H91",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H92",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H93",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H94",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H95",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H96",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H97",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H98",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H99",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H100",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H101",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H102",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H103",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H104",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H105",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H106",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H107",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H108",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H109",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H110",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H111",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H112",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H113",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H114",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H115",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H116",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H117",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H118",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H119",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H120",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H121",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H122",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H123",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H124",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H125",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H126",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H127",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H128",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H129",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H130",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H131",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H132",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H133",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H134",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H135",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H136",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H137",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H138",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H139",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H140",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H141",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H142",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H143",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H144",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H145",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H146",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H147",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H148",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H149",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H150",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H151",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H152",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H153",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H154",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H155",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H156",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H157",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H158",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H159",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H160",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H161",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H163",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H164",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H165",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H166",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H167",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H168",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H169",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H170",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H173",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H176",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H178",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H179",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H184",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H185",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H186",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H187",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H188",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H189",
+      "reason": "generated",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H190",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    },
+    {
+      "hunk": "H191",
+      "reason": "supporting",
+      "note": "Shared infrastructure, presentation, tests or local verification supporting all three workflows."
+    }
+  ]
+}

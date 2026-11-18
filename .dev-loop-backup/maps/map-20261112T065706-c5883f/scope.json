@@ -1,0 +1,779 @@
+{
+  "id": "map-20261112T065706747Z-ec3e68d3",
+  "capturedAt": "2026-11-12T06:57:07.832Z",
+  "repositoryRoot": "C:\\Users\\Administrator\\Desktop\\TripMateV3",
+  "scope": {
+    "type": "working-tree",
+    "baseRevision": "a266e8241168742ac1a858374f1dece2aea109cf",
+    "headRevision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+    "snapshotId": "cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b"
+  },
+  "snapshotId": "cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+  "includeIssues": false,
+  "reviewer": null,
+  "round": null,
+  "fixPreviews": false,
+  "changes": [
+    {
+      "file": "src/app/api/tripmate/route.ts",
+      "status": "modified",
+      "before": "cd614716532b6ca4e1b63159c0ef14844e95cbe3571fc8aca8624765193399b9",
+      "after": "a5a1d60b84473da6983970229635fa1a02b3ab81e38c1b9bac72a3e22ba7e4ad"
+    },
+    {
+      "file": "src/components/confirmation.tsx",
+      "status": "modified",
+      "before": "509e057fe8044d5e21ce03257feb9d3d6046a1b38c78ce09695e0e7a77e5cc93",
+      "after": "b00ef6ece37357212915288022f05077a05b889d0718fe4e52183fad210d9d8e"
+    },
+    {
+      "file": "src/components/tripmate.tsx",
+      "status": "modified",
+      "before": "5ef33b30aef0f52f90fab2cbb3f7427a36f291cb98f2eb69c815c9bacf697dc5",
+      "after": "b8c8daf3a5e8f90c8e8ef666a58a195ced3e3be3e93fa1ec23d14b36c3a72b97"
+    },
+    {
+      "file": "src/lib/accounting.ts",
+      "status": "modified",
+      "before": "4996a754ea3210afd089e6be33d47845a2980d95351ac7ac3f6b81621de2552c",
+      "after": "efc5312f6ecbaf7925a31dfa64a5daf517cd7678dc2160494ba2c0e1c43ee7e4"
+    },
+    {
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "status": "modified",
+      "before": "fe3d40632f3921c041aa9ea19c4ace829ea407211c92b6041db20a46e309dcd3",
+      "after": "0c5ee2cfa9315868d94a03111ffda9f82abccbe06f23da0f634adc2d18f4a062"
+    },
+    {
+      "file": "tests/browser/workflows.spec.ts",
+      "status": "modified",
+      "before": "f4677d3fc2f79cc1511a6be67cec384cd9d47896dddebaf98404678e9b2fe66f",
+      "after": "209f98386d11ff68fe0597c9d38cdec0e3c3e4b762017b0b44fd7c9cf8f1a7e5"
+    },
+    {
+      "file": "tests/integration/database.test.ts",
+      "status": "modified",
+      "before": "dfe735b78027cbc654456dbd44fb88010d071de2f433d998505c7ae37dd1237a",
+      "after": "60507cf0deb55963a041486d14279fb3f972e149e4bdd07b619a336471936e3a"
+    },
+    {
+      "file": "tests/support/supabase-fixture.mjs",
+      "status": "modified",
+      "before": "d787010138d5ff8e996dd1ba5b6fe8e2ee442119f2ff545d6fee7f5e8c7920d6",
+      "after": "8c481fabdf832a1eef660272ca329312844af4a6f52845c9c5e3b8374e395545"
+    },
+    {
+      "file": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+      "status": "added",
+      "before": null,
+      "after": "f73b80db274b717828176246babd94fc35945842919f3c5c2f46a6b34c071c6a"
+    }
+  ],
+  "omitted": [
+    {
+      "side": "base",
+      "file": "src/app/favicon.ico",
+      "reason": "binary-or-non-UTF8"
+    },
+    {
+      "side": "head",
+      "file": "src/app/favicon.ico",
+      "reason": "binary-or-non-UTF8"
+    }
+  ],
+  "sources": [
+    {
+      "id": "base-bc37d034bad56458",
+      "file": ".gitignore",
+      "asset": "sources/base/bc37d034bad564583790a46f19d807abfe519c5671395fd494d8cce506c42947.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "2b30981a5d2428335b999095b8eee78e81268dc5e3052680127678428e6c8949",
+      "language": "text",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/.gitignore"
+    },
+    {
+      "id": "base-a54ff182c7e8acf5",
+      "file": "AGENTS.md",
+      "asset": "sources/base/a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "063098f6cb31bb44c6f8fbea25b3876de7ee1e5f7d00a50dbab506f6415eb7f0",
+      "language": "md",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/AGENTS.md"
+    },
+    {
+      "id": "base-b335630551682c19",
+      "file": "README.md",
+      "asset": "sources/base/b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f",
+      "language": "md",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/README.md"
+    },
+    {
+      "id": "base-5a2c52e086ae1a9e",
+      "file": "design.pen",
+      "asset": "sources/base/5a2c52e086ae1a9ed96c68d1aa2066841f0a7ce29fb3cceac43a6d96382453aa.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "17eb106703162ef6d6170220cfbef896bdc412bc0d7d876bfe78bff8a1b6a307",
+      "language": "pen",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/design.pen"
+    },
+    {
+      "id": "base-487b79d1751c30f1",
+      "file": "docs/PRD.md",
+      "asset": "sources/base/487b79d1751c30f1530aa326b1d31d6062b4244d4e08bc4bbabb2777ca6e5e6b.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "a969982730573effe97dd30d8a5942f390d332e25d92e5e97ee846d391dda8c4",
+      "language": "md",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/docs/PRD.md"
+    },
+    {
+      "id": "base-5bd98433bbf0bc3e",
+      "file": "docs/implementation.md",
+      "asset": "sources/base/5bd98433bbf0bc3e9feae95c2aa11be9c35b64951369117eee8b9ab9de7427e9.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "b53272ea77da7a22e4c2cc8de8ba613734b5714896b6d023fe6c2f989c3b6740",
+      "language": "md",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/docs/implementation.md"
+    },
+    {
+      "id": "base-9601a8f6c734c200",
+      "file": "eslint.config.mjs",
+      "asset": "sources/base/9601a8f6c734c2001be34a2361f76946d19a39a709b5e8c624a2a5a0aade05f2.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "b67b88dca151f581c3b84877d577c414b6833f7795f53ee9ed76d50e84d54f82",
+      "language": "mjs",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/eslint.config.mjs"
+    },
+    {
+      "id": "base-e3f38f2f0e7ba92f",
+      "file": "next.config.ts",
+      "asset": "sources/base/e3f38f2f0e7ba92f0dd56c086ec5de704229d58d5371e8cc57e43961757d8c7b.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "5261a0a6dbe82d7972d0e8d4a443c45c1d02b692dc8da9869d11a00807511154",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/next.config.ts"
+    },
+    {
+      "id": "base-053150b640a7ce75",
+      "file": "package-lock.json",
+      "asset": "sources/base/053150b640a7ce75eff69d1a22cae7f0f94ad64ce9a855db544dda0929316519.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "e5b88b296dfd42f1607c66039fe627dcdbd05ba33751fd8bd935d554f60db569",
+      "language": "json",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/package-lock.json"
+    },
+    {
+      "id": "base-7ae45ad102eab3b6",
+      "file": "package.json",
+      "asset": "sources/base/7ae45ad102eab3b6d7e7896acd08c427a9b25b346470d7bc6507b6481575d519.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "67bfea6a51ff698370562d599eb1c64934a403049bd943cb34bb10f78cb2a7af",
+      "language": "json",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/package.json"
+    },
+    {
+      "id": "base-f679bf1e58e8dddf",
+      "file": "playwright.config.ts",
+      "asset": "sources/base/f679bf1e58e8dddfc6cff0fa37c8e755c8d2cfc9e6b5dc5520a5800beba59a92.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "f5dbb302fa05b222f80aa528ab6783103c4bfc5692607417193809ec508a089c",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/playwright.config.ts"
+    },
+    {
+      "id": "base-05a572ee54eee10f",
+      "file": "public/file.svg",
+      "asset": "sources/base/05a572ee54eee10f5ff4fb45dfdccb878c745d1a602e3d35ed14ffe720408b5d.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4",
+      "language": "svg",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/public/file.svg"
+    },
+    {
+      "id": "base-613a83104d85c1b2",
+      "file": "public/globe.svg",
+      "asset": "sources/base/613a83104d85c1b266d177fe063ee2251f39727e274358aefb28aa717640453c.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf",
+      "language": "svg",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/public/globe.svg"
+    },
+    {
+      "id": "base-3050cc21e1566c70",
+      "file": "public/next.svg",
+      "asset": "sources/base/3050cc21e1566c706c9efa7d87ed511043020a0f711c921b76f12baea15c8f8e.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc",
+      "language": "svg",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/public/next.svg"
+    },
+    {
+      "id": "base-1f1f1c059abc4c1f",
+      "file": "public/vercel.svg",
+      "asset": "sources/base/1f1f1c059abc4c1f3400f54a53a86ae4779d62e32a8904b2ad5e4d990ead6247.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4",
+      "language": "svg",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/public/vercel.svg"
+    },
+    {
+      "id": "base-fd8ddb0e49c91186",
+      "file": "public/window.svg",
+      "asset": "sources/base/fd8ddb0e49c91186bb9d4ea5533ad9254aefcb2709b980367b5bdabc47c64956.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1",
+      "language": "svg",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/public/window.svg"
+    },
+    {
+      "id": "base-3758ad602f4cae09",
+      "file": "src/app/api/tripmate/route.ts",
+      "asset": "sources/base/3758ad602f4cae0928d244f15378460891ee1d7f6f163dcd6dce3c5d77b4c00d.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "cd614716532b6ca4e1b63159c0ef14844e95cbe3571fc8aca8624765193399b9",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/app/api/tripmate/route.ts"
+    },
+    {
+      "id": "base-4f206759c961f544",
+      "file": "src/app/globals.css",
+      "asset": "sources/base/4f206759c961f544a48464ad2ee231adc87e72593d03a0004b68c17771f7a412.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "3cf250e5c70cd08662e7357c7b63b20a8f1c8b1c1539bcb390647a5c53803b52",
+      "language": "css",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/app/globals.css"
+    },
+    {
+      "id": "base-29d0a55f5ca1a995",
+      "file": "src/app/layout.tsx",
+      "asset": "sources/base/29d0a55f5ca1a9951042587f8b891bb4cd8b204f5bc855dc2468ed44cde2f5b3.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "9bce65f104a3e62c2103314e3e3b80757dc470dd2e31dda685209acf39abb7cb",
+      "language": "tsx",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/app/layout.tsx"
+    },
+    {
+      "id": "base-73d7a23e5015801b",
+      "file": "src/app/page.tsx",
+      "asset": "sources/base/73d7a23e5015801b9bcc9db601d6ec9594d3eb34e5bb23154e0ae4b0c30f1a3b.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "550b77ed36b078512c3b1577b4f437390406fe92f9d9dc6da0391bccd5e6b62e",
+      "language": "tsx",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/app/page.tsx"
+    },
+    {
+      "id": "base-b6c951804e7b673f",
+      "file": "src/components/confirmation.tsx",
+      "asset": "sources/base/b6c951804e7b673fa63c119d4514ffa0bfbfabc2266c80cb1484e0a6ee809756.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "509e057fe8044d5e21ce03257feb9d3d6046a1b38c78ce09695e0e7a77e5cc93",
+      "language": "tsx",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/components/confirmation.tsx"
+    },
+    {
+      "id": "base-19f6eb1239bfeaec",
+      "file": "src/components/tripmate.tsx",
+      "asset": "sources/base/19f6eb1239bfeaec0119355cbe3cd800f63e887cc33648027eaeec636c4377eb.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "5ef33b30aef0f52f90fab2cbb3f7427a36f291cb98f2eb69c815c9bacf697dc5",
+      "language": "tsx",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/components/tripmate.tsx"
+    },
+    {
+      "id": "base-a77df85de2e19173",
+      "file": "src/lib/accounting.ts",
+      "asset": "sources/base/a77df85de2e191738fc60ca034bc811f30598ebc14c79a4570615715620a4027.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "4996a754ea3210afd089e6be33d47845a2980d95351ac7ac3f6b81621de2552c",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/lib/accounting.ts"
+    },
+    {
+      "id": "base-c718619a882d3367",
+      "file": "src/lib/request-origin.ts",
+      "asset": "sources/base/c718619a882d33676f9b005d5f7e0d5c3091fb73ddd4c7d773569e94713272c5.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "2365ada58ac9ab08f7b4599dba496c574e5e2d7f33d74febda63568f7502e62a",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/lib/request-origin.ts"
+    },
+    {
+      "id": "base-0d26805b56742279",
+      "file": "src/lib/supabase-browser.ts",
+      "asset": "sources/base/0d26805b567422791197f5cf648069b54a07807c4448e128c6791f90dffc0256.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "1f475806bf5f235828fe0916006f4d1874bb99bc6808c1db3f12947722deb956",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/lib/supabase-browser.ts"
+    },
+    {
+      "id": "base-d94a11d6b5c5fde3",
+      "file": "src/lib/supabase-server.ts",
+      "asset": "sources/base/d94a11d6b5c5fde3d768c9e4a694cf6464ae57e650e0b7af0f9d78077aa74a48.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "b480927472851921b7a24f341291976ae57cce04850924cfbffea6597eab59c5",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/lib/supabase-server.ts"
+    },
+    {
+      "id": "base-78bb005ca7520864",
+      "file": "src/proxy.ts",
+      "asset": "sources/base/78bb005ca752086400a648d8aa3e60ce6f666e213da508caabd464d3bfeaf6a2.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "20dde90458ac89ba8d4a94fd19388bf8256cd559895872211329109d32860cf6",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/src/proxy.ts"
+    },
+    {
+      "id": "base-c65ab30c9effdf02",
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "asset": "sources/base/c65ab30c9effdf0299ecab4fc8b7010351f28609b33ad30ef99e398d8a532e00.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "fe3d40632f3921c041aa9ea19c4ace829ea407211c92b6041db20a46e309dcd3",
+      "language": "sql",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/supabase/migrations/202611100001_tripmate.sql"
+    },
+    {
+      "id": "base-0074600f6fd57ccf",
+      "file": "tests/accounting.test.ts",
+      "asset": "sources/base/0074600f6fd57ccf91ff961e4310059a432c1a24841d3b94adea03e06e3318e7.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "5c983bc4bd3480fc25139822380a30610a9ac0ef59649c1a7a5946a477480cb0",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/tests/accounting.test.ts"
+    },
+    {
+      "id": "base-9421ebb2c72b20db",
+      "file": "tests/browser/workflows.spec.ts",
+      "asset": "sources/base/9421ebb2c72b20db3fbbfb4c398d5b3483d97160f842e181e16effae1bd1085b.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "f4677d3fc2f79cc1511a6be67cec384cd9d47896dddebaf98404678e9b2fe66f",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/tests/browser/workflows.spec.ts"
+    },
+    {
+      "id": "base-4cb385ba012d8af8",
+      "file": "tests/integration/database.test.ts",
+      "asset": "sources/base/4cb385ba012d8af875b032b8ec05c61622659857e0fec64b15de2cfd1dc27cf0.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "dfe735b78027cbc654456dbd44fb88010d071de2f433d998505c7ae37dd1237a",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/tests/integration/database.test.ts"
+    },
+    {
+      "id": "base-0ba8e87cabe9e086",
+      "file": "tests/request-origin.test.ts",
+      "asset": "sources/base/0ba8e87cabe9e0866d68e8503571b03554f8b645e0fe7e38122db20f01521a39.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "3230b076338498de2a161fbd4f82792c516905473197453aa53cf072dbaf400e",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/tests/request-origin.test.ts"
+    },
+    {
+      "id": "base-97416c74c9848d1f",
+      "file": "tests/support/supabase-fixture.mjs",
+      "asset": "sources/base/97416c74c9848d1fadd4edbdff5b0fd899f8c226f7d142ad061d69bb926488f2.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "d787010138d5ff8e996dd1ba5b6fe8e2ee442119f2ff545d6fee7f5e8c7920d6",
+      "language": "mjs",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/tests/support/supabase-fixture.mjs"
+    },
+    {
+      "id": "base-b55cdbef4907b704",
+      "file": "tsconfig.json",
+      "asset": "sources/base/b55cdbef4907b7045f32cc5360d48d262cca5f94062e353089f189f4460039e0.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "023de8e47205b68f58bbaf6500c7de90e9a2e8c5fa01a2c83ca5d3e78c140e95",
+      "language": "json",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/tsconfig.json"
+    },
+    {
+      "id": "base-2ee894bf23aa44ff",
+      "file": "vitest.config.ts",
+      "asset": "sources/base/2ee894bf23aa44ff4ce12a3da8af19ab20180474ebf2176dbe5f2eea3f96dc92.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "b237a950a25e6d1761bb945c6b9d8edb023db0a895817512444f9d54f02a668a",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/vitest.config.ts"
+    },
+    {
+      "id": "base-3c8d49f04351b39c",
+      "file": "vitest.integration.config.ts",
+      "asset": "sources/base/3c8d49f04351b39c4c3cc793ee7c14a0abf725bb74155b3a617ca6b75162fa11.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "f5c14f62b25824253da9dca2df67be18b1e8582c6b29fcfe44dbf2355b4f9763",
+      "language": "ts",
+      "webUrl": "https://github.com/HtetLinLinNaing/TripMate/blob/a266e8241168742ac1a858374f1dece2aea109cf/vitest.integration.config.ts"
+    },
+    {
+      "id": "head-bc37d034bad56458",
+      "file": ".gitignore",
+      "asset": "sources/head/bc37d034bad564583790a46f19d807abfe519c5671395fd494d8cce506c42947.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "f5c70598d35e38ebc5e732a3ba9fa237eacfb1099b8ab0659159ee7fa72dd33f",
+      "language": "text"
+    },
+    {
+      "id": "head-a54ff182c7e8acf5",
+      "file": "AGENTS.md",
+      "asset": "sources/head/a54ff182c7e8acf56acfd6e4b9c3ff41e2c41a31c9b211b2deb9df75d9a478f9.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "063098f6cb31bb44c6f8fbea25b3876de7ee1e5f7d00a50dbab506f6415eb7f0",
+      "language": "md"
+    },
+    {
+      "id": "head-b335630551682c19",
+      "file": "README.md",
+      "asset": "sources/head/b335630551682c19a781afebcf4d07bf978fb1f8ac04c6bf87428ed5106870f5.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "60b55ff7df79af72590f9524208e46642bc32bdc175cdad41349681c0e2f958f",
+      "language": "md"
+    },
+    {
+      "id": "head-5a2c52e086ae1a9e",
+      "file": "design.pen",
+      "asset": "sources/head/5a2c52e086ae1a9ed96c68d1aa2066841f0a7ce29fb3cceac43a6d96382453aa.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "17eb106703162ef6d6170220cfbef896bdc412bc0d7d876bfe78bff8a1b6a307",
+      "language": "pen"
+    },
+    {
+      "id": "head-487b79d1751c30f1",
+      "file": "docs/PRD.md",
+      "asset": "sources/head/487b79d1751c30f1530aa326b1d31d6062b4244d4e08bc4bbabb2777ca6e5e6b.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "a969982730573effe97dd30d8a5942f390d332e25d92e5e97ee846d391dda8c4",
+      "language": "md"
+    },
+    {
+      "id": "head-5bd98433bbf0bc3e",
+      "file": "docs/implementation.md",
+      "asset": "sources/head/5bd98433bbf0bc3e9feae95c2aa11be9c35b64951369117eee8b9ab9de7427e9.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b53272ea77da7a22e4c2cc8de8ba613734b5714896b6d023fe6c2f989c3b6740",
+      "language": "md"
+    },
+    {
+      "id": "head-8b05d55eb919866d",
+      "file": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+      "asset": "sources/head/8b05d55eb919866df1c0a93b830542fa635e46169712c50ad497ce7c2751af55.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "f73b80db274b717828176246babd94fc35945842919f3c5c2f46a6b34c071c6a",
+      "language": "md"
+    },
+    {
+      "id": "head-9601a8f6c734c200",
+      "file": "eslint.config.mjs",
+      "asset": "sources/head/9601a8f6c734c2001be34a2361f76946d19a39a709b5e8c624a2a5a0aade05f2.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b67b88dca151f581c3b84877d577c414b6833f7795f53ee9ed76d50e84d54f82",
+      "language": "mjs"
+    },
+    {
+      "id": "head-e3f38f2f0e7ba92f",
+      "file": "next.config.ts",
+      "asset": "sources/head/e3f38f2f0e7ba92f0dd56c086ec5de704229d58d5371e8cc57e43961757d8c7b.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "5261a0a6dbe82d7972d0e8d4a443c45c1d02b692dc8da9869d11a00807511154",
+      "language": "ts"
+    },
+    {
+      "id": "head-053150b640a7ce75",
+      "file": "package-lock.json",
+      "asset": "sources/head/053150b640a7ce75eff69d1a22cae7f0f94ad64ce9a855db544dda0929316519.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "892aff975138a51a904a9a44fc6fe120924c233daa341cc418a6a18ba2920acc",
+      "language": "json"
+    },
+    {
+      "id": "head-7ae45ad102eab3b6",
+      "file": "package.json",
+      "asset": "sources/head/7ae45ad102eab3b6d7e7896acd08c427a9b25b346470d7bc6507b6481575d519.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "e72b9872b3618128bb7bc7e58b75d8225388fd2a7651a037bb6c5938d402d43d",
+      "language": "json"
+    },
+    {
+      "id": "head-f679bf1e58e8dddf",
+      "file": "playwright.config.ts",
+      "asset": "sources/head/f679bf1e58e8dddfc6cff0fa37c8e755c8d2cfc9e6b5dc5520a5800beba59a92.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "f5dbb302fa05b222f80aa528ab6783103c4bfc5692607417193809ec508a089c",
+      "language": "ts"
+    },
+    {
+      "id": "head-05a572ee54eee10f",
+      "file": "public/file.svg",
+      "asset": "sources/head/05a572ee54eee10f5ff4fb45dfdccb878c745d1a602e3d35ed14ffe720408b5d.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "2b67812c325c199a02536cdbeea0c593a72f707d323b72ee3e08dbab06753bd4",
+      "language": "svg"
+    },
+    {
+      "id": "head-613a83104d85c1b2",
+      "file": "public/globe.svg",
+      "asset": "sources/head/613a83104d85c1b266d177fe063ee2251f39727e274358aefb28aa717640453c.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b614b9bf183925957661ac851498fe1d8029fd43a62fbfed86f9e2624a57e7cf",
+      "language": "svg"
+    },
+    {
+      "id": "head-3050cc21e1566c70",
+      "file": "public/next.svg",
+      "asset": "sources/head/3050cc21e1566c706c9efa7d87ed511043020a0f711c921b76f12baea15c8f8e.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "55995dfad6ecb4945a1e856ddca03c5e16aa5bf13fd21b4df6a74ae79357bcfc",
+      "language": "svg"
+    },
+    {
+      "id": "head-1f1f1c059abc4c1f",
+      "file": "public/vercel.svg",
+      "asset": "sources/head/1f1f1c059abc4c1f3400f54a53a86ae4779d62e32a8904b2ad5e4d990ead6247.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "f081337b2fee635b455b63275406a3e7f39d6a014e25ad90dab5a67e62a12ac4",
+      "language": "svg"
+    },
+    {
+      "id": "head-fd8ddb0e49c91186",
+      "file": "public/window.svg",
+      "asset": "sources/head/fd8ddb0e49c91186bb9d4ea5533ad9254aefcb2709b980367b5bdabc47c64956.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "644768c4aaeb4767bce293344eeb0c125fb804a94d801440424072202d85e3a1",
+      "language": "svg"
+    },
+    {
+      "id": "head-3758ad602f4cae09",
+      "file": "src/app/api/tripmate/route.ts",
+      "asset": "sources/head/3758ad602f4cae0928d244f15378460891ee1d7f6f163dcd6dce3c5d77b4c00d.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "a5a1d60b84473da6983970229635fa1a02b3ab81e38c1b9bac72a3e22ba7e4ad",
+      "language": "ts"
+    },
+    {
+      "id": "head-4f206759c961f544",
+      "file": "src/app/globals.css",
+      "asset": "sources/head/4f206759c961f544a48464ad2ee231adc87e72593d03a0004b68c17771f7a412.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "3cf250e5c70cd08662e7357c7b63b20a8f1c8b1c1539bcb390647a5c53803b52",
+      "language": "css"
+    },
+    {
+      "id": "head-29d0a55f5ca1a995",
+      "file": "src/app/layout.tsx",
+      "asset": "sources/head/29d0a55f5ca1a9951042587f8b891bb4cd8b204f5bc855dc2468ed44cde2f5b3.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "9bce65f104a3e62c2103314e3e3b80757dc470dd2e31dda685209acf39abb7cb",
+      "language": "tsx"
+    },
+    {
+      "id": "head-73d7a23e5015801b",
+      "file": "src/app/page.tsx",
+      "asset": "sources/head/73d7a23e5015801b9bcc9db601d6ec9594d3eb34e5bb23154e0ae4b0c30f1a3b.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "550b77ed36b078512c3b1577b4f437390406fe92f9d9dc6da0391bccd5e6b62e",
+      "language": "tsx"
+    },
+    {
+      "id": "head-b6c951804e7b673f",
+      "file": "src/components/confirmation.tsx",
+      "asset": "sources/head/b6c951804e7b673fa63c119d4514ffa0bfbfabc2266c80cb1484e0a6ee809756.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b00ef6ece37357212915288022f05077a05b889d0718fe4e52183fad210d9d8e",
+      "language": "tsx"
+    },
+    {
+      "id": "head-19f6eb1239bfeaec",
+      "file": "src/components/tripmate.tsx",
+      "asset": "sources/head/19f6eb1239bfeaec0119355cbe3cd800f63e887cc33648027eaeec636c4377eb.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b8c8daf3a5e8f90c8e8ef666a58a195ced3e3be3e93fa1ec23d14b36c3a72b97",
+      "language": "tsx"
+    },
+    {
+      "id": "head-a77df85de2e19173",
+      "file": "src/lib/accounting.ts",
+      "asset": "sources/head/a77df85de2e191738fc60ca034bc811f30598ebc14c79a4570615715620a4027.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "efc5312f6ecbaf7925a31dfa64a5daf517cd7678dc2160494ba2c0e1c43ee7e4",
+      "language": "ts"
+    },
+    {
+      "id": "head-c718619a882d3367",
+      "file": "src/lib/request-origin.ts",
+      "asset": "sources/head/c718619a882d33676f9b005d5f7e0d5c3091fb73ddd4c7d773569e94713272c5.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "2365ada58ac9ab08f7b4599dba496c574e5e2d7f33d74febda63568f7502e62a",
+      "language": "ts"
+    },
+    {
+      "id": "head-0d26805b56742279",
+      "file": "src/lib/supabase-browser.ts",
+      "asset": "sources/head/0d26805b567422791197f5cf648069b54a07807c4448e128c6791f90dffc0256.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "1f475806bf5f235828fe0916006f4d1874bb99bc6808c1db3f12947722deb956",
+      "language": "ts"
+    },
+    {
+      "id": "head-d94a11d6b5c5fde3",
+      "file": "src/lib/supabase-server.ts",
+      "asset": "sources/head/d94a11d6b5c5fde3d768c9e4a694cf6464ae57e650e0b7af0f9d78077aa74a48.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b480927472851921b7a24f341291976ae57cce04850924cfbffea6597eab59c5",
+      "language": "ts"
+    },
+    {
+      "id": "head-78bb005ca7520864",
+      "file": "src/proxy.ts",
+      "asset": "sources/head/78bb005ca752086400a648d8aa3e60ce6f666e213da508caabd464d3bfeaf6a2.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "20dde90458ac89ba8d4a94fd19388bf8256cd559895872211329109d32860cf6",
+      "language": "ts"
+    },
+    {
+      "id": "head-c65ab30c9effdf02",
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "asset": "sources/head/c65ab30c9effdf0299ecab4fc8b7010351f28609b33ad30ef99e398d8a532e00.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "0c5ee2cfa9315868d94a03111ffda9f82abccbe06f23da0f634adc2d18f4a062",
+      "language": "sql"
+    },
+    {
+      "id": "head-0074600f6fd57ccf",
+      "file": "tests/accounting.test.ts",
+      "asset": "sources/head/0074600f6fd57ccf91ff961e4310059a432c1a24841d3b94adea03e06e3318e7.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "5c983bc4bd3480fc25139822380a30610a9ac0ef59649c1a7a5946a477480cb0",
+      "language": "ts"
+    },
+    {
+      "id": "head-9421ebb2c72b20db",
+      "file": "tests/browser/workflows.spec.ts",
+      "asset": "sources/head/9421ebb2c72b20db3fbbfb4c398d5b3483d97160f842e181e16effae1bd1085b.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "209f98386d11ff68fe0597c9d38cdec0e3c3e4b762017b0b44fd7c9cf8f1a7e5",
+      "language": "ts"
+    },
+    {
+      "id": "head-4cb385ba012d8af8",
+      "file": "tests/integration/database.test.ts",
+      "asset": "sources/head/4cb385ba012d8af875b032b8ec05c61622659857e0fec64b15de2cfd1dc27cf0.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "60507cf0deb55963a041486d14279fb3f972e149e4bdd07b619a336471936e3a",
+      "language": "ts"
+    },
+    {
+      "id": "head-0ba8e87cabe9e086",
+      "file": "tests/request-origin.test.ts",
+      "asset": "sources/head/0ba8e87cabe9e0866d68e8503571b03554f8b645e0fe7e38122db20f01521a39.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "3230b076338498de2a161fbd4f82792c516905473197453aa53cf072dbaf400e",
+      "language": "ts"
+    },
+    {
+      "id": "head-97416c74c9848d1f",
+      "file": "tests/support/supabase-fixture.mjs",
+      "asset": "sources/head/97416c74c9848d1fadd4edbdff5b0fd899f8c226f7d142ad061d69bb926488f2.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "8c481fabdf832a1eef660272ca329312844af4a6f52845c9c5e3b8374e395545",
+      "language": "mjs"
+    },
+    {
+      "id": "head-b55cdbef4907b704",
+      "file": "tsconfig.json",
+      "asset": "sources/head/b55cdbef4907b7045f32cc5360d48d262cca5f94062e353089f189f4460039e0.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "c687cb582547ff3557c285b5995ee7c589cffe309393899f71446baa7b81a868",
+      "language": "json"
+    },
+    {
+      "id": "head-2ee894bf23aa44ff",
+      "file": "vitest.config.ts",
+      "asset": "sources/head/2ee894bf23aa44ff4ce12a3da8af19ab20180474ebf2176dbe5f2eea3f96dc92.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b237a950a25e6d1761bb945c6b9d8edb023db0a895817512444f9d54f02a668a",
+      "language": "ts"
+    },
+    {
+      "id": "head-3c8d49f04351b39c",
+      "file": "vitest.integration.config.ts",
+      "asset": "sources/head/3c8d49f04351b39c4c3cc793ee7c14a0abf725bb74155b3a617ca6b75162fa11.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "f5c14f62b25824253da9dca2df67be18b1e8582c6b29fcfe44dbf2355b4f9763",
+      "language": "ts"
+    }
+  ]
+}

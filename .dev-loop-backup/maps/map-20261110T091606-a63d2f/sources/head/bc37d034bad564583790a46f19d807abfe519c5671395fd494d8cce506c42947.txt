@@ -1,0 +1,14 @@
+.dev-loop
+node_modules/
+.next/
+.next-test/
+out/
+coverage/
+test-results/
+playwright-report/
+*.tsbuildinfo
+.env*.local
+.dev-loop/sessions/
+.dev-loop/runs/
+.dev-loop/reviews/
+.dev-loop/plans/**/*.chat/

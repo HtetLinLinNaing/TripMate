@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "id": "push-11bdbe45-1ff5-4b27-9deb-c278e9cca56d",
+  "status": "Push Failed",
+  "options": {
+    "context": ""
+  },
+  "candidate": {
+    "root": "C:/Users/Administrator/Desktop/TripMateV3",
+    "branch": "feature/version-1",
+    "head": "462e5e138a45129e707f22b4760e5c1a550afbaf",
+    "destination": {
+      "remote": "origin",
+      "endpoint": "https://github.com/HtetLinLinNaing/TripMate.git",
+      "ref": "refs/heads/feature/version-1",
+      "publish": false,
+      "oid": "ea138cbf1df9692d36c39e526edf8980e1482222"
+    },
+    "issue": {
+      "value": null,
+      "inferred": false,
+      "conflicts": []
+    },
+    "commits": [
+      {
+        "hash": "462e5e138a45129e707f22b4760e5c1a550afbaf",
+        "subject": "add the testing update'",
+        "message": "add the testing update'"
+      }
+    ],
+    "dirty": [],
+    "mixedIssues": [],
+    "configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+    "transport": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "workspace": "3174b82d2cfee604e9983c22db963bbc752ec734300c77ff7726a98c85512f4f",
+    "allow_push_without_issue": true,
+    "status": "ready"
+  },
+  "created_at": "2026-11-16T08:17:05.998Z",
+  "evidence": {
+    "configuration_fingerprint": "7340943802766fe64979bfea053f0203c4cbbf60f6af89b5a410cf6fc962465a",
+    "status": "Gate Passed",
+    "results": [
+      {
+        "name": "tests",
+        "command": "npm run test",
+        "timeout_seconds": 60,
+        "started_at": "2026-11-16T08:37:54.393Z",
+        "ended_at": "2026-11-16T08:37:57.764Z",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "\n> tripmate@0.1.0 test\n> vitest run\n\n(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v4.1.12 C:/Users/ADMINI~1/AppData/Local/Temp/dev-loop-push-DCHgk3/checkout\n\n\n Test Files  2 passed (2)\n      Tests  9 passed (9)\n   Start at  15:37:56\n   Duration  862ms (transform 198ms, setup 0ms, import 305ms, tests 58ms, environment 0ms)\n\n"
+      },
+      {
+        "name": "lint",
+        "command": "npm run lint",
+        "timeout_seconds": 120,
+        "started_at": "2026-11-16T08:37:57.764Z",
+        "ended_at": "2026-11-16T08:38:22.697Z",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "\n> tripmate@0.1.0 lint\n> eslint\n\n"
+      },
+      {
+        "name": "typecheck",
+        "command": "npm run typecheck",
+        "timeout_seconds": 120,
+        "started_at": "2026-11-16T08:38:22.697Z",
+        "ended_at": "2026-11-16T08:38:34.901Z",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "\n> tripmate@0.1.0 typecheck\n> next typegen && tsc --noEmit\n\nGenerating route types...\n✓ Types generated successfully\n"
+      }
+    ],
+    "bootstrap": {
+      "command": "npm ci",
+      "exit_code": 0,
+      "status": "passed",
+      "output": "npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n\nadded 485 packages, and audited 492 packages in 2m\n\n163 packages are looking for funding\n  run `npm fund` for details\n\n7 moderate severity vulnerabilities\n\nTo address all issues, run:\n  npm audit fix\n\nRun `npm audit` for details.\n"
+    },
+    "head": "462e5e138a45129e707f22b4760e5c1a550afbaf",
+    "project_configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+    "candidate": "2b605985d152ad8718d9e731583dbf020563f1d2c0dfaea213e93631f7c680ba"
+  },
+  "preview": {
+    "candidate": {
+      "root": "C:/Users/Administrator/Desktop/TripMateV3",
+      "branch": "feature/version-1",
+      "head": "462e5e138a45129e707f22b4760e5c1a550afbaf",
+      "destination": {
+        "remote": "origin",
+        "endpoint": "https://github.com/HtetLinLinNaing/TripMate.git",
+        "ref": "refs/heads/feature/version-1",
+        "publish": false,
+        "oid": "ea138cbf1df9692d36c39e526edf8980e1482222"
+      },
+      "issue": {
+        "value": null,
+        "inferred": false,
+        "conflicts": []
+      },
+      "commits": [
+        {
+          "hash": "462e5e138a45129e707f22b4760e5c1a550afbaf",
+          "subject": "add the testing update'",
+          "message": "add the testing update'"
+        }
+      ],
+      "dirty": [],
+      "mixedIssues": [],
+      "configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+      "transport": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "workspace": "3174b82d2cfee604e9983c22db963bbc752ec734300c77ff7726a98c85512f4f",
+      "allow_push_without_issue": true,
+      "status": "ready"
+    },
+    "evidence": {
+      "configuration_fingerprint": "7340943802766fe64979bfea053f0203c4cbbf60f6af89b5a410cf6fc962465a",
+      "status": "Gate Passed",
+      "results": [
+        {
+          "name": "tests",
+          "command": "npm run test",
+          "timeout_seconds": 60,
+          "started_at": "2026-11-16T08:37:54.393Z",
+          "ended_at": "2026-11-16T08:37:57.764Z",
+          "exit_code": 0,
+          "status": "passed",
+          "output": "\n> tripmate@0.1.0 test\n> vitest run\n\n(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v4.1.12 C:/Users/ADMINI~1/AppData/Local/Temp/dev-loop-push-DCHgk3/checkout\n\n\n Test Files  2 passed (2)\n      Tests  9 passed (9)\n   Start at  15:37:56\n   Duration  862ms (transform 198ms, setup 0ms, import 305ms, tests 58ms, environment 0ms)\n\n"
+        },
+        {
+          "name": "lint",
+          "command": "npm run lint",
+          "timeout_seconds": 120,
+          "started_at": "2026-11-16T08:37:57.764Z",
+          "ended_at": "2026-11-16T08:38:22.697Z",
+          "exit_code": 0,
+          "status": "passed",
+          "output": "\n> tripmate@0.1.0 lint\n> eslint\n\n"
+        },
+        {
+          "name": "typecheck",
+          "command": "npm run typecheck",
+          "timeout_seconds": 120,
+          "started_at": "2026-11-16T08:38:22.697Z",
+          "ended_at": "2026-11-16T08:38:34.901Z",
+          "exit_code": 0,
+          "status": "passed",
+          "output": "\n> tripmate@0.1.0 typecheck\n> next typegen && tsc --noEmit\n\nGenerating route types...\n✓ Types generated successfully\n"
+        }
+      ],
+      "bootstrap": {
+        "command": "npm ci",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n\nadded 485 packages, and audited 492 packages in 2m\n\n163 packages are looking for funding\n  run `npm fund` for details\n\n7 moderate severity vulnerabilities\n\nTo address all issues, run:\n  npm audit fix\n\nRun `npm audit` for details.\n"
+      },
+      "head": "462e5e138a45129e707f22b4760e5c1a550afbaf",
+      "project_configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+      "candidate": "2b605985d152ad8718d9e731583dbf020563f1d2c0dfaea213e93631f7c680ba"
+    },
+    "confirmations": [],
+    "token": "3a4f6c5311afbd9af7298bbb1b90c840abde8085a77bc91df325adc87aa3f957"
+  },
+  "attempted": true,
+  "approved_token": "3a4f6c5311afbd9af7298bbb1b90c840abde8085a77bc91df325adc87aa3f957",
+  "approved_at": "2026-11-16T08:42:14.282Z",
+  "result": {
+    "status": "Push Failed",
+    "checks": "Gate Passed",
+    "reason": "remote: Permission to HtetLinLinNaing/TripMate.git denied to htetlinlin.\nfatal: unable to access 'https://github.com/HtetLinLinNaing/TripMate.git/': The requested URL returned error: 403\n",
+    "remote_head": "ea138cbf1df9692d36c39e526edf8980e1482222",
+    "next": "Inspect Git authentication, network and remote rejection details. Resolve the problem yourself; no automatic retry or history repair."
+  }
+}

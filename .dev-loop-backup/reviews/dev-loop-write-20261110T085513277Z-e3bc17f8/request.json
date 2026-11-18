@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 3,
+  "mode": "write",
+  "action": null,
+  "issueType": null,
+  "agent": "codex",
+  "contextRoot": "C:\\Users\\Administrator\\Desktop\\TripMateV3",
+  "repositoryRoot": "C:\\Users\\Administrator\\Desktop\\TripMateV3",
+  "context": "",
+  "target": {
+    "provider": null,
+    "issue": null,
+    "context": {},
+    "selectedBy": "local-contract"
+  },
+  "scope": null,
+  "specification": {
+    "path": "C:\\Users\\Administrator\\Desktop\\TripMateV3\\.dev-loop\\write\\tripmate-mvp\\specification.json",
+    "asset": "specification.source.json",
+    "sha256": "9bddae4bea8d48920d3174fe49c05bdc87dc8300fdc12042e9c21e67c3923dba"
+  },
+  "updateTarget": null,
+  "connection": null,
+  "next": "Follow DEV_LOOP_WRITE.md and Implementation preview in DEV_LOOP_SKILLS.md: infer design from context, expose material choices and clarify consequential unknowns. Apply GUIDELINES.md: keep presentation, application, domain and infrastructure code apart inside each action and place each action in its context; justify both physical boundaries and infrastructure from requirements and constraints. Load the business specification and matching captured technical specification when supplied; surface conflicting or stale decisions before compiling the execution contract. Display the final technical spec and test spec as an at-a-glance top-down view of design choices, application shape and all high-level workflows, with a short workflow-level coverage summary for confirmation before product-code edits. Show lower details only on request; retain full contracts, concrete scenarios and confirmation evidence locally across resume. Reuse unchanged prior confirmation or an explicit standalone waiver. This helper has prepared evidence only; it has not approved or implemented the change.",
+  "skill": "dev-loop-write",
+  "workflowRoot": "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\dev-loop-kit\\.agent-workflow\\",
+  "guidelines": {
+    "path": "C:\\Users\\Administrator\\AppData\\Roaming\\npm\\node_modules\\dev-loop-kit\\.agent-workflow\\GUIDELINES.md",
+    "sha256": "222fd0860b22ddd6eb187d4772a13950d95889a3cadd56f06a250c971974bb70"
+  }
+}

@@ -1,0 +1,344 @@
+{
+  "kind": "plan-preview",
+  "schemaVersion": 1,
+  "id": "manual-trip-close",
+  "title": "Manual trip close",
+  "summary": "Allow an organiser to confirm and permanently complete an active trip while preserving final balances and rejecting subsequent ledger writes.",
+  "revision": "1",
+  "status": "draft",
+  "identityStatus": "source-linked",
+  "area": "trip-lifecycle",
+  "sources": [
+    {
+      "id": "design",
+      "title": "Manual trip close design",
+      "reference": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+      "revision": "2026-11-12",
+      "sha256": "f73b80db274b717828176246babd94fc35945842919f3c5c2f46a6b34c071c6a"
+    },
+    {
+      "id": "repository",
+      "title": "TripMate repository state",
+      "reference": "git:a266e8241168742ac1a858374f1dece2aea109cf",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf"
+    }
+  ],
+  "specifications": [
+    {
+      "id": "manual-trip-close",
+      "summary": "Finalise active trips only through an organiser-confirmed manual action.",
+      "details": "The finalised ledger stays readable, but no contribution or expense can be added after completion.",
+      "sourceIds": ["design"]
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "close-by-organiser",
+      "summary": "An organiser can confirm ending an active trip.",
+      "specificationIds": ["manual-trip-close"],
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "completion-visible",
+      "summary": "Members can identify and read a completed trip and its final balances.",
+      "specificationIds": ["manual-trip-close"],
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "ledger-frozen",
+      "summary": "Contributions and expenses are rejected after a trip is completed.",
+      "specificationIds": ["manual-trip-close"],
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "close-authorised",
+      "summary": "Only the organiser can complete a trip, and only while it is active.",
+      "specificationIds": ["manual-trip-close"],
+      "sourceIds": ["design"]
+    }
+  ],
+  "contexts": [
+    {
+      "id": "trip-lifecycle",
+      "title": "Trip lifecycle",
+      "kind": "core",
+      "summary": "Owns a trip's draft, active, and completed states and the organiser authority to change state.",
+      "glossary": [
+        {"term": "completed", "meaning": "A final trip state in which its ledger remains readable but cannot accept new entries."}
+      ]
+    },
+    {
+      "id": "shared-ledger",
+      "title": "Shared ledger",
+      "kind": "core",
+      "summary": "Owns contributions, expenses, allocations, and the rule that entries can be recorded only for active trips."
+    }
+  ],
+  "physicalBoundaries": [
+    {
+      "id": "tripmate-app",
+      "title": "TripMate application",
+      "location": "Next.js application and its Supabase-backed data access",
+      "summary": "Serves the browser UI and performs authenticated trip commands through the existing API route and database RPCs."
+    }
+  ],
+  "infrastructure": [
+    {
+      "id": "nextjs",
+      "title": "Next.js",
+      "technology": "Next.js 16.4.5",
+      "physicalBoundary": "tripmate-app",
+      "responsibility": "Renders the client interaction and dispatches authenticated API commands.",
+      "rationale": "Existing application framework and request boundary."
+    },
+    {
+      "id": "supabase",
+      "title": "Supabase RPC and PostgreSQL",
+      "technology": "Supabase and PostgreSQL",
+      "physicalBoundary": "tripmate-app",
+      "responsibility": "Persists trip status and enforces authorisation and ledger-state rules in database functions.",
+      "rationale": "Existing authoritative persistence and access-control boundary."
+    },
+    {
+      "id": "vitest",
+      "title": "Vitest",
+      "technology": "Vitest 4.1.12 with PGlite fixture",
+      "physicalBoundary": "tripmate-app",
+      "responsibility": "Verifies database-backed command behaviour locally.",
+      "rationale": "Existing integration test tooling."
+    },
+    {
+      "id": "playwright",
+      "title": "Playwright",
+      "technology": "Playwright 1.65.0",
+      "physicalBoundary": "tripmate-app",
+      "responsibility": "Verifies the organiser-facing browser flow.",
+      "rationale": "Existing browser acceptance test tooling."
+    }
+  ],
+  "models": [
+    {
+      "id": "trip-record",
+      "title": "Trip record",
+      "summary": "Persisted trip identity, organiser, dates, cash holder, and lifecycle status.",
+      "kind": "record",
+      "contextId": "trip-lifecycle",
+      "infrastructureId": "supabase",
+      "fields": [
+        {"name": "status", "type": "draft | active | completed", "required": true, "description": "Lifecycle state controlling whether ledger writes are permitted."}
+      ],
+      "acceptanceIds": ["close-by-organiser", "completion-visible", "ledger-frozen", "close-authorised"]
+    },
+    {
+      "id": "complete-trip-request",
+      "title": "Complete trip request",
+      "summary": "Authenticated command identifying the trip the organiser wants to complete.",
+      "kind": "request",
+      "contextId": "trip-lifecycle",
+      "fields": [
+        {"name": "trip", "type": "UUID", "required": true, "description": "Trip to transition from active to completed."}
+      ],
+      "acceptanceIds": ["close-by-organiser", "close-authorised"]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "finalize-trip-ledger",
+      "title": "Finalise a trip ledger",
+      "summary": "An organiser closes a finished trip, members retain final-balance visibility, and later ledger writes are refused.",
+      "goal": "Provide an intentional, final endpoint for shared-trip accounting without losing the completed ledger.",
+      "diagram": "Organiser confirms completion → application stores completed state → members view final ledger; later ledger entry → rejected",
+      "specificationIds": ["manual-trip-close"],
+      "acceptanceIds": ["close-by-organiser", "completion-visible", "ledger-frozen", "close-authorised"],
+      "sourceIds": ["design", "repository"],
+      "boundaryIds": ["tripmate-app"],
+      "actions": [
+        {
+          "id": "complete-active-trip",
+          "title": "Complete an active trip",
+          "summary": "The organiser confirms the end-trip action and receives the saved completed state.",
+          "contextId": "trip-lifecycle",
+          "steps": [
+            "Show the organiser-only End trip control for an active trip.",
+            "Ask the organiser to confirm that the ledger is final.",
+            "Validate the authenticated organiser and active trip state.",
+            "Persist the trip status as completed and refresh the snapshot."
+          ],
+          "businessRules": [
+            "Only the organiser may complete a trip.",
+            "Only an active trip may be completed.",
+            "Completion is permanent in this version."
+          ],
+          "boundaryIds": ["tripmate-app"],
+          "serviceRoles": [
+            {"boundaryId": "tripmate-app", "description": "Presents confirmation and executes the authenticated lifecycle transition."}
+          ],
+          "infrastructureLinks": [
+            {"infrastructureId": "nextjs", "relationship": "Renders and dispatches", "description": "Shows the confirmed end-trip interaction and posts the command through the existing API route."},
+            {"infrastructureId": "supabase", "relationship": "Persists through", "description": "Uses a guarded database RPC to change the authoritative trip status."}
+          ],
+          "modelLinks": [
+            {"modelId": "complete-trip-request", "use": "accepts", "description": "Receives the selected trip identifier."},
+            {"modelId": "trip-record", "use": "writes", "description": "Changes an active trip to completed."}
+          ],
+          "acceptanceIds": ["close-by-organiser", "close-authorised"],
+          "verification": "Browser acceptance test covers the confirmed organiser path; database integration tests cover authority and active-state guards."
+        },
+        {
+          "id": "view-completed-ledger",
+          "title": "View a completed ledger",
+          "summary": "A member sees the completed label, final entries, and calculated bill without any new-entry controls.",
+          "contextId": "shared-ledger",
+          "steps": [
+            "Load the completed trip snapshot for a current member.",
+            "Display its completed state, ledger totals, and member bill.",
+            "Withhold controls that add funds or expenses."
+          ],
+          "businessRules": [
+            "Completion preserves member read access to the final ledger."
+          ],
+          "boundaryIds": ["tripmate-app"],
+          "serviceRoles": [
+            {"boundaryId": "tripmate-app", "description": "Renders the persisted final ledger to authorised members."}
+          ],
+          "infrastructureLinks": [
+            {"infrastructureId": "nextjs", "relationship": "Renders with", "description": "Uses the existing ledger view to communicate final status and balances."},
+            {"infrastructureId": "supabase", "relationship": "Reads through", "description": "Fetches the existing member-authorised trip snapshot."}
+          ],
+          "modelLinks": [
+            {"modelId": "trip-record", "use": "reads", "description": "Uses the completed status to choose the read-only ledger presentation."}
+          ],
+          "acceptanceIds": ["completion-visible"],
+          "verification": "Browser acceptance test proves the completed marker and final ledger remain visible."
+        },
+        {
+          "id": "reject-closed-ledger-entry",
+          "title": "Reject a closed-trip ledger entry",
+          "summary": "A member attempting a contribution or expense after completion receives a rejected command and no ledger mutation.",
+          "contextId": "shared-ledger",
+          "steps": [
+            "Receive a contribution or expense command for the trip.",
+            "Read the authoritative trip lifecycle state.",
+            "Reject the command when the trip is completed without creating ledger records."
+          ],
+          "businessRules": [
+            "Funds and expenses may be recorded only while a trip is active."
+          ],
+          "boundaryIds": ["tripmate-app"],
+          "serviceRoles": [
+            {"boundaryId": "tripmate-app", "description": "Forwards ledger commands to persistence, where lifecycle rules are enforced."}
+          ],
+          "infrastructureLinks": [
+            {"infrastructureId": "supabase", "relationship": "Enforces with", "description": "Uses the contribution and expense RPC guards to reject writes for completed trips."},
+            {"infrastructureId": "vitest", "relationship": "Verified by", "description": "Runs PGlite-backed integration tests against the migration and RPC behavior."}
+          ],
+          "modelLinks": [
+            {"modelId": "trip-record", "use": "reads", "description": "Reads the persisted status as the write eligibility rule."}
+          ],
+          "acceptanceIds": ["ledger-frozen"],
+          "verification": "PGlite integration tests prove both contribution and expense RPCs fail after completion and create no rows."
+        }
+      ],
+      "actionFlow": {
+        "entries": [
+          {"actionId": "complete-active-trip", "trigger": "organiser confirms"},
+          {"actionId": "view-completed-ledger", "trigger": "member opens trip"},
+          {"actionId": "reject-closed-ledger-entry", "trigger": "member submits entry"}
+        ],
+        "edges": [
+          {"from": "complete-active-trip", "to": "view-completed-ledger", "kind": "then", "label": "completed trip", "description": "After status is saved, members can read the final ledger."},
+          {"from": "complete-active-trip", "to": "reject-closed-ledger-entry", "kind": "needs", "label": "completed state", "description": "A later ledger command uses the completed state to determine rejection."}
+        ],
+        "records": [
+          {"id": "trip-state", "title": "Trip lifecycle state", "summary": "The persisted status provides the finalisation state for display and command validation.", "actionIds": ["complete-active-trip", "view-completed-ledger", "reject-closed-ledger-entry"], "modelId": "trip-record"}
+        ],
+        "notes": ["The scheduled end date does not automatically complete a trip."]
+      },
+      "verification": "Validate organiser completion, visible final ledger, non-organiser/state rejection, and frozen contribution and expense commands at their lowest appropriate test levels."
+    }
+  ],
+  "testCases": [
+    {
+      "id": "TC1",
+      "title": "Organiser confirms completion from the active ledger",
+      "acceptanceIds": ["close-by-organiser"],
+      "kind": "core",
+      "level": "e2e",
+      "targets": [{"workflowId": "finalize-trip-ledger", "actionId": "complete-active-trip", "step": 4}],
+      "given": "An organiser is viewing an active trip ledger.",
+      "when": "They confirm End trip.",
+      "then": "The ledger refreshes as completed and no longer presents new-entry actions.",
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "TC2",
+      "title": "Non-organiser and non-active completion commands fail",
+      "acceptanceIds": ["close-authorised"],
+      "kind": "failure",
+      "level": "integration",
+      "targets": [{"workflowId": "finalize-trip-ledger", "actionId": "complete-active-trip", "step": 3}],
+      "given": "A member or an organiser with a non-active trip sends the completion command.",
+      "when": "The database RPC validates the command.",
+      "then": "It returns an authorisation or lifecycle-state error without changing the trip record.",
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "TC3",
+      "title": "Completed trip remains readable to members",
+      "acceptanceIds": ["completion-visible"],
+      "kind": "core",
+      "level": "e2e",
+      "targets": [{"workflowId": "finalize-trip-ledger", "actionId": "view-completed-ledger", "step": 2}],
+      "given": "A member opens a completed trip.",
+      "when": "The snapshot loads.",
+      "then": "The page labels the trip completed and shows its final ledger and bill.",
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "TC4",
+      "title": "Completed trips reject new contributions and expenses",
+      "acceptanceIds": ["ledger-frozen"],
+      "kind": "failure",
+      "level": "integration",
+      "targets": [{"workflowId": "finalize-trip-ledger", "actionId": "reject-closed-ledger-entry", "step": 3}],
+      "given": "A trip has been completed.",
+      "when": "A current member calls each ledger write RPC.",
+      "then": "Both calls fail and no contribution, expense, or allocation is persisted.",
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "TC5",
+      "title": "Organiser authority permits the active-trip completion transition",
+      "acceptanceIds": ["close-authorised"],
+      "kind": "core",
+      "level": "integration",
+      "targets": [{"workflowId": "finalize-trip-ledger", "actionId": "complete-active-trip", "step": 3}],
+      "given": "The authenticated organiser owns an active trip.",
+      "when": "They invoke the completion RPC.",
+      "then": "The trip status is persisted as completed.",
+      "sourceIds": ["design"]
+    },
+    {
+      "id": "TC6",
+      "title": "Active trips continue accepting valid ledger entries",
+      "acceptanceIds": ["ledger-frozen"],
+      "kind": "core",
+      "level": "integration",
+      "targets": [{"workflowId": "finalize-trip-ledger", "actionId": "reject-closed-ledger-entry", "step": 2}],
+      "given": "A trip is active and a current member submits valid ledger commands.",
+      "when": "The contribution and expense RPCs validate their lifecycle state.",
+      "then": "The valid entries are persisted.",
+      "sourceIds": ["design"]
+    }
+  ],
+  "choices": [
+    "Selected: manual organiser-only completion with confirmation rather than automatic closure on the scheduled end date.",
+    "Selected: server-side RPC guards remain authoritative for both the completion transition and post-completion write rejection.",
+    "Excluded: reopening completed trips, settlement payments, and notifications."
+  ],
+  "constraints": [
+    "Reuse the existing Next.js client, API route, Supabase RPC, and PostgreSQL migration architecture.",
+    "Preserve draft and active behaviours while adding completed as a final lifecycle state.",
+    "Existing invitations remain unchanged because they do not write ledger entries."
+  ]
+}

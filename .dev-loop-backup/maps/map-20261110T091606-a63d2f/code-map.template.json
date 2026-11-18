@@ -1,0 +1,345 @@
+{
+  "summary": "",
+  "workflows": [
+    {
+      "workflowId": "set-up-trip",
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "references": []
+    }
+  ],
+  "actions": [
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "references": [],
+      "deviations": []
+    }
+  ],
+  "steps": [
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "step": 1,
+      "text": "Enter organiser, name, dates, and optional trip details.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "step": 2,
+      "text": "Reject missing details or an end date before the start date.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "create-trip",
+      "step": 3,
+      "text": "Create the trip, organiser membership, and invitation.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "step": 1,
+      "text": "Restore or automatically create a Supabase anonymous identity; ask new members only for a display name.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "step": 2,
+      "text": "Return existing members on the same browser to their trip without creating membership; otherwise reject invalid, expired, or revoked invitations with the agreed message.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "join-trip",
+      "step": 3,
+      "text": "Create the membership and show the group board.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "step": 1,
+      "text": "Review joined members on the group board.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "step": 2,
+      "text": "Select a current member as the cash holder.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "set-up-trip",
+      "actionId": "configure-group",
+      "step": 3,
+      "text": "Keep Start trip disabled below two active members including the organiser; allow only the organiser to start once the threshold is met.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "step": 1,
+      "text": "Choose the contributor and enter a positive THB amount with an optional note.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "step": 2,
+      "text": "Reject a zero, negative, or malformed amount.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "add-contribution",
+      "step": 3,
+      "text": "Save the contribution and publish the updated activity.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 1,
+      "text": "Enter the expense description, payer, source, and positive THB total.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 2,
+      "text": "Choose everyone, selected-member, or mixed allocation and preview every person's exact share before saving.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 3,
+      "text": "Reject empty participants, negative shares, or allocations that do not equal the total.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 4,
+      "text": "Warn with the resulting negative pool balance and require explicit Save anyway confirmation; Cancel leaves the expense unsaved.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "record-expense",
+      "step": 5,
+      "text": "Save the expense and allocations as one ledger entry.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 1,
+      "text": "Confirm the viewer is an active trip member.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 2,
+      "text": "Read contributions and expenses for the trip.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 3,
+      "text": "Show remaining pool balance prominently, total contributed separately, total used and recent activity; open an expense to see its payer and payment source.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "maintain-trip-ledger",
+      "actionId": "review-active-ledger",
+      "step": 4,
+      "text": "Apply authorised realtime changes to the displayed ledger.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 1,
+      "text": "Confirm the viewer is an active trip member.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 2,
+      "text": "Read the viewer's allocations, contributions, and personally paid shared expenses.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 3,
+      "text": "Calculate an itemised shared-cost total, pool contribution total, payer credit, and net position.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "view-personal-bill",
+      "step": 4,
+      "text": "Display the itemised bill with a clear due or credit label and a separate “Paid personally” credit row when applicable.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "step": 1,
+      "text": "Open the active ledger from the bill.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "step": 2,
+      "text": "Match bill items to visible activity and expense details.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "understand-member-position",
+      "actionId": "review-shared-context",
+      "step": 3,
+      "text": "Return to the bill with the shared context understood.",
+      "status": null,
+      "references": []
+    }
+  ],
+  "unplanned": [],
+  "relatedTests": [
+    {
+      "test": "T1",
+      "file": "tests/browser/workflows.spec.ts",
+      "tests": [
+        "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+        "TC15 exposes no payment/settlement controls; invalid invitation explains recovery"
+      ]
+    },
+    {
+      "test": "T2",
+      "file": "tests/accounting.test.ts",
+      "tests": [
+        "TC2 rejects missing names, impossible or reversed dates",
+        "TC5 requires organiser authority and two active members including organiser",
+        "TC7 rejects zero, negative, malformed, overflow and fractional satang",
+        "TC10 splits ฿121 exactly and assigns the remainder by stable ID",
+        "TC11 rejects empty, duplicate, foreign participants and non-positive shares",
+        "TC19 selected and mixed parts charge only their groups and reconcile",
+        "TC14 explains allocations, extras, contributions, personal credits and net",
+        "TC14 excludes personal payments from pool spending and includes all expenses in total used"
+      ]
+    },
+    {
+      "test": "T3",
+      "file": "tests/integration/database.test.ts",
+      "tests": [
+        "TC1 creates the trip, organiser and invitation atomically",
+        "TC3 joins exactly once and TC18 returns an existing trip",
+        "TC4 refuses revoked, expired and unknown invitations for new members",
+        "TC17 sets the cash holder and starts two members; non-organiser is denied",
+        "TC6 saves contributions and retries without duplicates",
+        "TC8 saves a personal expense and its exact allocations atomically",
+        "TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation",
+        "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+        "TC13 prevents outsider reads, writes and protected RPC access"
+      ]
+    },
+    {
+      "test": "T4",
+      "file": "tests/request-origin.test.ts",
+      "tests": [
+        "SEC7 accepts the incoming host behind a local proxy but rejects cross-origin mutations"
+      ]
+    },
+    {
+      "test": "T5",
+      "file": "tests/support/supabase-fixture.mjs",
+      "tests": []
+    }
+  ]
+}

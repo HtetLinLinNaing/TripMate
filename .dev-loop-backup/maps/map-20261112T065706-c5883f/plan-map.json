@@ -1,0 +1,1570 @@
+{
+  "kind": "plan-map",
+  "schemaVersion": 1,
+  "id": "map-20261112T065706-c5883f",
+  "title": "Manual trip close — code map",
+  "summary": "Manual completed-trip lifecycle is implemented in the database, API, and client, with integration and browser coverage.",
+  "mappedAt": "2026-11-12T06:58:43.237Z",
+  "plan": {
+    "kind": "plan-preview",
+    "schemaVersion": 1,
+    "id": "manual-trip-close",
+    "title": "Manual trip close",
+    "summary": "Allow an organiser to confirm and permanently complete an active trip while preserving final balances and rejecting subsequent ledger writes.",
+    "revision": "1",
+    "status": "draft",
+    "identityStatus": "source-linked",
+    "area": "trip-lifecycle",
+    "sources": [
+      {
+        "id": "design",
+        "title": "Manual trip close design",
+        "reference": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+        "revision": "2026-11-12",
+        "sha256": "f73b80db274b717828176246babd94fc35945842919f3c5c2f46a6b34c071c6a"
+      },
+      {
+        "id": "repository",
+        "title": "TripMate repository state",
+        "reference": "git:a266e8241168742ac1a858374f1dece2aea109cf",
+        "revision": "a266e8241168742ac1a858374f1dece2aea109cf"
+      }
+    ],
+    "specifications": [
+      {
+        "id": "manual-trip-close",
+        "summary": "Finalise active trips only through an organiser-confirmed manual action.",
+        "details": "The finalised ledger stays readable, but no contribution or expense can be added after completion.",
+        "sourceIds": [
+          "design"
+        ]
+      }
+    ],
+    "acceptance": [
+      {
+        "id": "close-by-organiser",
+        "summary": "An organiser can confirm ending an active trip.",
+        "specificationIds": [
+          "manual-trip-close"
+        ],
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "completion-visible",
+        "summary": "Members can identify and read a completed trip and its final balances.",
+        "specificationIds": [
+          "manual-trip-close"
+        ],
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "ledger-frozen",
+        "summary": "Contributions and expenses are rejected after a trip is completed.",
+        "specificationIds": [
+          "manual-trip-close"
+        ],
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "close-authorised",
+        "summary": "Only the organiser can complete a trip, and only while it is active.",
+        "specificationIds": [
+          "manual-trip-close"
+        ],
+        "sourceIds": [
+          "design"
+        ]
+      }
+    ],
+    "contexts": [
+      {
+        "id": "trip-lifecycle",
+        "title": "Trip lifecycle",
+        "kind": "core",
+        "summary": "Owns a trip's draft, active, and completed states and the organiser authority to change state.",
+        "glossary": [
+          {
+            "term": "completed",
+            "meaning": "A final trip state in which its ledger remains readable but cannot accept new entries."
+          }
+        ]
+      },
+      {
+        "id": "shared-ledger",
+        "title": "Shared ledger",
+        "kind": "core",
+        "summary": "Owns contributions, expenses, allocations, and the rule that entries can be recorded only for active trips."
+      }
+    ],
+    "physicalBoundaries": [
+      {
+        "id": "tripmate-app",
+        "title": "TripMate application",
+        "location": "Next.js application and its Supabase-backed data access",
+        "summary": "Serves the browser UI and performs authenticated trip commands through the existing API route and database RPCs."
+      }
+    ],
+    "infrastructure": [
+      {
+        "id": "nextjs",
+        "title": "Next.js",
+        "technology": "Next.js 16.4.5",
+        "physicalBoundary": "tripmate-app",
+        "responsibility": "Renders the client interaction and dispatches authenticated API commands.",
+        "rationale": "Existing application framework and request boundary."
+      },
+      {
+        "id": "supabase",
+        "title": "Supabase RPC and PostgreSQL",
+        "technology": "Supabase and PostgreSQL",
+        "physicalBoundary": "tripmate-app",
+        "responsibility": "Persists trip status and enforces authorisation and ledger-state rules in database functions.",
+        "rationale": "Existing authoritative persistence and access-control boundary."
+      },
+      {
+        "id": "vitest",
+        "title": "Vitest",
+        "technology": "Vitest 4.1.12 with PGlite fixture",
+        "physicalBoundary": "tripmate-app",
+        "responsibility": "Verifies database-backed command behaviour locally.",
+        "rationale": "Existing integration test tooling."
+      },
+      {
+        "id": "playwright",
+        "title": "Playwright",
+        "technology": "Playwright 1.65.0",
+        "physicalBoundary": "tripmate-app",
+        "responsibility": "Verifies the organiser-facing browser flow.",
+        "rationale": "Existing browser acceptance test tooling."
+      }
+    ],
+    "models": [
+      {
+        "id": "trip-record",
+        "title": "Trip record",
+        "summary": "Persisted trip identity, organiser, dates, cash holder, and lifecycle status.",
+        "kind": "record",
+        "contextId": "trip-lifecycle",
+        "infrastructureId": "supabase",
+        "fields": [
+          {
+            "name": "status",
+            "type": "draft | active | completed",
+            "required": true,
+            "description": "Lifecycle state controlling whether ledger writes are permitted."
+          }
+        ],
+        "acceptanceIds": [
+          "close-by-organiser",
+          "completion-visible",
+          "ledger-frozen",
+          "close-authorised"
+        ]
+      },
+      {
+        "id": "complete-trip-request",
+        "title": "Complete trip request",
+        "summary": "Authenticated command identifying the trip the organiser wants to complete.",
+        "kind": "request",
+        "contextId": "trip-lifecycle",
+        "fields": [
+          {
+            "name": "trip",
+            "type": "UUID",
+            "required": true,
+            "description": "Trip to transition from active to completed."
+          }
+        ],
+        "acceptanceIds": [
+          "close-by-organiser",
+          "close-authorised"
+        ]
+      }
+    ],
+    "workflows": [
+      {
+        "id": "finalize-trip-ledger",
+        "title": "Finalise a trip ledger",
+        "summary": "An organiser closes a finished trip, members retain final-balance visibility, and later ledger writes are refused.",
+        "goal": "Provide an intentional, final endpoint for shared-trip accounting without losing the completed ledger.",
+        "diagram": "Organiser confirms completion → application stores completed state → members view final ledger; later ledger entry → rejected",
+        "specificationIds": [
+          "manual-trip-close"
+        ],
+        "acceptanceIds": [
+          "close-by-organiser",
+          "completion-visible",
+          "ledger-frozen",
+          "close-authorised"
+        ],
+        "sourceIds": [
+          "design",
+          "repository"
+        ],
+        "boundaryIds": [
+          "tripmate-app"
+        ],
+        "actions": [
+          {
+            "id": "complete-active-trip",
+            "title": "Complete an active trip",
+            "summary": "The organiser confirms the end-trip action and receives the saved completed state.",
+            "contextId": "trip-lifecycle",
+            "steps": [
+              "Show the organiser-only End trip control for an active trip.",
+              "Ask the organiser to confirm that the ledger is final.",
+              "Validate the authenticated organiser and active trip state.",
+              "Persist the trip status as completed and refresh the snapshot."
+            ],
+            "businessRules": [
+              "Only the organiser may complete a trip.",
+              "Only an active trip may be completed.",
+              "Completion is permanent in this version."
+            ],
+            "boundaryIds": [
+              "tripmate-app"
+            ],
+            "serviceRoles": [
+              {
+                "boundaryId": "tripmate-app",
+                "description": "Presents confirmation and executes the authenticated lifecycle transition."
+              }
+            ],
+            "infrastructureLinks": [
+              {
+                "infrastructureId": "nextjs",
+                "relationship": "Renders and dispatches",
+                "description": "Shows the confirmed end-trip interaction and posts the command through the existing API route."
+              },
+              {
+                "infrastructureId": "supabase",
+                "relationship": "Persists through",
+                "description": "Uses a guarded database RPC to change the authoritative trip status."
+              }
+            ],
+            "modelLinks": [
+              {
+                "modelId": "complete-trip-request",
+                "use": "accepts",
+                "description": "Receives the selected trip identifier."
+              },
+              {
+                "modelId": "trip-record",
+                "use": "writes",
+                "description": "Changes an active trip to completed."
+              }
+            ],
+            "acceptanceIds": [
+              "close-by-organiser",
+              "close-authorised"
+            ],
+            "verification": "Browser acceptance test covers the confirmed organiser path; database integration tests cover authority and active-state guards."
+          },
+          {
+            "id": "view-completed-ledger",
+            "title": "View a completed ledger",
+            "summary": "A member sees the completed label, final entries, and calculated bill without any new-entry controls.",
+            "contextId": "shared-ledger",
+            "steps": [
+              "Load the completed trip snapshot for a current member.",
+              "Display its completed state, ledger totals, and member bill.",
+              "Withhold controls that add funds or expenses."
+            ],
+            "businessRules": [
+              "Completion preserves member read access to the final ledger."
+            ],
+            "boundaryIds": [
+              "tripmate-app"
+            ],
+            "serviceRoles": [
+              {
+                "boundaryId": "tripmate-app",
+                "description": "Renders the persisted final ledger to authorised members."
+              }
+            ],
+            "infrastructureLinks": [
+              {
+                "infrastructureId": "nextjs",
+                "relationship": "Renders with",
+                "description": "Uses the existing ledger view to communicate final status and balances."
+              },
+              {
+                "infrastructureId": "supabase",
+                "relationship": "Reads through",
+                "description": "Fetches the existing member-authorised trip snapshot."
+              }
+            ],
+            "modelLinks": [
+              {
+                "modelId": "trip-record",
+                "use": "reads",
+                "description": "Uses the completed status to choose the read-only ledger presentation."
+              }
+            ],
+            "acceptanceIds": [
+              "completion-visible"
+            ],
+            "verification": "Browser acceptance test proves the completed marker and final ledger remain visible."
+          },
+          {
+            "id": "reject-closed-ledger-entry",
+            "title": "Reject a closed-trip ledger entry",
+            "summary": "A member attempting a contribution or expense after completion receives a rejected command and no ledger mutation.",
+            "contextId": "shared-ledger",
+            "steps": [
+              "Receive a contribution or expense command for the trip.",
+              "Read the authoritative trip lifecycle state.",
+              "Reject the command when the trip is completed without creating ledger records."
+            ],
+            "businessRules": [
+              "Funds and expenses may be recorded only while a trip is active."
+            ],
+            "boundaryIds": [
+              "tripmate-app"
+            ],
+            "serviceRoles": [
+              {
+                "boundaryId": "tripmate-app",
+                "description": "Forwards ledger commands to persistence, where lifecycle rules are enforced."
+              }
+            ],
+            "infrastructureLinks": [
+              {
+                "infrastructureId": "supabase",
+                "relationship": "Enforces with",
+                "description": "Uses the contribution and expense RPC guards to reject writes for completed trips."
+              },
+              {
+                "infrastructureId": "vitest",
+                "relationship": "Verified by",
+                "description": "Runs PGlite-backed integration tests against the migration and RPC behavior."
+              }
+            ],
+            "modelLinks": [
+              {
+                "modelId": "trip-record",
+                "use": "reads",
+                "description": "Reads the persisted status as the write eligibility rule."
+              }
+            ],
+            "acceptanceIds": [
+              "ledger-frozen"
+            ],
+            "verification": "PGlite integration tests prove both contribution and expense RPCs fail after completion and create no rows."
+          }
+        ],
+        "actionFlow": {
+          "entries": [
+            {
+              "actionId": "complete-active-trip",
+              "trigger": "organiser confirms"
+            },
+            {
+              "actionId": "view-completed-ledger",
+              "trigger": "member opens trip"
+            },
+            {
+              "actionId": "reject-closed-ledger-entry",
+              "trigger": "member submits entry"
+            }
+          ],
+          "edges": [
+            {
+              "from": "complete-active-trip",
+              "to": "view-completed-ledger",
+              "kind": "then",
+              "label": "completed trip",
+              "description": "After status is saved, members can read the final ledger."
+            },
+            {
+              "from": "complete-active-trip",
+              "to": "reject-closed-ledger-entry",
+              "kind": "needs",
+              "label": "completed state",
+              "description": "A later ledger command uses the completed state to determine rejection."
+            }
+          ],
+          "records": [
+            {
+              "id": "trip-state",
+              "title": "Trip lifecycle state",
+              "summary": "The persisted status provides the finalisation state for display and command validation.",
+              "actionIds": [
+                "complete-active-trip",
+                "view-completed-ledger",
+                "reject-closed-ledger-entry"
+              ],
+              "modelId": "trip-record"
+            }
+          ],
+          "notes": [
+            "The scheduled end date does not automatically complete a trip."
+          ]
+        },
+        "verification": "Validate organiser completion, visible final ledger, non-organiser/state rejection, and frozen contribution and expense commands at their lowest appropriate test levels."
+      }
+    ],
+    "testCases": [
+      {
+        "id": "TC1",
+        "title": "Organiser confirms completion from the active ledger",
+        "acceptanceIds": [
+          "close-by-organiser"
+        ],
+        "kind": "core",
+        "level": "e2e",
+        "targets": [
+          {
+            "workflowId": "finalize-trip-ledger",
+            "actionId": "complete-active-trip",
+            "step": 4
+          }
+        ],
+        "given": "An organiser is viewing an active trip ledger.",
+        "when": "They confirm End trip.",
+        "then": "The ledger refreshes as completed and no longer presents new-entry actions.",
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "TC2",
+        "title": "Non-organiser and non-active completion commands fail",
+        "acceptanceIds": [
+          "close-authorised"
+        ],
+        "kind": "failure",
+        "level": "integration",
+        "targets": [
+          {
+            "workflowId": "finalize-trip-ledger",
+            "actionId": "complete-active-trip",
+            "step": 3
+          }
+        ],
+        "given": "A member or an organiser with a non-active trip sends the completion command.",
+        "when": "The database RPC validates the command.",
+        "then": "It returns an authorisation or lifecycle-state error without changing the trip record.",
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "TC3",
+        "title": "Completed trip remains readable to members",
+        "acceptanceIds": [
+          "completion-visible"
+        ],
+        "kind": "core",
+        "level": "e2e",
+        "targets": [
+          {
+            "workflowId": "finalize-trip-ledger",
+            "actionId": "view-completed-ledger",
+            "step": 2
+          }
+        ],
+        "given": "A member opens a completed trip.",
+        "when": "The snapshot loads.",
+        "then": "The page labels the trip completed and shows its final ledger and bill.",
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "TC4",
+        "title": "Completed trips reject new contributions and expenses",
+        "acceptanceIds": [
+          "ledger-frozen"
+        ],
+        "kind": "failure",
+        "level": "integration",
+        "targets": [
+          {
+            "workflowId": "finalize-trip-ledger",
+            "actionId": "reject-closed-ledger-entry",
+            "step": 3
+          }
+        ],
+        "given": "A trip has been completed.",
+        "when": "A current member calls each ledger write RPC.",
+        "then": "Both calls fail and no contribution, expense, or allocation is persisted.",
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "TC5",
+        "title": "Organiser authority permits the active-trip completion transition",
+        "acceptanceIds": [
+          "close-authorised"
+        ],
+        "kind": "core",
+        "level": "integration",
+        "targets": [
+          {
+            "workflowId": "finalize-trip-ledger",
+            "actionId": "complete-active-trip",
+            "step": 3
+          }
+        ],
+        "given": "The authenticated organiser owns an active trip.",
+        "when": "They invoke the completion RPC.",
+        "then": "The trip status is persisted as completed.",
+        "sourceIds": [
+          "design"
+        ]
+      },
+      {
+        "id": "TC6",
+        "title": "Active trips continue accepting valid ledger entries",
+        "acceptanceIds": [
+          "ledger-frozen"
+        ],
+        "kind": "core",
+        "level": "integration",
+        "targets": [
+          {
+            "workflowId": "finalize-trip-ledger",
+            "actionId": "reject-closed-ledger-entry",
+            "step": 2
+          }
+        ],
+        "given": "A trip is active and a current member submits valid ledger commands.",
+        "when": "The contribution and expense RPCs validate their lifecycle state.",
+        "then": "The valid entries are persisted.",
+        "sourceIds": [
+          "design"
+        ]
+      }
+    ],
+    "choices": [
+      "Selected: manual organiser-only completion with confirmation rather than automatic closure on the scheduled end date.",
+      "Selected: server-side RPC guards remain authoritative for both the completion transition and post-completion write rejection.",
+      "Excluded: reopening completed trips, settlement payments, and notifications."
+    ],
+    "constraints": [
+      "Reuse the existing Next.js client, API route, Supabase RPC, and PostgreSQL migration architecture.",
+      "Preserve draft and active behaviours while adding completed as a final lifecycle state.",
+      "Existing invitations remain unchanged because they do not write ledger entries."
+    ]
+  },
+  "planSource": {
+    "path": "C:\\Users\\Administrator\\Desktop\\TripMateV3\\.dev-loop\\plans\\trip-lifecycle\\manual-trip-close\\plan-preview.json",
+    "sha256": "29d2459805db4057f7802932c84682f09751209f5ab9dea130269793f7e49a4d",
+    "revision": "1",
+    "selectedFrom": "path",
+    "alternatives": []
+  },
+  "scope": {
+    "type": "working-tree",
+    "baseRevision": "a266e8241168742ac1a858374f1dece2aea109cf",
+    "headRevision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+    "snapshotId": "cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+    "inferredFrom": "explicit",
+    "request": "Manual organiser-only trip close with completed read-only ledger and server-side ledger write rejection",
+    "focus": []
+  },
+  "code": {
+    "repositoryRoot": "C:\\Users\\Administrator\\Desktop\\TripMateV3",
+    "capturedAt": "2026-11-12T06:57:07.832Z"
+  },
+  "codeSources": [
+    {
+      "id": "head-8b05d55eb919866d",
+      "file": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+      "asset": "sources/head/8b05d55eb919866df1c0a93b830542fa635e46169712c50ad497ce7c2751af55.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "f73b80db274b717828176246babd94fc35945842919f3c5c2f46a6b34c071c6a",
+      "language": "md",
+      "lines": 44
+    },
+    {
+      "id": "base-3758ad602f4cae09",
+      "file": "src/app/api/tripmate/route.ts",
+      "asset": "sources/base/3758ad602f4cae0928d244f15378460891ee1d7f6f163dcd6dce3c5d77b4c00d.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "cd614716532b6ca4e1b63159c0ef14844e95cbe3571fc8aca8624765193399b9",
+      "language": "ts",
+      "lines": 138
+    },
+    {
+      "id": "head-3758ad602f4cae09",
+      "file": "src/app/api/tripmate/route.ts",
+      "asset": "sources/head/3758ad602f4cae0928d244f15378460891ee1d7f6f163dcd6dce3c5d77b4c00d.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "a5a1d60b84473da6983970229635fa1a02b3ab81e38c1b9bac72a3e22ba7e4ad",
+      "language": "ts",
+      "lines": 141
+    },
+    {
+      "id": "base-b6c951804e7b673f",
+      "file": "src/components/confirmation.tsx",
+      "asset": "sources/base/b6c951804e7b673fa63c119d4514ffa0bfbfabc2266c80cb1484e0a6ee809756.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "509e057fe8044d5e21ce03257feb9d3d6046a1b38c78ce09695e0e7a77e5cc93",
+      "language": "tsx",
+      "lines": 32
+    },
+    {
+      "id": "head-b6c951804e7b673f",
+      "file": "src/components/confirmation.tsx",
+      "asset": "sources/head/b6c951804e7b673fa63c119d4514ffa0bfbfabc2266c80cb1484e0a6ee809756.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b00ef6ece37357212915288022f05077a05b889d0718fe4e52183fad210d9d8e",
+      "language": "tsx",
+      "lines": 34
+    },
+    {
+      "id": "base-19f6eb1239bfeaec",
+      "file": "src/components/tripmate.tsx",
+      "asset": "sources/base/19f6eb1239bfeaec0119355cbe3cd800f63e887cc33648027eaeec636c4377eb.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "5ef33b30aef0f52f90fab2cbb3f7427a36f291cb98f2eb69c815c9bacf697dc5",
+      "language": "tsx",
+      "lines": 1246
+    },
+    {
+      "id": "head-19f6eb1239bfeaec",
+      "file": "src/components/tripmate.tsx",
+      "asset": "sources/head/19f6eb1239bfeaec0119355cbe3cd800f63e887cc33648027eaeec636c4377eb.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "b8c8daf3a5e8f90c8e8ef666a58a195ced3e3be3e93fa1ec23d14b36c3a72b97",
+      "language": "tsx",
+      "lines": 1307
+    },
+    {
+      "id": "base-a77df85de2e19173",
+      "file": "src/lib/accounting.ts",
+      "asset": "sources/base/a77df85de2e191738fc60ca034bc811f30598ebc14c79a4570615715620a4027.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "4996a754ea3210afd089e6be33d47845a2980d95351ac7ac3f6b81621de2552c",
+      "language": "ts",
+      "lines": 160
+    },
+    {
+      "id": "head-a77df85de2e19173",
+      "file": "src/lib/accounting.ts",
+      "asset": "sources/head/a77df85de2e191738fc60ca034bc811f30598ebc14c79a4570615715620a4027.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "efc5312f6ecbaf7925a31dfa64a5daf517cd7678dc2160494ba2c0e1c43ee7e4",
+      "language": "ts",
+      "lines": 160
+    },
+    {
+      "id": "base-c65ab30c9effdf02",
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "asset": "sources/base/c65ab30c9effdf0299ecab4fc8b7010351f28609b33ad30ef99e398d8a532e00.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "fe3d40632f3921c041aa9ea19c4ace829ea407211c92b6041db20a46e309dcd3",
+      "language": "sql",
+      "lines": 196
+    },
+    {
+      "id": "head-c65ab30c9effdf02",
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "asset": "sources/head/c65ab30c9effdf0299ecab4fc8b7010351f28609b33ad30ef99e398d8a532e00.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "0c5ee2cfa9315868d94a03111ffda9f82abccbe06f23da0f634adc2d18f4a062",
+      "language": "sql",
+      "lines": 207
+    },
+    {
+      "id": "base-9421ebb2c72b20db",
+      "file": "tests/browser/workflows.spec.ts",
+      "asset": "sources/base/9421ebb2c72b20db3fbbfb4c398d5b3483d97160f842e181e16effae1bd1085b.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "f4677d3fc2f79cc1511a6be67cec384cd9d47896dddebaf98404678e9b2fe66f",
+      "language": "ts",
+      "lines": 136
+    },
+    {
+      "id": "head-9421ebb2c72b20db",
+      "file": "tests/browser/workflows.spec.ts",
+      "asset": "sources/head/9421ebb2c72b20db3fbbfb4c398d5b3483d97160f842e181e16effae1bd1085b.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "209f98386d11ff68fe0597c9d38cdec0e3c3e4b762017b0b44fd7c9cf8f1a7e5",
+      "language": "ts",
+      "lines": 148
+    },
+    {
+      "id": "base-4cb385ba012d8af8",
+      "file": "tests/integration/database.test.ts",
+      "asset": "sources/base/4cb385ba012d8af875b032b8ec05c61622659857e0fec64b15de2cfd1dc27cf0.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "dfe735b78027cbc654456dbd44fb88010d071de2f433d998505c7ae37dd1237a",
+      "language": "ts",
+      "lines": 247
+    },
+    {
+      "id": "head-4cb385ba012d8af8",
+      "file": "tests/integration/database.test.ts",
+      "asset": "sources/head/4cb385ba012d8af875b032b8ec05c61622659857e0fec64b15de2cfd1dc27cf0.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "60507cf0deb55963a041486d14279fb3f972e149e4bdd07b619a336471936e3a",
+      "language": "ts",
+      "lines": 285
+    },
+    {
+      "id": "base-97416c74c9848d1f",
+      "file": "tests/support/supabase-fixture.mjs",
+      "asset": "sources/base/97416c74c9848d1fadd4edbdff5b0fd899f8c226f7d142ad061d69bb926488f2.txt",
+      "side": "base",
+      "revision": "a266e8241168742ac1a858374f1dece2aea109cf",
+      "sha256": "d787010138d5ff8e996dd1ba5b6fe8e2ee442119f2ff545d6fee7f5e8c7920d6",
+      "language": "mjs",
+      "lines": 171
+    },
+    {
+      "id": "head-97416c74c9848d1f",
+      "file": "tests/support/supabase-fixture.mjs",
+      "asset": "sources/head/97416c74c9848d1fadd4edbdff5b0fd899f8c226f7d142ad061d69bb926488f2.txt",
+      "side": "head",
+      "revision": "workspace:cac9a4b8c9b93c1fe6dbe2550168654f104104125aa49d573c3016ea402ab32b",
+      "sha256": "8c481fabdf832a1eef660272ca329312844af4a6f52845c9c5e3b8374e395545",
+      "language": "mjs",
+      "lines": 172
+    }
+  ],
+  "changes": [
+    {
+      "file": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+      "status": "added",
+      "headSourceId": "head-8b05d55eb919866d",
+      "hunks": [
+        {
+          "id": "H1",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 44
+        }
+      ]
+    },
+    {
+      "file": "src/app/api/tripmate/route.ts",
+      "status": "modified",
+      "headSourceId": "head-3758ad602f4cae09",
+      "baseSourceId": "base-3758ad602f4cae09",
+      "hunks": [
+        {
+          "id": "H2",
+          "headAt": 16,
+          "baseFrom": 16,
+          "baseTo": 16,
+          "headFrom": 16,
+          "headTo": 16
+        },
+        {
+          "id": "H3",
+          "headAt": 106,
+          "headFrom": 106,
+          "headTo": 108
+        }
+      ]
+    },
+    {
+      "file": "src/components/confirmation.tsx",
+      "status": "modified",
+      "headSourceId": "head-b6c951804e7b673f",
+      "baseSourceId": "base-b6c951804e7b673f",
+      "hunks": [
+        {
+          "id": "H4",
+          "headAt": 8,
+          "headFrom": 8,
+          "headTo": 8
+        },
+        {
+          "id": "H5",
+          "headAt": 13,
+          "headFrom": 13,
+          "headTo": 13
+        },
+        {
+          "id": "H6",
+          "headAt": 25,
+          "baseFrom": 23,
+          "baseTo": 23,
+          "headFrom": 25,
+          "headTo": 25
+        }
+      ]
+    },
+    {
+      "file": "src/components/tripmate.tsx",
+      "status": "modified",
+      "headSourceId": "head-19f6eb1239bfeaec",
+      "baseSourceId": "base-19f6eb1239bfeaec",
+      "hunks": [
+        {
+          "id": "H7",
+          "headAt": 130,
+          "baseFrom": 130,
+          "baseTo": 130,
+          "headFrom": 130,
+          "headTo": 131
+        },
+        {
+          "id": "H8",
+          "headAt": 465,
+          "baseFrom": 464,
+          "baseTo": 464,
+          "headFrom": 465,
+          "headTo": 469
+        },
+        {
+          "id": "H9",
+          "headAt": 776,
+          "baseFrom": 771,
+          "baseTo": 780,
+          "headFrom": 776,
+          "headTo": 804
+        },
+        {
+          "id": "H10",
+          "headAt": 1213,
+          "baseFrom": 1189,
+          "baseTo": 1189,
+          "headFrom": 1213,
+          "headTo": 1215
+        },
+        {
+          "id": "H11",
+          "headAt": 1243,
+          "baseFrom": 1217,
+          "baseTo": 1217,
+          "headFrom": 1243,
+          "headTo": 1243
+        },
+        {
+          "id": "H12",
+          "headAt": 1270,
+          "headFrom": 1270,
+          "headTo": 1304
+        }
+      ]
+    },
+    {
+      "file": "src/lib/accounting.ts",
+      "status": "modified",
+      "headSourceId": "head-a77df85de2e19173",
+      "baseSourceId": "base-a77df85de2e19173",
+      "hunks": [
+        {
+          "id": "H13",
+          "headAt": 87,
+          "baseFrom": 87,
+          "baseTo": 87,
+          "headFrom": 87,
+          "headTo": 87
+        }
+      ]
+    },
+    {
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "status": "modified",
+      "headSourceId": "head-c65ab30c9effdf02",
+      "baseSourceId": "base-c65ab30c9effdf02",
+      "hunks": [
+        {
+          "id": "H14",
+          "headAt": 8,
+          "baseFrom": 8,
+          "baseTo": 8,
+          "headFrom": 8,
+          "headTo": 8
+        },
+        {
+          "id": "H15",
+          "headAt": 116,
+          "headFrom": 116,
+          "headTo": 124
+        },
+        {
+          "id": "H16",
+          "headAt": 142,
+          "headFrom": 142,
+          "headTo": 142
+        },
+        {
+          "id": "H17",
+          "headAt": 160,
+          "headFrom": 160,
+          "headTo": 160
+        },
+        {
+          "id": "H18",
+          "headAt": 203,
+          "baseFrom": 192,
+          "baseTo": 193,
+          "headFrom": 203,
+          "headTo": 204
+        }
+      ]
+    },
+    {
+      "file": "tests/browser/workflows.spec.ts",
+      "status": "modified",
+      "headSourceId": "head-9421ebb2c72b20db",
+      "baseSourceId": "base-9421ebb2c72b20db",
+      "hunks": [
+        {
+          "id": "H19",
+          "headAt": 124,
+          "headFrom": 124,
+          "headTo": 135
+        }
+      ]
+    },
+    {
+      "file": "tests/integration/database.test.ts",
+      "status": "modified",
+      "headSourceId": "head-4cb385ba012d8af8",
+      "baseSourceId": "base-4cb385ba012d8af8",
+      "hunks": [
+        {
+          "id": "H20",
+          "headAt": 221,
+          "headFrom": 221,
+          "headTo": 258
+        }
+      ]
+    },
+    {
+      "file": "tests/support/supabase-fixture.mjs",
+      "status": "modified",
+      "headSourceId": "head-97416c74c9848d1f",
+      "baseSourceId": "base-97416c74c9848d1f",
+      "hunks": [
+        {
+          "id": "H21",
+          "headAt": 66,
+          "headFrom": 66,
+          "headTo": 66
+        }
+      ]
+    }
+  ],
+  "codeMap": {
+    "workflows": [
+      {
+        "workflowId": "finalize-trip-ledger",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 776,
+            "toLine": 804
+          },
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 116,
+            "toLine": 160
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "complete-active-trip",
+        "references": [
+          {
+            "sourceId": "head-3758ad602f4cae09",
+            "file": "src/app/api/tripmate/route.ts",
+            "fromLine": 99,
+            "toLine": 111
+          },
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 795,
+            "toLine": 804
+          },
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 1270,
+            "toLine": 1304
+          },
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 116,
+            "toLine": 124
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "view-completed-ledger",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 465,
+            "toLine": 469
+          },
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 776,
+            "toLine": 804
+          },
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 1213,
+            "toLine": 1215
+          },
+          {
+            "sourceId": "head-a77df85de2e19173",
+            "file": "src/lib/accounting.ts",
+            "fromLine": 87,
+            "toLine": 87
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "reject-closed-ledger-entry",
+        "references": [
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 139,
+            "toLine": 142
+          },
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 157,
+            "toLine": 160
+          },
+          {
+            "sourceId": "head-3758ad602f4cae09",
+            "file": "src/app/api/tripmate/route.ts",
+            "fromLine": 16,
+            "toLine": 16
+          }
+        ]
+      }
+    ],
+    "steps": [
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "complete-active-trip",
+        "step": 1,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 795,
+            "toLine": 803
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "complete-active-trip",
+        "step": 2,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 1270,
+            "toLine": 1285
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "complete-active-trip",
+        "step": 3,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 119,
+            "toLine": 121
+          },
+          {
+            "sourceId": "head-4cb385ba012d8af8",
+            "file": "tests/integration/database.test.ts",
+            "fromLine": 221,
+            "toLine": 231,
+            "role": "test",
+            "symbol": "TC5 completes an active trip for its organiser and TC2 rejects other completion attempts",
+            "testCaseId": "TC2"
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "complete-active-trip",
+        "step": 4,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 122,
+            "toLine": 122
+          },
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 1287,
+            "toLine": 1300
+          },
+          {
+            "sourceId": "head-9421ebb2c72b20db",
+            "file": "tests/browser/workflows.spec.ts",
+            "fromLine": 124,
+            "toLine": 132,
+            "role": "test",
+            "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+            "testCaseId": "TC1"
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "view-completed-ledger",
+        "step": 1,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 126,
+            "toLine": 134
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "view-completed-ledger",
+        "step": 2,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 776,
+            "toLine": 783
+          },
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 1213,
+            "toLine": 1215
+          },
+          {
+            "sourceId": "head-9421ebb2c72b20db",
+            "file": "tests/browser/workflows.spec.ts",
+            "fromLine": 127,
+            "toLine": 135,
+            "role": "test",
+            "symbol": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+            "testCaseId": "TC3"
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "view-completed-ledger",
+        "step": 3,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-19f6eb1239bfeaec",
+            "file": "src/components/tripmate.tsx",
+            "fromLine": 776,
+            "toLine": 804
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "reject-closed-ledger-entry",
+        "step": 1,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-3758ad602f4cae09",
+            "file": "src/app/api/tripmate/route.ts",
+            "fromLine": 109,
+            "toLine": 120
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "reject-closed-ledger-entry",
+        "step": 2,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 139,
+            "toLine": 143
+          },
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 157,
+            "toLine": 161
+          }
+        ]
+      },
+      {
+        "workflowId": "finalize-trip-ledger",
+        "actionId": "reject-closed-ledger-entry",
+        "step": 3,
+        "status": "implemented",
+        "references": [
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 142,
+            "toLine": 142
+          },
+          {
+            "sourceId": "head-c65ab30c9effdf02",
+            "file": "supabase/migrations/202611100001_tripmate.sql",
+            "fromLine": 160,
+            "toLine": 160
+          },
+          {
+            "sourceId": "head-4cb385ba012d8af8",
+            "file": "tests/integration/database.test.ts",
+            "fromLine": 233,
+            "toLine": 258,
+            "role": "test",
+            "symbol": "TC4 rejects contributions and expenses after a trip is completed",
+            "testCaseId": "TC4"
+          }
+        ]
+      }
+    ],
+    "unplanned": [
+      {
+        "hunkId": "H1",
+        "reason": "supporting",
+        "note": "Approved source design document."
+      },
+      {
+        "hunkId": "H4",
+        "reason": "supporting",
+        "note": "Accessible confirmation label API."
+      },
+      {
+        "hunkId": "H5",
+        "reason": "supporting",
+        "note": "Accessible confirmation label typing."
+      },
+      {
+        "hunkId": "H6",
+        "reason": "supporting",
+        "note": "Accessible confirmation label wiring."
+      },
+      {
+        "hunkId": "H11",
+        "reason": "supporting",
+        "note": "Existing confirmation dialog adopts the generic accessible title id."
+      },
+      {
+        "hunkId": "H14",
+        "reason": "supporting",
+        "note": "Trip status constraint permits the completed lifecycle state."
+      },
+      {
+        "hunkId": "H18",
+        "reason": "supporting",
+        "note": "Completion RPC permissions are granted to authenticated callers."
+      },
+      {
+        "hunkId": "H21",
+        "reason": "test-only",
+        "note": "Fixture exposes the completion RPC to browser tests."
+      }
+    ],
+    "unplannedTests": [
+      {
+        "testId": "T3",
+        "reason": "test-only",
+        "note": "Fixture support has no direct test case."
+      },
+      {
+        "testId": "T4",
+        "reason": "out-of-scope",
+        "note": "Existing unchanged accounting tests are only indirectly related."
+      }
+    ]
+  },
+  "inventory": {
+    "testPaths": {
+      "from": "config",
+      "paths": [
+        "tests"
+      ]
+    },
+    "requestWords": [
+      "manual",
+      "organiser",
+      "only",
+      "trip",
+      "close",
+      "completed",
+      "read",
+      "ledger",
+      "server",
+      "side",
+      "write",
+      "rejection"
+    ],
+    "code": [
+      {
+        "file": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+        "why": [
+          "changed",
+          "request-match:manual"
+        ],
+        "lines": 44
+      },
+      {
+        "file": "supabase/migrations/202611100001_tripmate.sql",
+        "why": [
+          "changed",
+          "request-match:organiser"
+        ],
+        "lines": 207
+      },
+      {
+        "file": "src/components/tripmate.tsx",
+        "why": [
+          "changed",
+          "request-match:organiser"
+        ],
+        "lines": 1307
+      },
+      {
+        "file": "src/app/api/tripmate/route.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 141
+      },
+      {
+        "file": "src/components/confirmation.tsx",
+        "why": [
+          "changed"
+        ],
+        "lines": 34
+      },
+      {
+        "file": "src/lib/accounting.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 160
+      },
+      {
+        "file": "src/app/layout.tsx",
+        "why": [
+          "references-changed:TripMate"
+        ],
+        "lines": 30
+      },
+      {
+        "file": "src/app/page.tsx",
+        "why": [
+          "references-changed:TripMate"
+        ],
+        "lines": 4
+      },
+      {
+        "file": "src/lib/supabase-browser.ts",
+        "why": [
+          "references-changed:TripMate",
+          "referenced-by-changed:browserDb"
+        ],
+        "lines": 38
+      },
+      {
+        "file": "src/lib/supabase-server.ts",
+        "why": [
+          "request-match:server"
+        ],
+        "lines": 17
+      }
+    ],
+    "tests": [
+      {
+        "id": "T1",
+        "file": "tests/browser/workflows.spec.ts",
+        "framework": "playwright",
+        "level": "e2e",
+        "why": [
+          "changed",
+          "request-match:organiser"
+        ],
+        "changed": true,
+        "tests": [
+          {
+            "name": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+            "line": 5
+          },
+          {
+            "name": "TC15 exposes no payment/settlement controls; invalid invitation explains recovery",
+            "line": 138
+          }
+        ]
+      },
+      {
+        "id": "T2",
+        "file": "tests/integration/database.test.ts",
+        "framework": "vitest",
+        "level": "integration",
+        "why": [
+          "changed",
+          "request-match:organiser"
+        ],
+        "changed": true,
+        "tests": [
+          {
+            "name": "TC1 creates the trip, organiser and invitation atomically",
+            "line": 60
+          },
+          {
+            "name": "TC3 joins exactly once and TC18 returns an existing trip",
+            "line": 83
+          },
+          {
+            "name": "TC4 refuses revoked, expired and unknown invitations for new members",
+            "line": 101
+          },
+          {
+            "name": "TC17 sets the cash holder and starts two members; non-organiser is denied",
+            "line": 120
+          },
+          {
+            "name": "TC6 saves contributions and retries without duplicates",
+            "line": 129
+          },
+          {
+            "name": "TC8 saves a personal expense and its exact allocations atomically",
+            "line": 158
+          },
+          {
+            "name": "TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation",
+            "line": 173
+          },
+          {
+            "name": "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+            "line": 186
+          },
+          {
+            "name": "TC5 completes an active trip for its organiser and TC2 rejects other completion attempts",
+            "line": 221
+          },
+          {
+            "name": "TC4 rejects contributions and expenses after a trip is completed",
+            "line": 233
+          },
+          {
+            "name": "TC13 prevents outsider reads, writes and protected RPC access",
+            "line": 259
+          }
+        ]
+      },
+      {
+        "id": "T3",
+        "file": "tests/support/supabase-fixture.mjs",
+        "framework": "unknown",
+        "level": "unit",
+        "why": [
+          "changed"
+        ],
+        "changed": true,
+        "tests": []
+      },
+      {
+        "id": "T4",
+        "file": "tests/accounting.test.ts",
+        "framework": "vitest",
+        "level": "unit",
+        "why": [
+          "references-changed:canStart"
+        ],
+        "changed": false,
+        "tests": [
+          {
+            "name": "TC2 rejects missing names, impossible or reversed dates",
+            "line": 13
+          },
+          {
+            "name": "TC5 requires organiser authority and two active members including organiser",
+            "line": 36
+          },
+          {
+            "name": "TC7 rejects zero, negative, malformed, overflow and fractional satang",
+            "line": 43
+          },
+          {
+            "name": "TC10 splits ฿121 exactly and assigns the remainder by stable ID",
+            "line": 58
+          },
+          {
+            "name": "TC11 rejects empty, duplicate, foreign participants and non-positive shares",
+            "line": 65
+          },
+          {
+            "name": "TC19 selected and mixed parts charge only their groups and reconcile",
+            "line": 70
+          },
+          {
+            "name": "TC14 explains allocations, extras, contributions, personal credits and net",
+            "line": 114
+          },
+          {
+            "name": "TC14 excludes personal payments from pool spending and includes all expenses in total used",
+            "line": 127
+          }
+        ]
+      }
+    ],
+    "cut": {
+      "code": 0,
+      "tests": 0
+    },
+    "warnings": []
+  }
+}

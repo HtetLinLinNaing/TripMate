@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "workflow_version": "0.14.0-preview",
+  "max_review_iterations": 4,
+  "protected_branches": ["main", "master", "develop", "release/*"],
+  "feature_branch_template": "feature/{task_slug}",
+  "allow_push_without_issue": true,
+  "gates": [
+    {
+      "name": "tests",
+      "command": "npm run test",
+      "timeout_seconds": 60
+    },
+    {
+      "name": "lint",
+      "command": "npm run lint",
+      "timeout_seconds": 120
+    },
+    {
+      "name": "typecheck",
+      "command": "npm run typecheck",
+      "timeout_seconds": 120
+    }
+  ],
+  "test_integrity": {
+    "paths": ["tests"],
+    "allow_existing_test_changes": false
+  }
+}

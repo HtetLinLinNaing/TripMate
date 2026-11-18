@@ -1,0 +1,238 @@
+{
+  "testPaths": {
+    "from": "config",
+    "paths": [
+      "tests"
+    ]
+  },
+  "requestWords": [
+    "manual",
+    "organiser",
+    "only",
+    "trip",
+    "close",
+    "completed",
+    "read",
+    "ledger",
+    "server",
+    "side",
+    "write",
+    "rejection"
+  ],
+  "code": [
+    {
+      "file": "docs/superpowers/specs/2026-11-12-manual-trip-close-design.md",
+      "why": [
+        "changed",
+        "request-match:manual"
+      ],
+      "lines": 44
+    },
+    {
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "why": [
+        "changed",
+        "request-match:organiser"
+      ],
+      "lines": 207
+    },
+    {
+      "file": "src/components/tripmate.tsx",
+      "why": [
+        "changed",
+        "request-match:organiser"
+      ],
+      "lines": 1305
+    },
+    {
+      "file": "src/app/api/tripmate/route.ts",
+      "why": [
+        "changed"
+      ],
+      "lines": 141
+    },
+    {
+      "file": "src/components/confirmation.tsx",
+      "why": [
+        "changed"
+      ],
+      "lines": 34
+    },
+    {
+      "file": "src/lib/accounting.ts",
+      "why": [
+        "changed"
+      ],
+      "lines": 160
+    },
+    {
+      "file": "src/app/layout.tsx",
+      "why": [
+        "references-changed:TripMate"
+      ],
+      "lines": 30
+    },
+    {
+      "file": "src/app/page.tsx",
+      "why": [
+        "references-changed:TripMate"
+      ],
+      "lines": 4
+    },
+    {
+      "file": "src/lib/supabase-browser.ts",
+      "why": [
+        "references-changed:TripMate",
+        "referenced-by-changed:browserDb"
+      ],
+      "lines": 38
+    },
+    {
+      "file": "src/lib/supabase-server.ts",
+      "why": [
+        "request-match:server"
+      ],
+      "lines": 17
+    }
+  ],
+  "tests": [
+    {
+      "id": "T1",
+      "file": "tests/browser/workflows.spec.ts",
+      "framework": "playwright",
+      "level": "e2e",
+      "why": [
+        "changed",
+        "request-match:organiser"
+      ],
+      "changed": true,
+      "tests": [
+        {
+          "name": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+          "line": 5
+        },
+        {
+          "name": "TC15 exposes no payment/settlement controls; invalid invitation explains recovery",
+          "line": 135
+        }
+      ]
+    },
+    {
+      "id": "T2",
+      "file": "tests/integration/database.test.ts",
+      "framework": "vitest",
+      "level": "integration",
+      "why": [
+        "changed",
+        "request-match:organiser"
+      ],
+      "changed": true,
+      "tests": [
+        {
+          "name": "TC1 creates the trip, organiser and invitation atomically",
+          "line": 60
+        },
+        {
+          "name": "TC3 joins exactly once and TC18 returns an existing trip",
+          "line": 83
+        },
+        {
+          "name": "TC4 refuses revoked, expired and unknown invitations for new members",
+          "line": 101
+        },
+        {
+          "name": "TC17 sets the cash holder and starts two members; non-organiser is denied",
+          "line": 120
+        },
+        {
+          "name": "TC6 saves contributions and retries without duplicates",
+          "line": 129
+        },
+        {
+          "name": "TC8 saves a personal expense and its exact allocations atomically",
+          "line": 158
+        },
+        {
+          "name": "TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation",
+          "line": 173
+        },
+        {
+          "name": "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+          "line": 186
+        },
+        {
+          "name": "TC5 completes an active trip for its organiser and TC2 rejects other completion attempts",
+          "line": 221
+        },
+        {
+          "name": "TC4 rejects contributions and expenses after a trip is completed",
+          "line": 233
+        },
+        {
+          "name": "TC13 prevents outsider reads, writes and protected RPC access",
+          "line": 259
+        }
+      ]
+    },
+    {
+      "id": "T3",
+      "file": "tests/support/supabase-fixture.mjs",
+      "framework": "unknown",
+      "level": "unit",
+      "why": [
+        "changed"
+      ],
+      "changed": true,
+      "tests": []
+    },
+    {
+      "id": "T4",
+      "file": "tests/accounting.test.ts",
+      "framework": "vitest",
+      "level": "unit",
+      "why": [
+        "references-changed:canStart"
+      ],
+      "changed": false,
+      "tests": [
+        {
+          "name": "TC2 rejects missing names, impossible or reversed dates",
+          "line": 13
+        },
+        {
+          "name": "TC5 requires organiser authority and two active members including organiser",
+          "line": 36
+        },
+        {
+          "name": "TC7 rejects zero, negative, malformed, overflow and fractional satang",
+          "line": 43
+        },
+        {
+          "name": "TC10 splits ฿121 exactly and assigns the remainder by stable ID",
+          "line": 58
+        },
+        {
+          "name": "TC11 rejects empty, duplicate, foreign participants and non-positive shares",
+          "line": 65
+        },
+        {
+          "name": "TC19 selected and mixed parts charge only their groups and reconcile",
+          "line": 70
+        },
+        {
+          "name": "TC14 explains allocations, extras, contributions, personal credits and net",
+          "line": 114
+        },
+        {
+          "name": "TC14 excludes personal payments from pool spending and includes all expenses in total used",
+          "line": 127
+        }
+      ]
+    }
+  ],
+  "cut": {
+    "code": 0,
+    "tests": 0
+  },
+  "warnings": []
+}

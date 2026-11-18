@@ -1,0 +1,34 @@
+{
+  "summary": "Manual completed-trip lifecycle is implemented in the database, API, and client, with integration and browser coverage.",
+  "workflows": [{"workflowId": "finalize-trip-ledger", "references": [{"file": "src/components/tripmate.tsx", "fromLine": 776, "toLine": 804}, {"file": "supabase/migrations/202611100001_tripmate.sql", "fromLine": 116, "toLine": 160}]}],
+  "actions": [
+    {"workflowId": "finalize-trip-ledger", "actionId": "complete-active-trip", "references": [{"file": "src/app/api/tripmate/route.ts", "fromLine": 99, "toLine": 111}, {"file": "src/components/tripmate.tsx", "fromLine": 795, "toLine": 804}, {"file": "src/components/tripmate.tsx", "fromLine": 1270, "toLine": 1304}, {"file": "supabase/migrations/202611100001_tripmate.sql", "fromLine": 116, "toLine": 124}], "deviations": []},
+    {"workflowId": "finalize-trip-ledger", "actionId": "view-completed-ledger", "references": [{"file": "src/components/tripmate.tsx", "fromLine": 465, "toLine": 469}, {"file": "src/components/tripmate.tsx", "fromLine": 776, "toLine": 804}, {"file": "src/components/tripmate.tsx", "fromLine": 1213, "toLine": 1215}, {"file": "src/lib/accounting.ts", "fromLine": 87, "toLine": 87}], "deviations": []},
+    {"workflowId": "finalize-trip-ledger", "actionId": "reject-closed-ledger-entry", "references": [{"file": "supabase/migrations/202611100001_tripmate.sql", "fromLine": 139, "toLine": 142}, {"file": "supabase/migrations/202611100001_tripmate.sql", "fromLine": 157, "toLine": 160}, {"file": "src/app/api/tripmate/route.ts", "fromLine": 16, "toLine": 16}], "deviations": []}
+  ],
+  "steps": [
+    {"workflowId":"finalize-trip-ledger","actionId":"complete-active-trip","step":1,"text":"Show the organiser-only End trip control for an active trip.","status":"implemented","references":[{"file":"src/components/tripmate.tsx","fromLine":795,"toLine":803}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"complete-active-trip","step":2,"text":"Ask the organiser to confirm that the ledger is final.","status":"implemented","references":[{"file":"src/components/tripmate.tsx","fromLine":1270,"toLine":1285}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"complete-active-trip","step":3,"text":"Validate the authenticated organiser and active trip state.","status":"implemented","references":[{"file":"supabase/migrations/202611100001_tripmate.sql","fromLine":119,"toLine":121},{"file":"tests/integration/database.test.ts","fromLine":221,"toLine":231,"role":"test","symbol":"TC5 completes an active trip for its organiser and TC2 rejects other completion attempts","testCaseId":"TC2"}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"complete-active-trip","step":4,"text":"Persist the trip status as completed and refresh the snapshot.","status":"implemented","references":[{"file":"supabase/migrations/202611100001_tripmate.sql","fromLine":122,"toLine":122},{"file":"src/components/tripmate.tsx","fromLine":1287,"toLine":1300},{"file":"tests/browser/workflows.spec.ts","fromLine":124,"toLine":132,"role":"test","symbol":"TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)","testCaseId":"TC1"}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"view-completed-ledger","step":1,"text":"Load the completed trip snapshot for a current member.","status":"implemented","references":[{"file":"src/components/tripmate.tsx","fromLine":126,"toLine":134}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"view-completed-ledger","step":2,"text":"Display its completed state, ledger totals, and member bill.","status":"implemented","references":[{"file":"src/components/tripmate.tsx","fromLine":776,"toLine":783},{"file":"src/components/tripmate.tsx","fromLine":1213,"toLine":1215},{"file":"tests/browser/workflows.spec.ts","fromLine":127,"toLine":135,"role":"test","symbol":"TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)","testCaseId":"TC3"}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"view-completed-ledger","step":3,"text":"Withhold controls that add funds or expenses.","status":"implemented","references":[{"file":"src/components/tripmate.tsx","fromLine":776,"toLine":804}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"reject-closed-ledger-entry","step":1,"text":"Receive a contribution or expense command for the trip.","status":"implemented","references":[{"file":"src/app/api/tripmate/route.ts","fromLine":109,"toLine":120}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"reject-closed-ledger-entry","step":2,"text":"Read the authoritative trip lifecycle state.","status":"implemented","references":[{"file":"supabase/migrations/202611100001_tripmate.sql","fromLine":139,"toLine":143},{"file":"supabase/migrations/202611100001_tripmate.sql","fromLine":157,"toLine":161}]},
+    {"workflowId":"finalize-trip-ledger","actionId":"reject-closed-ledger-entry","step":3,"text":"Reject the command when the trip is completed without creating ledger records.","status":"implemented","references":[{"file":"supabase/migrations/202611100001_tripmate.sql","fromLine":142,"toLine":142},{"file":"supabase/migrations/202611100001_tripmate.sql","fromLine":160,"toLine":160},{"file":"tests/integration/database.test.ts","fromLine":233,"toLine":258,"role":"test","symbol":"TC4 rejects contributions and expenses after a trip is completed","testCaseId":"TC4"}]}
+  ],
+  "unplanned": [
+    {"hunk":"H1","reason":"supporting","note":"Approved source design document."},
+    {"hunk":"H4","reason":"supporting","note":"Accessible confirmation label API."},
+    {"hunk":"H5","reason":"supporting","note":"Accessible confirmation label typing."},
+    {"hunk":"H6","reason":"supporting","note":"Accessible confirmation label wiring."},
+    {"hunk":"H11","reason":"supporting","note":"Existing confirmation dialog adopts the generic accessible title id."},
+    {"hunk":"H14","reason":"supporting","note":"Trip status constraint permits the completed lifecycle state."},
+    {"hunk":"H18","reason":"supporting","note":"Completion RPC permissions are granted to authenticated callers."},
+    {"hunk":"H21","reason":"test-only","note":"Fixture exposes the completion RPC to browser tests."},
+    {"test":"T3","reason":"test-only","note":"Fixture support has no direct test case."},
+    {"test":"T4","reason":"out-of-scope","note":"Existing unchanged accounting tests are only indirectly related."}
+  ],
+  "relatedTests": []
+}

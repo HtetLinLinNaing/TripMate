@@ -1,0 +1,387 @@
+diff --git a/docs/superpowers/specs/2026-11-12-manual-trip-close-design.md b/docs/superpowers/specs/2026-11-12-manual-trip-close-design.md
+new file mode 100644
+index 0000000..a714ace
+--- /dev/null
++++ b/docs/superpowers/specs/2026-11-12-manual-trip-close-design.md
+@@ -0,0 +1,44 @@
++# Manual trip close
++
++## Intent
++
++Give organisers an explicit way to finalise a trip once the group has finished entering spending. A completed trip must preserve its final balances and cannot accept further contributions or expenses.
++
++## Goals
++
++- An organiser can end an active trip after confirming the irreversible action.
++- Every member can still view the completed trip, its ledger, and their final bill.
++- The UI clearly identifies completed trips.
++- The server rejects ledger writes after completion, regardless of the client UI.
++
++## Non-goals
++
++- Automatically ending a trip on its scheduled end date.
++- Editing or reopening a completed trip.
++- Settling payments or sending notifications.
++
++## Constraints
++
++- Keep the existing Next.js client, API route, and Supabase RPC architecture.
++- Preserve the current `draft` and `active` behaviour.
++- Only the organiser may close a trip.
++
++## Approaches considered
++
++1. Manual final close: the organiser confirms an **End trip** action. This keeps late receipts possible until the organiser decides the ledger is final. **Selected.**
++2. Automatic close on the scheduled end date: less effort for organisers but can prevent valid late entries.
++3. Soft close that permits later ledger changes: flexible, but it does not provide a final balance.
++
++## Design
++
++- Add `completed` as a trip status and an RPC action that transitions only an organiser-owned active trip to it.
++- Place an organiser-only **End trip** control on the active ledger and require the existing confirmation UI before submitting it.
++- Display completed trips as **Completed** in the trip list and show a completed-state notice in the ledger.
++- Retain read access and all balance calculations for completed trips.
++- Update contribution and expense RPC guards to accept only `active` trips.
++- Cover the close transition and post-close write rejection with automated tests.
++
++## Builder decisions
++
++- Closing is permanent for this version; reopening requires a future, separately designed feature.
++- Existing invitation behaviour remains unchanged because active invitations are not a ledger-write path.
+diff --git a/src/app/api/tripmate/route.ts b/src/app/api/tripmate/route.ts
+index 9fa08c5..017b791 100644
+--- a/src/app/api/tripmate/route.ts
++++ b/src/app/api/tripmate/route.ts
+@@ -13,7 +13,7 @@ const uuid = (value: unknown) =>
+ function safeError(message: string) {
+   if (message.startsWith("POOL_CONFIRM:")) return message;
+   if (
+-    /^(This invitation|Enter |Choose |Only the organiser|Invite one more|Start the trip|Each share|Expense parts|Operation already|Too many trips|You do not have access|Invalid |Add valid)/.test(
++    /^(This invitation|Enter |Choose |Only the organiser|Only active trips|This is a completed trip|Invite one more|Start the trip|Each share|Expense parts|Operation already|Too many trips|You do not have access|Invalid |Add valid)/.test(
+       message,
+     )
+   )
+@@ -103,6 +103,9 @@ export async function POST(request: Request) {
+           p_holder: body.holder,
+           p_start: body.start === true,
+         };
++      } else if (body.action === "complete") {
++        name = "complete_trip";
++        args = { p_trip: body.trip };
+       } else if (body.action === "contribute") {
+         name = "save_contribution";
+         args = {
+diff --git a/src/components/confirmation.tsx b/src/components/confirmation.tsx
+index 48fb09c..e6aca40 100644
+--- a/src/components/confirmation.tsx
++++ b/src/components/confirmation.tsx
+@@ -5,10 +5,12 @@ export default function Confirmation({
+   children,
+   busy,
+   onCancel,
++  labelledBy = "confirmation-title",
+ }: {
+   children: ReactNode;
+   busy: boolean;
+   onCancel: () => void;
++  labelledBy?: string;
+ }) {
+   const dialog = useRef<HTMLDialogElement>(null);
+   useEffect(() => {
+@@ -20,7 +22,7 @@ export default function Confirmation({
+     <dialog
+       ref={dialog}
+       className="confirm-dialog"
+-      aria-labelledby="overdraw-title"
++      aria-labelledby={labelledBy}
+       onCancel={(event) => {
+         event.preventDefault();
+         if (!busy) onCancel();
+diff --git a/src/components/tripmate.tsx b/src/components/tripmate.tsx
+index c7e1764..06f3050 100644
+--- a/src/components/tripmate.tsx
++++ b/src/components/tripmate.tsx
+@@ -127,7 +127,8 @@ export default function TripMate() {
+       { label: "", amount: "", members: [] },
+     ]);
+   const [confirmBalance, setConfirmBalance] = useState<number | null>(null),
+-    [holder, setHolder] = useState("");
++    [holder, setHolder] = useState(""),
++    [confirmEnd, setConfirmEnd] = useState(false);
+   const operation = useRef(""),
+     submitting = useRef(false);
+   const refresh = useCallback(async (id: string) => {
+@@ -461,7 +462,11 @@ export default function TripMate() {
+                     </small>
+                   </span>
+                   <span className="tag">
+-                    {t.status === "draft" ? "Waiting for group" : "Active"}
++                    {t.status === "draft"
++                      ? "Waiting for group"
++                      : t.status === "active"
++                        ? "Active"
++                        : "Completed"}
+                   </span>
+                 </button>
+               ))
+@@ -768,16 +773,35 @@ export default function TripMate() {
+                 No expenses yet. Add your first shared purchase.
+               </p>
+             )}
+-            <div className="action-grid">
+-              <Button className="secondary" onPress={() => go("funds")}>
+-                <Glyph name="plus" />
+-                Add funds
+-              </Button>
+-              <Button className="primary" onPress={() => go("expense")}>
+-                <Glyph name="plus" />
+-                Add expense
+-              </Button>
+-            </div>
++            {snapshot.trip.status === "completed" ? (
++              <p className="soft">
++                <strong>Completed</strong>
++                <br />
++                This ledger is final. New funds and expenses are locked.
++              </p>
++            ) : (
++              <>
++                <div className="action-grid">
++                  <Button className="secondary" onPress={() => go("funds")}>
++                    <Glyph name="plus" />
++                    Add funds
++                  </Button>
++                  <Button className="primary" onPress={() => go("expense")}>
++                    <Glyph name="plus" />
++                    Add expense
++                  </Button>
++                </div>
++                {organiser && (
++                  <Button
++                    variant="tertiary"
++                    isDisabled={busy}
++                    onPress={() => setConfirmEnd(true)}
++                  >
++                    End trip
++                  </Button>
++                )}
++              </>
++            )}
+             <Button
+               className="bill-link"
+               variant="tertiary"
+@@ -1186,7 +1210,9 @@ export default function TripMate() {
+           {view === "board"
+             ? "Waiting for group"
+             : view === "ledger"
+-              ? "Active"
++              ? trip?.status === "completed"
++                ? "Completed"
++                : "Active"
+               : view === "bill"
+                 ? trip?.name
+                 : "TripMate · shared expenses"}
+@@ -1214,7 +1240,7 @@ export default function TripMate() {
+       </footer>
+       {confirmBalance !== null && (
+         <Confirmation busy={busy} onCancel={() => setConfirmBalance(null)}>
+-          <h2 id="overdraw-title">Pool funds are short</h2>
++          <h2 id="confirmation-title">Pool funds are short</h2>
+           <p>
+             This expense will leave the pool{" "}
+             {money(parseMoney(amount) - confirmBalance)} below zero.
+@@ -1241,6 +1267,41 @@ export default function TripMate() {
+           </div>
+         </Confirmation>
+       )}
++      {confirmEnd && trip && (
++        <Confirmation
++          busy={busy}
++          labelledBy="end-trip-title"
++          onCancel={() => setConfirmEnd(false)}
++        >
++          <h2 id="end-trip-title">End {trip.name}?</h2>
++          <p>This locks the ledger so no one can add funds or expenses.</p>
++          <p className="muted">You can still review the final balances.</p>
++          <div className="action-grid">
++            <Button
++              autoFocus
++              variant="secondary"
++              isDisabled={busy}
++              onPress={() => setConfirmEnd(false)}
++            >
++              Cancel
++            </Button>
++            <Button
++              className="primary"
++              isDisabled={busy}
++              onPress={() =>
++                void run(async () => {
++                  await api("", { action: "complete", trip: trip.id });
++                  setConfirmEnd(false);
++                  await refresh(trip.id);
++                  setNotice("Trip completed. The ledger is now final.");
++                })
++              }
++            >
++              End trip
++            </Button>
++          </div>
++        </Confirmation>
++      )}
+     </div>
+   );
+ }
+diff --git a/src/lib/accounting.ts b/src/lib/accounting.ts
+index db744b1..714c18f 100644
+--- a/src/lib/accounting.ts
++++ b/src/lib/accounting.ts
+@@ -84,7 +84,7 @@ export interface Trip {
+   starts_on: string;
+   ends_on: string;
+   notes: string;
+-  status: "draft" | "active";
++  status: "draft" | "active" | "completed";
+   cash_holder_id: string | null;
+ }
+ export interface Contribution {
+diff --git a/supabase/migrations/202611100001_tripmate.sql b/supabase/migrations/202611100001_tripmate.sql
+index 7901e88..2e63959 100644
+--- a/supabase/migrations/202611100001_tripmate.sql
++++ b/supabase/migrations/202611100001_tripmate.sql
+@@ -5,7 +5,7 @@ revoke all on schema tripmate_private from public;
+ create table public.trips (
+  id uuid primary key default gen_random_uuid(), name text not null check(length(trim(name)) between 1 and 100),
+  organiser_id uuid not null references auth.users(id), starts_on date not null, ends_on date not null,
+- notes text not null default '' check(length(notes)<=2000), status text not null default 'draft' check(status in ('draft','active')),
++ notes text not null default '' check(length(notes)<=2000), status text not null default 'draft' check(status in ('draft','active','completed')),
+  currency text not null default 'THB' check(currency='THB'), cash_holder_id uuid references auth.users(id),
+  created_at timestamptz not null default now(), check(ends_on>=starts_on)
+ );
+@@ -113,6 +113,15 @@ begin
+  update public.trips set cash_holder_id=p_holder,status=case when p_start then 'active' else status end where id=p_trip;
+ end $$;
+ 
++create function public.complete_trip(p_trip uuid) returns void language plpgsql security definer set search_path='' as $$
++declare t public.trips;
++begin
++ select * into t from public.trips where id=p_trip for update;
++ if t.organiser_id is distinct from auth.uid() or auth.uid() is null then raise exception 'Only the organiser can end this trip'; end if;
++ if t.status<>'active' then raise exception 'Only active trips can be completed'; end if;
++ update public.trips set status='completed' where id=p_trip;
++end $$;
++
+ create function public.trip_snapshot(p_trip uuid) returns jsonb language plpgsql stable security definer set search_path='' as $$
+ declare result jsonb;
+ begin
+@@ -130,6 +139,7 @@ declare t public.trips; prior public.contributions; entry uuid;
+ begin
+  select * into t from public.trips where id=p_trip for update;
+  if not tripmate_private.member(p_trip) then raise exception 'You do not have access to this trip'; end if;
++ if t.status='completed' then raise exception 'This is a completed trip; no new ledger entries can be recorded'; end if;
+  if t.status<>'active' then raise exception 'Start the trip before recording funds'; end if;
+  if p_cents is null or p_cents<=0 or p_cents>999999999999 then raise exception 'Enter a positive THB amount'; end if;
+  select * into prior from public.contributions where recorder_id=auth.uid() and operation_id=p_operation;
+@@ -147,6 +157,7 @@ declare t public.trips; prior public.expenses; entry uuid; total bigint; part js
+ begin
+  select * into t from public.trips where id=p_trip for update;
+  if not tripmate_private.member(p_trip) then raise exception 'You do not have access to this trip'; end if;
++ if t.status='completed' then raise exception 'This is a completed trip; no new ledger entries can be recorded'; end if;
+  if t.status<>'active' then raise exception 'Start the trip before recording expenses'; end if;
+  select * into prior from public.expenses where recorder_id=auth.uid() and operation_id=(p->>'operation')::uuid;
+  if found then
+@@ -189,8 +200,8 @@ begin
+  return entry;
+ end $$;
+ 
+-revoke execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) from public,anon;
+-grant execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) to authenticated;
++revoke execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.complete_trip(uuid),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) from public,anon;
++grant execute on function public.create_trip(jsonb),public.invitation_context(text),public.join_trip(text,text),public.configure_trip(uuid,uuid,boolean),public.complete_trip(uuid),public.trip_snapshot(uuid),public.save_contribution(uuid,uuid,bigint,text,uuid),public.save_expense(uuid,jsonb) to authenticated;
+ 
+ -- Realtime SELECT uses the same membership policies. Private rows never enter public broadcasts.
+ alter publication supabase_realtime add table public.trips,public.memberships,public.contributions,public.expenses;
+diff --git a/tests/browser/workflows.spec.ts b/tests/browser/workflows.spec.ts
+index d15e1a6..a0ae676 100644
+--- a/tests/browser/workflows.spec.ts
++++ b/tests/browser/workflows.spec.ts
+@@ -121,6 +121,18 @@ test("TC16 TC20 complete all three workflows across browser presentation, Next A
+   await expect(guest.getByRole("button", { name: "Join Mom Jam" })).toHaveCount(
+     0,
+   );
++  await page.getByRole("button", { name: "End trip", exact: true }).click();
++  await expect(page.getByRole("dialog")).toContainText("End Mom Jam?");
++  await page.getByRole("button", { name: "End trip", exact: true }).last().click();
++  await expect(page.locator("main > .eyebrow")).toHaveText("Completed");
++  await expect(
++    page.getByText("This ledger is final. New funds and expenses are locked."),
++  ).toBeVisible();
++  await expect(
++    page.getByRole("button", { name: /Add funds|Add expense/ }),
++  ).toHaveCount(0);
++  await guest.getByRole("button", { name: "Refresh", exact: true }).click();
++  await expect(guest.locator("main > .eyebrow")).toHaveText("Completed");
+   await other.close();
+ });
+ test("TC15 exposes no payment/settlement controls; invalid invitation explains recovery", async ({
+diff --git a/tests/integration/database.test.ts b/tests/integration/database.test.ts
+index 9198a97..316aa0c 100644
+--- a/tests/integration/database.test.ts
++++ b/tests/integration/database.test.ts
+@@ -218,6 +218,44 @@ describe.sequential("isolated PostgreSQL schema, RLS and transactions", () => {
+       (await db.query("select id from public.expenses")).rows,
+     ).toHaveLength(before.rows.length);
+   });
++  it("TC5 completes an active trip for its organiser and TC2 rejects other completion attempts", async () => {
++    await expect(rpc(niran, "complete_trip", [trip])).rejects.toThrow(
++      "Only the organiser",
++    );
++    await rpc(may, "complete_trip", [trip]);
++    expect(await rpc(may, "trip_snapshot", [trip])).toMatchObject({
++      trip: { status: "completed" },
++    });
++    await expect(rpc(may, "complete_trip", [trip])).rejects.toThrow(
++      "Only active trips",
++    );
++  });
++  it("TC4 rejects contributions and expenses after a trip is completed", async () => {
++    const before = await db.query(
++      "select (select count(*) from public.contributions where trip_id=$1) as contributions, (select count(*) from public.expenses where trip_id=$1) as expenses",
++      [trip],
++    );
++    await expect(
++      rpc(may, "save_contribution", [
++        trip,
++        may,
++        100000,
++        "Late cash",
++        randomUUID(),
++      ]),
++    ).rejects.toThrow("completed trip");
++    await expect(rpc(may, "save_expense", [trip, expense()])).rejects.toThrow(
++      "completed trip",
++    );
++    expect(
++      (
++        await db.query(
++          "select (select count(*) from public.contributions where trip_id=$1) as contributions, (select count(*) from public.expenses where trip_id=$1) as expenses",
++          [trip],
++        )
++      ).rows,
++    ).toEqual(before.rows);
++  });
+   it("TC13 prevents outsider reads, writes and protected RPC access", async () => {
+     expect(
+       (await as(outsider, "select * from public.trips")).rows,
+diff --git a/tests/support/supabase-fixture.mjs b/tests/support/supabase-fixture.mjs
+index 8013979..961899d 100644
+--- a/tests/support/supabase-fixture.mjs
++++ b/tests/support/supabase-fixture.mjs
+@@ -63,6 +63,7 @@ const rpcArgs = {
+   invitation_context: ["p_token"],
+   join_trip: ["p_token", "p_name"],
+   configure_trip: ["p_trip", "p_holder", "p_start"],
++  complete_trip: ["p_trip"],
+   trip_snapshot: ["p_trip"],
+   save_contribution: ["p_trip", "p_member", "p_cents", "p_note", "p_operation"],
+   save_expense: ["p_trip", "p"],

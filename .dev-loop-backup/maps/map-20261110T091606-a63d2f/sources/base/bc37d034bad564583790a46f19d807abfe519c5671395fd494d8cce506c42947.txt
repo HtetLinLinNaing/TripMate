@@ -1,0 +1,7 @@
+.dev-loop
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+.env*.local

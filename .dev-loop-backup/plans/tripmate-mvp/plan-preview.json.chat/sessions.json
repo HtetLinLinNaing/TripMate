@@ -1,0 +1,18 @@
+{
+  "kind": "plan-chat-sessions",
+  "schemaVersion": 1,
+  "lastActive": "24bfbd63-0c9a-4824-a447-0f549d24765b",
+  "sessions": [
+    {
+      "id": "24bfbd63-0c9a-4824-a447-0f549d24765b",
+      "title": "Chat 1",
+      "provider": "codex",
+      "providerSessionId": "01a1c4bc-ee12-77b1-af3d-a95bad3d78f1",
+      "autoApply": "auto",
+      "createdAt": "2026-11-10T09:14:17.899Z",
+      "updatedAt": "2026-11-10T09:15:02.109Z",
+      "archived": false,
+      "lastSeenSha256": "9c22b982c8b850388d54ed525572d043f93147af2ba1e7166a801cc559db485e"
+    }
+  ]
+}

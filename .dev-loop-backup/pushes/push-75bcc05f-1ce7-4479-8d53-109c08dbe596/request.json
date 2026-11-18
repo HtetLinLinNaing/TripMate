@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "id": "push-75bcc05f-1ce7-4479-8d53-109c08dbe596",
+  "status": "Push Verified",
+  "options": {
+    "context": ""
+  },
+  "candidate": {
+    "root": "C:/Users/Administrator/Desktop/TripMateV3",
+    "branch": "feature/version-1",
+    "head": "783dd9d73537b16f168249559b80f3e7a5fd7a2b",
+    "destination": {
+      "remote": "origin",
+      "endpoint": "https://github.com/HtetLinLinNaing/TripMate.git",
+      "ref": "refs/heads/feature/version-1",
+      "publish": false,
+      "oid": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee"
+    },
+    "issue": {
+      "value": null,
+      "inferred": false,
+      "conflicts": []
+    },
+    "commits": [
+      {
+        "hash": "783dd9d73537b16f168249559b80f3e7a5fd7a2b",
+        "subject": "update the button",
+        "message": "update the button"
+      }
+    ],
+    "dirty": [],
+    "mixedIssues": [],
+    "configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+    "transport": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "workspace": "3174b82d2cfee604e9983c22db963bbc752ec734300c77ff7726a98c85512f4f",
+    "allow_push_without_issue": true,
+    "status": "ready"
+  },
+  "created_at": "2026-11-13T08:39:38.148Z",
+  "evidence": {
+    "status": "Developer Confirmed",
+    "candidate": "7e80a42a19d5d6905e5b73a8e63ed99e413eba111462e01c59bcc531fe47c900"
+  },
+  "preview": {
+    "candidate": {
+      "root": "C:/Users/Administrator/Desktop/TripMateV3",
+      "branch": "feature/version-1",
+      "head": "783dd9d73537b16f168249559b80f3e7a5fd7a2b",
+      "destination": {
+        "remote": "origin",
+        "endpoint": "https://github.com/HtetLinLinNaing/TripMate.git",
+        "ref": "refs/heads/feature/version-1",
+        "publish": false,
+        "oid": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee"
+      },
+      "issue": {
+        "value": null,
+        "inferred": false,
+        "conflicts": []
+      },
+      "commits": [
+        {
+          "hash": "783dd9d73537b16f168249559b80f3e7a5fd7a2b",
+          "subject": "update the button",
+          "message": "update the button"
+        }
+      ],
+      "dirty": [],
+      "mixedIssues": [],
+      "configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+      "transport": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "workspace": "3174b82d2cfee604e9983c22db963bbc752ec734300c77ff7726a98c85512f4f",
+      "allow_push_without_issue": true,
+      "status": "ready"
+    },
+    "evidence": {
+      "status": "Developer Confirmed",
+      "candidate": "7e80a42a19d5d6905e5b73a8e63ed99e413eba111462e01c59bcc531fe47c900"
+    },
+    "confirmations": [],
+    "token": "052127fdb51b42306a14850b26ae21125a69d9bd215d1ec49d641038bb2550fe"
+  },
+  "attempted": true,
+  "approved_token": "052127fdb51b42306a14850b26ae21125a69d9bd215d1ec49d641038bb2550fe",
+  "approved_at": "2026-11-13T08:43:49.140Z",
+  "result": {
+    "status": "Push Verified",
+    "checks": "Developer Confirmed",
+    "expected_head": "783dd9d73537b16f168249559b80f3e7a5fd7a2b",
+    "remote_head": "783dd9d73537b16f168249559b80f3e7a5fd7a2b",
+    "output": "To https://github.com/HtetLinLinNaing/TripMate.git\n \t783dd9d73537b16f168249559b80f3e7a5fd7a2b:refs/heads/feature/version-1\t09fa0f3..783dd9d\nDone\n"
+  }
+}
