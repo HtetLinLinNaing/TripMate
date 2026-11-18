@@ -1,0 +1,175 @@
+{
+  "version": 1,
+  "id": "push-cfd78a27-3ff7-4279-9025-698ec5209cb4",
+  "status": "Push Verified",
+  "options": {
+    "context": ""
+  },
+  "candidate": {
+    "root": "C:/Users/Administrator/Desktop/TripMateV3",
+    "branch": "feature/version-1",
+    "head": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+    "destination": {
+      "remote": "origin",
+      "endpoint": "https://github.com/HtetLinLinNaing/TripMate.git",
+      "ref": "refs/heads/feature/version-1",
+      "publish": false,
+      "oid": "a266e8241168742ac1a858374f1dece2aea109cf"
+    },
+    "issue": {
+      "value": null,
+      "inferred": false,
+      "conflicts": []
+    },
+    "commits": [
+      {
+        "hash": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+        "subject": "feat: finalise trips with a ledger lock",
+        "message": "feat: finalise trips with a ledger lock\n\nLets organisers close active trips after confirmation while preserving read access and preventing later funds or expense entries."
+      }
+    ],
+    "dirty": [],
+    "mixedIssues": [],
+    "configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+    "transport": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "workspace": "3174b82d2cfee604e9983c22db963bbc752ec734300c77ff7726a98c85512f4f",
+    "allow_push_without_issue": true,
+    "status": "ready"
+  },
+  "created_at": "2026-11-13T08:27:58.632Z",
+  "evidence": {
+    "configuration_fingerprint": "23a35cc5390999256791fc42b12f5b77e4dda8fa9f477d7881b0a4b0b65ad478",
+    "status": "Gate Passed",
+    "results": [
+      {
+        "name": "tests",
+        "command": "npm run test",
+        "timeout_seconds": 60,
+        "started_at": "2026-11-13T08:30:02.032Z",
+        "ended_at": "2026-11-13T08:30:04.011Z",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "\n> tripmate@0.1.0 test\n> vitest run\n\n(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v4.1.12 C:/Users/ADMINI~1/AppData/Local/Temp/dev-loop-push-qFd6cg/checkout\n\n\n Test Files  2 passed (2)\n      Tests  9 passed (9)\n   Start at  15:30:03\n   Duration  439ms (transform 87ms, setup 0ms, import 152ms, tests 31ms, environment 0ms)\n\n"
+      },
+      {
+        "name": "lint",
+        "command": "npm run lint",
+        "timeout_seconds": 120,
+        "started_at": "2026-11-13T08:30:04.011Z",
+        "ended_at": "2026-11-13T08:30:17.952Z",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "\n> tripmate@0.1.0 lint\n> eslint\n\n"
+      },
+      {
+        "name": "typecheck",
+        "command": "npm run typecheck",
+        "timeout_seconds": 120,
+        "started_at": "2026-11-13T08:30:17.952Z",
+        "ended_at": "2026-11-13T08:30:26.301Z",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "\n> tripmate@0.1.0 typecheck\n> next typegen && tsc --noEmit\n\nGenerating route types...\n✓ Types generated successfully\n"
+      }
+    ],
+    "bootstrap": {
+      "command": "npm ci",
+      "exit_code": 0,
+      "status": "passed",
+      "output": "npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n\nadded 485 packages, and audited 492 packages in 1m\n\n163 packages are looking for funding\n  run `npm fund` for details\n\n7 moderate severity vulnerabilities\n\nTo address all issues, run:\n  npm audit fix\n\nRun `npm audit` for details.\n"
+    },
+    "head": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+    "project_configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+    "candidate": "b2fa679e1ea7a69792cf7613df041ec33e42ea61e940a546d45c79ef9090760c"
+  },
+  "preview": {
+    "candidate": {
+      "root": "C:/Users/Administrator/Desktop/TripMateV3",
+      "branch": "feature/version-1",
+      "head": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+      "destination": {
+        "remote": "origin",
+        "endpoint": "https://github.com/HtetLinLinNaing/TripMate.git",
+        "ref": "refs/heads/feature/version-1",
+        "publish": false,
+        "oid": "a266e8241168742ac1a858374f1dece2aea109cf"
+      },
+      "issue": {
+        "value": null,
+        "inferred": false,
+        "conflicts": []
+      },
+      "commits": [
+        {
+          "hash": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+          "subject": "feat: finalise trips with a ledger lock",
+          "message": "feat: finalise trips with a ledger lock\n\nLets organisers close active trips after confirmation while preserving read access and preventing later funds or expense entries."
+        }
+      ],
+      "dirty": [],
+      "mixedIssues": [],
+      "configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+      "transport": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "workspace": "3174b82d2cfee604e9983c22db963bbc752ec734300c77ff7726a98c85512f4f",
+      "allow_push_without_issue": true,
+      "status": "ready"
+    },
+    "evidence": {
+      "configuration_fingerprint": "23a35cc5390999256791fc42b12f5b77e4dda8fa9f477d7881b0a4b0b65ad478",
+      "status": "Gate Passed",
+      "results": [
+        {
+          "name": "tests",
+          "command": "npm run test",
+          "timeout_seconds": 60,
+          "started_at": "2026-11-13T08:30:02.032Z",
+          "ended_at": "2026-11-13T08:30:04.011Z",
+          "exit_code": 0,
+          "status": "passed",
+          "output": "\n> tripmate@0.1.0 test\n> vitest run\n\n(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:\n  - ESM syntax in a file loaded as CommonJS (vitest.config.ts:1:1). Use a `.mjs` extension or set `\"type\": \"module\"` in the closest package.json\nSet `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.\n\n RUN  v4.1.12 C:/Users/ADMINI~1/AppData/Local/Temp/dev-loop-push-qFd6cg/checkout\n\n\n Test Files  2 passed (2)\n      Tests  9 passed (9)\n   Start at  15:30:03\n   Duration  439ms (transform 87ms, setup 0ms, import 152ms, tests 31ms, environment 0ms)\n\n"
+        },
+        {
+          "name": "lint",
+          "command": "npm run lint",
+          "timeout_seconds": 120,
+          "started_at": "2026-11-13T08:30:04.011Z",
+          "ended_at": "2026-11-13T08:30:17.952Z",
+          "exit_code": 0,
+          "status": "passed",
+          "output": "\n> tripmate@0.1.0 lint\n> eslint\n\n"
+        },
+        {
+          "name": "typecheck",
+          "command": "npm run typecheck",
+          "timeout_seconds": 120,
+          "started_at": "2026-11-13T08:30:17.952Z",
+          "ended_at": "2026-11-13T08:30:26.301Z",
+          "exit_code": 0,
+          "status": "passed",
+          "output": "\n> tripmate@0.1.0 typecheck\n> next typegen && tsc --noEmit\n\nGenerating route types...\n✓ Types generated successfully\n"
+        }
+      ],
+      "bootstrap": {
+        "command": "npm ci",
+        "exit_code": 0,
+        "status": "passed",
+        "output": "npm warn deprecated eslint@9.39.5: This version is no longer supported. Please see https://eslint.org/version-support for other options.\n\nadded 485 packages, and audited 492 packages in 1m\n\n163 packages are looking for funding\n  run `npm fund` for details\n\n7 moderate severity vulnerabilities\n\nTo address all issues, run:\n  npm audit fix\n\nRun `npm audit` for details.\n"
+      },
+      "head": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+      "project_configuration": "105ade2ba7db00d12662f40fd943755988251a3b5a3c32c5a7e51733d444f5cd",
+      "candidate": "b2fa679e1ea7a69792cf7613df041ec33e42ea61e940a546d45c79ef9090760c"
+    },
+    "confirmations": [],
+    "token": "cada2ff529428b1022880c0d3ff0c37b3f88edc5bc36be32c44bb31805233917"
+  },
+  "attempted": true,
+  "approved_token": "cada2ff529428b1022880c0d3ff0c37b3f88edc5bc36be32c44bb31805233917",
+  "approved_at": "2026-11-13T08:32:23.661Z",
+  "result": {
+    "status": "Push Verified",
+    "checks": "Gate Passed",
+    "expected_head": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+    "remote_head": "09fa0f3fd5483ffc875f38e21b97879f7f8a81ee",
+    "output": "To https://github.com/HtetLinLinNaing/TripMate.git\n \t09fa0f3fd5483ffc875f38e21b97879f7f8a81ee:refs/heads/feature/version-1\ta266e82..09fa0f3\nDone\n"
+  }
+}

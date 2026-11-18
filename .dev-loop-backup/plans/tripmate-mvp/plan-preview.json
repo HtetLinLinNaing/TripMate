@@ -1,0 +1,1823 @@
+{
+  "kind": "plan-preview",
+  "schemaVersion": 1,
+  "id": "tripmate-mvp",
+  "title": "Build TripMate shared-trip expense tracker",
+  "summary": "A responsive, private trip ledger that lets groups record pooled funds and expenses, split costs fairly, and understand each member's balance without processing payments.",
+  "revision": "2",
+  "status": "confirmed",
+  "identityStatus": "provisional",
+  "area": "tripmate",
+  "sources": [
+    {
+      "id": "prd",
+      "title": "TripMate MVP PRD",
+      "reference": "docs/PRD.md"
+    },
+    {
+      "id": "design",
+      "title": "TripMate screen flow",
+      "reference": "design.pen"
+    },
+    {
+      "id": "decision",
+      "title": "Confirmed technology choices",
+      "reference": "User confirmed Next.js, TypeScript, Tailwind CSS, HeroUI, Iconify, and Supabase."
+    },
+    {
+      "id": "ux-decisions",
+      "title": "Confirmed design alignment decisions, 2026-11-10",
+      "reference": ".dev-loop/plans/tripmate-mvp/design-decisions.md"
+    }
+  ],
+  "specifications": [
+    {
+      "id": "S1",
+      "summary": "Private groups can create, join, and configure a trip.",
+      "sourceIds": [
+        "prd",
+        "design"
+      ]
+    },
+    {
+      "id": "S2",
+      "summary": "Members can record positive THB contributions into a shared pool.",
+      "sourceIds": [
+        "prd",
+        "design"
+      ]
+    },
+    {
+      "id": "S3",
+      "summary": "Members can record personal or shared-pool expenses with an accountable payer.",
+      "sourceIds": [
+        "prd",
+        "design"
+      ]
+    },
+    {
+      "id": "S4",
+      "summary": "Expenses can be split equally, among selected members, or as named mixed parts.",
+      "sourceIds": [
+        "prd",
+        "design"
+      ]
+    },
+    {
+      "id": "S5",
+      "summary": "The ledger and personal bill show explainable, current balances.",
+      "sourceIds": [
+        "prd",
+        "design"
+      ]
+    },
+    {
+      "id": "S6",
+      "summary": "The product is mobile-first and remains convenient on tablet and desktop web.",
+      "sourceIds": [
+        "prd",
+        "design"
+      ]
+    },
+    {
+      "id": "S7",
+      "summary": "Only authorised trip members can access private trip data.",
+      "sourceIds": [
+        "prd",
+        "decision"
+      ]
+    },
+    {
+      "id": "S8",
+      "summary": "The MVP tracks settlements but does not process payments or support multi-currency.",
+      "sourceIds": [
+        "prd"
+      ]
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "A1",
+      "summary": "An organiser creates a trip with valid required details and receives a private invitation.",
+      "specificationIds": [
+        "S1"
+      ]
+    },
+    {
+      "id": "A2",
+      "summary": "A valid invite lets a person join once; invalid, expired, or revoked invitations show an actionable error. Existing members on the same browser return to their trip without another membership.",
+      "specificationIds": [
+        "S1",
+        "S7"
+      ]
+    },
+    {
+      "id": "A3",
+      "summary": "An organiser can assign a cash holder and start a trip only after at least two members join.",
+      "specificationIds": [
+        "S1"
+      ]
+    },
+    {
+      "id": "A4",
+      "summary": "A positive contribution updates the pool balance, contributor total, and activity feed.",
+      "specificationIds": [
+        "S2",
+        "S5"
+      ]
+    },
+    {
+      "id": "A5",
+      "summary": "A personal or shared-pool expense records its payer, source, and amount; a negative pool balance requires confirmation.",
+      "specificationIds": [
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "A6",
+      "summary": "Equal, selected-member, and mixed allocations total exactly to the expense amount and reject invalid participants or allocations.",
+      "specificationIds": [
+        "S4"
+      ]
+    },
+    {
+      "id": "A7",
+      "summary": "The active ledger shows current remaining pool balance, total contributed, recent activity, and total used; payer and payment source are available in expense details.",
+      "specificationIds": [
+        "S3",
+        "S5"
+      ]
+    },
+    {
+      "id": "A8",
+      "summary": "A member's bill itemises allocations, contributions, personal-payment credit, and resulting due or credit position.",
+      "specificationIds": [
+        "S5"
+      ]
+    },
+    {
+      "id": "A9",
+      "summary": "The primary flows remain usable on phone, tablet, and desktop widths with accessible controls.",
+      "specificationIds": [
+        "S6"
+      ]
+    },
+    {
+      "id": "A10",
+      "summary": "Unauthorised users cannot read or mutate a trip, including through realtime updates.",
+      "specificationIds": [
+        "S7"
+      ]
+    },
+    {
+      "id": "A11",
+      "summary": "No payment transfer, currency conversion, or automated settlement action is exposed in the MVP.",
+      "specificationIds": [
+        "S8"
+      ]
+    }
+  ],
+  "contexts": [
+    {
+      "id": "trip-setup",
+      "title": "Trip setup",
+      "kind": "core",
+      "summary": "Owns a trip's identity, membership, invitations, status, and cash-holder selection.",
+      "glossary": [
+        {
+          "term": "Cash holder",
+          "meaning": "The member designated to handle the shared-pool workflow; this role does not own other members' money."
+        }
+      ]
+    },
+    {
+      "id": "shared-ledger",
+      "title": "Shared ledger",
+      "kind": "core",
+      "summary": "Owns contributions, expenses, allocations, and the shared-pool balance."
+    },
+    {
+      "id": "member-position",
+      "title": "Member position",
+      "kind": "core",
+      "summary": "Derives each member's explainable trip balance, due amount, or credit from ledger entries."
+    }
+  ],
+  "physicalBoundaries": [
+    {
+      "id": "web-app",
+      "title": "TripMate web application",
+      "location": "Next.js application deployed as a responsive web app",
+      "summary": "Renders the experience, coordinates use cases, and performs server-side access-checked data operations."
+    },
+    {
+      "id": "supabase-platform",
+      "title": "Supabase platform",
+      "location": "Managed Supabase project",
+      "summary": "Provides Auth, Postgres persistence with Row Level Security, and authorised realtime database-change delivery."
+    }
+  ],
+  "infrastructure": [
+    {
+      "id": "nextjs",
+      "title": "Next.js App Router",
+      "technology": "Next.js with TypeScript",
+      "physicalBoundary": "TripMate web application",
+      "rationale": "Provides one responsive web application with server components for data reads, client components for interactive forms, and route handlers/server actions for protected mutations.",
+      "boundaryIds": [
+        "web-app"
+      ]
+    },
+    {
+      "id": "tailwind",
+      "title": "Tailwind CSS",
+      "technology": "Tailwind CSS",
+      "physicalBoundary": "TripMate web application",
+      "rationale": "Supports mobile-first base utilities with breakpoint overrides for a compact phone UI that expands gracefully to tablet and desktop layouts.",
+      "boundaryIds": [
+        "web-app"
+      ]
+    },
+    {
+      "id": "heroui",
+      "title": "HeroUI",
+      "technology": "HeroUI React components",
+      "physicalBoundary": "TripMate web application",
+      "rationale": "Supplies accessible, Tailwind-compatible form, modal, feedback, and navigation primitives while retaining the custom TripMate visual flow.",
+      "boundaryIds": [
+        "web-app"
+      ]
+    },
+    {
+      "id": "iconify",
+      "title": "Iconify",
+      "technology": "Iconify React with local icon collections",
+      "physicalBoundary": "TripMate web application",
+      "rationale": "Provides consistent, accessible icons without hand-drawn assets; selected collections will be bundled locally so core controls do not depend on a third-party icon request at runtime.",
+      "boundaryIds": [
+        "web-app"
+      ]
+    },
+    {
+      "id": "supabase-auth",
+      "title": "Supabase Auth",
+      "technology": "Supabase Auth with Next.js SSR support",
+      "physicalBoundary": "Supabase platform",
+      "rationale": "Provides a persistent identity for membership, attribution, and protected sessions without designing a custom credential system.",
+      "boundaryIds": [
+        "supabase-platform"
+      ]
+    },
+    {
+      "id": "supabase-postgres",
+      "title": "Supabase Postgres and Row Level Security",
+      "technology": "Postgres migrations and Row Level Security",
+      "physicalBoundary": "Supabase platform",
+      "rationale": "Stores the trip ledger durably and enforces member-only reads and writes at the database boundary.",
+      "boundaryIds": [
+        "supabase-platform"
+      ]
+    },
+    {
+      "id": "supabase-realtime",
+      "title": "Supabase Realtime",
+      "technology": "Postgres change subscriptions",
+      "physicalBoundary": "Supabase platform",
+      "rationale": "Keeps active trip members informed about new contributions and expenses while applying the same membership access rules.",
+      "boundaryIds": [
+        "supabase-platform"
+      ]
+    }
+  ],
+  "models": [
+    {
+      "id": "trip",
+      "title": "Trip",
+      "kind": "aggregate",
+      "contextId": "trip-setup",
+      "summary": "A private shared-finance group with its organiser, dates, state, currency, and cash holder.",
+      "fields": [
+        {
+          "name": "id",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "organiserId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "startsOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "endsOn",
+          "type": "date",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "draft | active",
+          "required": true
+        },
+        {
+          "name": "currency",
+          "type": "THB",
+          "required": true
+        },
+        {
+          "name": "cashHolderId",
+          "type": "UUID | null",
+          "required": false
+        }
+      ],
+      "acceptanceIds": [
+        "A1",
+        "A3"
+      ]
+    },
+    {
+      "id": "membership",
+      "title": "Trip membership",
+      "kind": "entity",
+      "contextId": "trip-setup",
+      "summary": "An active person's membership and role within one private trip.",
+      "fields": [
+        {
+          "name": "tripId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "userId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "displayName",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "role",
+          "type": "organiser | member",
+          "required": true
+        },
+        {
+          "name": "joinedAt",
+          "type": "timestamp",
+          "required": true
+        }
+      ],
+      "acceptanceIds": [
+        "A2",
+        "A3",
+        "A10"
+      ]
+    },
+    {
+      "id": "invitation",
+      "title": "Trip invitation",
+      "kind": "record",
+      "contextId": "trip-setup",
+      "summary": "A private join token with lifecycle state and expiry.",
+      "fields": [
+        {
+          "name": "token",
+          "type": "opaque string",
+          "required": true
+        },
+        {
+          "name": "tripId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "status",
+          "type": "active | revoked | expired",
+          "required": true
+        },
+        {
+          "name": "expiresAt",
+          "type": "timestamp | null",
+          "required": false
+        }
+      ],
+      "infrastructureId": "supabase-postgres",
+      "acceptanceIds": [
+        "A1",
+        "A2"
+      ]
+    },
+    {
+      "id": "contribution",
+      "title": "Contribution",
+      "kind": "record",
+      "contextId": "shared-ledger",
+      "summary": "A positive THB amount attributed to a member and added to the shared pool.",
+      "fields": [
+        {
+          "name": "tripId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "contributorId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "note",
+          "type": "string | null",
+          "required": false
+        },
+        {
+          "name": "createdAt",
+          "type": "timestamp",
+          "required": true
+        }
+      ],
+      "infrastructureId": "supabase-postgres",
+      "acceptanceIds": [
+        "A4"
+      ]
+    },
+    {
+      "id": "expense",
+      "title": "Expense",
+      "kind": "aggregate",
+      "contextId": "shared-ledger",
+      "summary": "An immutable purchase record with payer, payment source, total THB amount, and allocations.",
+      "fields": [
+        {
+          "name": "tripId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "payerId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "paymentSource",
+          "type": "personal | shared_pool",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "createdAt",
+          "type": "timestamp",
+          "required": true
+        }
+      ],
+      "acceptanceIds": [
+        "A5",
+        "A6",
+        "A7"
+      ]
+    },
+    {
+      "id": "allocation",
+      "title": "Expense allocation",
+      "kind": "entity",
+      "contextId": "shared-ledger",
+      "summary": "One member's exactly quantified share of an expense, optionally labelled as a mixed part.",
+      "fields": [
+        {
+          "name": "expenseId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "memberId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "amount",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "partLabel",
+          "type": "string | null",
+          "required": false
+        }
+      ],
+      "acceptanceIds": [
+        "A6",
+        "A8"
+      ]
+    },
+    {
+      "id": "ledger-summary",
+      "title": "Ledger summary",
+      "kind": "view-model",
+      "contextId": "member-position",
+      "summary": "The current pool balance, total used, and recent activity rendered for a trip member.",
+      "fields": [
+        {
+          "name": "poolBalance",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "totalUsed",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "recentActivity",
+          "type": "activity[]",
+          "required": true
+        }
+      ],
+      "acceptanceIds": [
+        "A4",
+        "A7"
+      ]
+    },
+    {
+      "id": "personal-bill",
+      "title": "Personal bill",
+      "kind": "view-model",
+      "contextId": "member-position",
+      "summary": "An itemised accounting explanation of one member's cost share, contributions, payer credits, and net position.",
+      "fields": [
+        {
+          "name": "memberId",
+          "type": "UUID",
+          "required": true
+        },
+        {
+          "name": "sharedCostTotal",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "paidIntoPool",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "personalPaymentCredit",
+          "type": "decimal(12,2)",
+          "required": true
+        },
+        {
+          "name": "netPosition",
+          "type": "decimal(12,2)",
+          "required": true
+        }
+      ],
+      "acceptanceIds": [
+        "A8"
+      ]
+    }
+  ],
+  "workflows": [
+    {
+      "id": "set-up-trip",
+      "title": "Set up a private trip group",
+      "summary": "An organiser creates a trip, people join through a private invitation, and the group is made ready to track costs.",
+      "goal": "A private group has enough authorised members and configuration to start a shared trip ledger.",
+      "diagram": "Create trip → Join by invitation → Configure group → Start trip",
+      "specificationIds": [
+        "S1",
+        "S7"
+      ],
+      "acceptanceIds": [
+        "A1",
+        "A2",
+        "A3",
+        "A10"
+      ],
+      "actions": [
+        {
+          "id": "create-trip",
+          "title": "Create a trip",
+          "summary": "An organiser saves valid trip details and receives a private invitation.",
+          "contextId": "trip-setup",
+          "steps": [
+            "Enter organiser, name, dates, and optional trip details.",
+            "Reject missing details or an end date before the start date.",
+            "Create the trip, organiser membership, and invitation."
+          ],
+          "stepFlow": {
+            "edges": [
+              {
+                "from": 1,
+                "to": 2,
+                "kind": "if",
+                "label": "invalid details"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "kind": "if",
+                "label": "valid details"
+              }
+            ]
+          },
+          "businessRules": [
+            "A trip name, organiser display name, and valid dates are required.",
+            "The MVP trip currency is THB."
+          ],
+          "specificationIds": [
+            "S1"
+          ],
+          "acceptanceIds": [
+            "A1"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Presents the creation form and coordinates the protected trip setup transaction."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Uses App Router server-side mutation handling for the trip setup transaction."
+            },
+            {
+              "infrastructureId": "heroui",
+              "relationship": "Renders with",
+              "description": "Uses accessible form controls and validation feedback."
+            },
+            {
+              "infrastructureId": "tailwind",
+              "relationship": "Styles with",
+              "description": "Uses mobile-first layout and wider-screen form arrangement."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Persists through",
+              "description": "Creates the trip, organiser membership, and invitation records under database constraints."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "trip",
+              "use": "creates"
+            },
+            {
+              "modelId": "membership",
+              "use": "creates"
+            },
+            {
+              "modelId": "invitation",
+              "use": "writes"
+            }
+          ]
+        },
+        {
+          "id": "join-trip",
+          "title": "Join a trip",
+          "summary": "An invited person validates an invitation and becomes one active member exactly once.",
+          "contextId": "trip-setup",
+          "steps": [
+            "Restore or automatically create a Supabase anonymous identity; ask new members only for a display name.",
+            "Return existing members on the same browser to their trip without creating membership; otherwise reject invalid, expired, or revoked invitations with the agreed message.",
+            "Create the membership and show the group board."
+          ],
+          "stepFlow": {
+            "edges": [
+              {
+                "from": 1,
+                "to": 2,
+                "kind": "if",
+                "label": "new join unusable"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "kind": "if",
+                "label": "invite valid"
+              }
+            ]
+          },
+          "businessRules": [
+            "A person can join a trip only once.",
+            "Only a valid private invitation can create membership."
+          ],
+          "specificationIds": [
+            "S1",
+            "S7"
+          ],
+          "acceptanceIds": [
+            "A2",
+            "A10"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Validates a private join request and renders the resulting group access."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Uses a route-bound invitation page and protected membership mutation."
+            },
+            {
+              "infrastructureId": "supabase-auth",
+              "relationship": "Uses to identify",
+              "description": "Associates the join with a persistent authenticated identity."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Persists through",
+              "description": "Checks invitation state and writes one membership under Row Level Security."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "invitation",
+              "use": "reads"
+            },
+            {
+              "modelId": "membership",
+              "use": "creates"
+            }
+          ],
+          "details": "Existing-member access uses authenticated membership and does not depend on an invitation still being valid. New joins with invalid, expired or revoked invitations show: “This invitation is no longer valid. Ask the organiser for a new link.” No visible registration form is required."
+        },
+        {
+          "id": "configure-group",
+          "title": "Configure and start the group",
+          "summary": "The organiser assigns a cash holder and starts a sufficiently populated trip.",
+          "contextId": "trip-setup",
+          "steps": [
+            "Review joined members on the group board.",
+            "Select a current member as the cash holder.",
+            "Keep Start trip disabled below two active members including the organiser; allow only the organiser to start once the threshold is met."
+          ],
+          "stepFlow": {
+            "edges": [
+              {
+                "from": 2,
+                "to": 3,
+                "kind": "then"
+              }
+            ]
+          },
+          "businessRules": [
+            "Only the organiser can set the cash holder or start the trip.",
+            "A trip needs at least two active members before it starts."
+          ],
+          "specificationIds": [
+            "S1"
+          ],
+          "acceptanceIds": [
+            "A3"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Enforces organiser-only group configuration and shows the group board."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Coordinates the role-checked start transition."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Persists through",
+              "description": "Reads active membership and stores the cash-holder and trip status changes."
+            },
+            {
+              "infrastructureId": "supabase-realtime",
+              "relationship": "Subscribes to",
+              "description": "Refreshes the group board when other invited members join."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "trip",
+              "use": "changes"
+            },
+            {
+              "modelId": "membership",
+              "use": "reads"
+            }
+          ]
+        }
+      ],
+      "actionFlow": {
+        "entries": [
+          {
+            "actionId": "create-trip",
+            "trigger": "organiser starts"
+          },
+          {
+            "actionId": "join-trip",
+            "trigger": "invite opened"
+          },
+          {
+            "actionId": "configure-group",
+            "trigger": "organiser configures"
+          }
+        ],
+        "edges": [
+          {
+            "from": "create-trip",
+            "to": "join-trip",
+            "kind": "then",
+            "label": "invitation"
+          },
+          {
+            "from": "join-trip",
+            "to": "configure-group",
+            "kind": "then",
+            "label": "member joined"
+          }
+        ],
+        "records": [
+          {
+            "id": "trip-group",
+            "title": "Trip group",
+            "summary": "Created during setup and read when people join or the organiser starts the trip.",
+            "actionIds": [
+              "create-trip",
+              "join-trip",
+              "configure-group"
+            ],
+            "modelId": "trip"
+          }
+        ]
+      },
+      "verification": "Plan unit validation for dates, invitation lifecycle, duplicate membership, organiser permissions, and start conditions; integration coverage for Row Level Security; E2E coverage for create, join, and start on a responsive browser."
+    },
+    {
+      "id": "maintain-trip-ledger",
+      "title": "Maintain the shared trip ledger",
+      "summary": "Members contribute funds and record shared costs while everyone sees a current, access-controlled ledger.",
+      "goal": "The group has an accurate shared-pool balance and visible record of spending.",
+      "diagram": "Add funds → Record expense → Update ledger → Review activity",
+      "specificationIds": [
+        "S2",
+        "S3",
+        "S4",
+        "S5",
+        "S7"
+      ],
+      "acceptanceIds": [
+        "A4",
+        "A5",
+        "A6",
+        "A7",
+        "A10"
+      ],
+      "actions": [
+        {
+          "id": "add-contribution",
+          "title": "Add a pool contribution",
+          "summary": "A member records a positive THB contribution and immediately sees its ledger effect.",
+          "contextId": "shared-ledger",
+          "steps": [
+            "Choose the contributor and enter a positive THB amount with an optional note.",
+            "Reject a zero, negative, or malformed amount.",
+            "Save the contribution and publish the updated activity."
+          ],
+          "stepFlow": {
+            "edges": [
+              {
+                "from": 1,
+                "to": 2,
+                "kind": "if",
+                "label": "amount invalid"
+              },
+              {
+                "from": 1,
+                "to": 3,
+                "kind": "if",
+                "label": "amount valid"
+              }
+            ]
+          },
+          "businessRules": [
+            "A contribution amount must be greater than zero.",
+            "A contribution is attributed to one active trip member."
+          ],
+          "specificationIds": [
+            "S2"
+          ],
+          "acceptanceIds": [
+            "A4"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Collects a contribution form and coordinates an authorised ledger write."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Runs the protected contribution use case from the responsive UI."
+            },
+            {
+              "infrastructureId": "heroui",
+              "relationship": "Renders with",
+              "description": "Provides accessible money input and save feedback."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Persists through",
+              "description": "Stores the contribution for an authorised trip member."
+            },
+            {
+              "infrastructureId": "supabase-realtime",
+              "relationship": "Publishes through",
+              "description": "Delivers the new ledger entry to authorised active viewers."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "contribution",
+              "use": "writes"
+            },
+            {
+              "modelId": "membership",
+              "use": "reads"
+            },
+            {
+              "modelId": "ledger-summary",
+              "use": "renders"
+            }
+          ]
+        },
+        {
+          "id": "record-expense",
+          "title": "Record and split an expense",
+          "summary": "A member records the payer, payment source, amount, and a valid allocation in one immutable ledger entry.",
+          "contextId": "shared-ledger",
+          "steps": [
+            "Enter the expense description, payer, source, and positive THB total.",
+            "Choose everyone, selected-member, or mixed allocation and preview every person's exact share before saving.",
+            "Reject empty participants, negative shares, or allocations that do not equal the total.",
+            "Warn with the resulting negative pool balance and require explicit Save anyway confirmation; Cancel leaves the expense unsaved.",
+            "Save the expense and allocations as one ledger entry."
+          ],
+          "stepFlow": {
+            "edges": [
+              {
+                "from": 1,
+                "to": 2,
+                "kind": "then"
+              },
+              {
+                "from": 2,
+                "to": 3,
+                "kind": "if",
+                "label": "allocation invalid"
+              },
+              {
+                "from": 2,
+                "to": 4,
+                "kind": "if",
+                "label": "pool would be negative"
+              },
+              {
+                "from": 2,
+                "to": 5,
+                "kind": "if",
+                "label": "allocation valid"
+              },
+              {
+                "from": 4,
+                "to": 5,
+                "kind": "if",
+                "label": "confirmed"
+              }
+            ]
+          },
+          "businessRules": [
+            "An expense total and every allocation must be positive.",
+            "Allocations must sum exactly to the expense total after deterministic displayed rounding.",
+            "A personal payer receives credit so the same shared cost is not charged twice."
+          ],
+          "specificationIds": [
+            "S3",
+            "S4"
+          ],
+          "acceptanceIds": [
+            "A5",
+            "A6"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Guides a member through entry, pre-save allocation validation, and authorised immutable ledger writing."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Coordinates the protected expense transaction and negative-pool confirmation flow."
+            },
+            {
+              "infrastructureId": "heroui",
+              "relationship": "Renders with",
+              "description": "Uses accessible selection, disclosure, and confirmation controls."
+            },
+            {
+              "infrastructureId": "iconify",
+              "relationship": "Renders with",
+              "description": "Supplies labelled visual affordances for payer, pool, split, and warning states."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Persists through",
+              "description": "Stores each immutable expense and its allocations atomically under membership policy."
+            },
+            {
+              "infrastructureId": "supabase-realtime",
+              "relationship": "Publishes through",
+              "description": "Delivers the changed ledger state to authorised subscribed members."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "expense",
+              "use": "creates"
+            },
+            {
+              "modelId": "allocation",
+              "use": "creates"
+            },
+            {
+              "modelId": "membership",
+              "use": "reads"
+            },
+            {
+              "modelId": "contribution",
+              "use": "reads"
+            }
+          ],
+          "details": "All split modes preview exact person-level allocations. For ฿121 split among three people, show ฿40.34, ฿40.33 and ฿40.33 with deterministic remainder assignment. Mixed splits show how the parts produce each person's share."
+        },
+        {
+          "id": "review-active-ledger",
+          "title": "Review the active ledger",
+          "summary": "A member sees the current pool balance, total used, payment sources, and recent activity.",
+          "contextId": "member-position",
+          "steps": [
+            "Confirm the viewer is an active trip member.",
+            "Read contributions and expenses for the trip.",
+            "Show remaining pool balance prominently, total contributed separately, total used and recent activity; open an expense to see its payer and payment source.",
+            "Apply authorised realtime changes to the displayed ledger."
+          ],
+          "businessRules": [
+            "Only active trip members can view a trip ledger.",
+            "Shared-pool expenses reduce pool balance; personal expenses do not."
+          ],
+          "specificationIds": [
+            "S5",
+            "S7"
+          ],
+          "acceptanceIds": [
+            "A7",
+            "A10"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Renders a member-scoped ledger and keeps it current without exposing unauthorised records."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Uses server data reads for the initial ledger view and client interactivity for live refresh."
+            },
+            {
+              "infrastructureId": "tailwind",
+              "relationship": "Styles with",
+              "description": "Presents a compact phone ledger that expands into efficient wider-screen information layout."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Reads through",
+              "description": "Reads only trip records permitted by Row Level Security."
+            },
+            {
+              "infrastructureId": "supabase-realtime",
+              "relationship": "Subscribes to",
+              "description": "Receives authorised changes for the active trip."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "contribution",
+              "use": "reads"
+            },
+            {
+              "modelId": "expense",
+              "use": "reads"
+            },
+            {
+              "modelId": "ledger-summary",
+              "use": "renders"
+            }
+          ]
+        }
+      ],
+      "actionFlow": {
+        "entries": [
+          {
+            "actionId": "add-contribution",
+            "trigger": "funds received"
+          },
+          {
+            "actionId": "record-expense",
+            "trigger": "purchase paid"
+          },
+          {
+            "actionId": "review-active-ledger",
+            "trigger": "member opens ledger"
+          }
+        ],
+        "edges": [
+          {
+            "from": "add-contribution",
+            "to": "review-active-ledger",
+            "kind": "then",
+            "label": "new contribution"
+          },
+          {
+            "from": "record-expense",
+            "to": "review-active-ledger",
+            "kind": "then",
+            "label": "new expense"
+          }
+        ],
+        "records": [
+          {
+            "id": "shared-ledger-record",
+            "title": "Shared ledger",
+            "summary": "Contributions and expenses are written by members and summarised for viewers.",
+            "actionIds": [
+              "add-contribution",
+              "record-expense",
+              "review-active-ledger"
+            ],
+            "modelId": "expense"
+          }
+        ]
+      },
+      "verification": "Plan unit tests for money validation, allocation and balance calculations; integration tests for atomic persisted expense/allocation writes, RLS, and authorised realtime subscription; E2E coverage for contribution, each split mode, negative-pool confirmation, and responsive ledger review."
+    },
+    {
+      "id": "understand-member-position",
+      "title": "Understand a member's trip position",
+      "summary": "A member opens an itemised bill and uses the shared ledger to understand their due or credit position without a payment flow.",
+      "goal": "Every member can explain their net trip position from recorded entries.",
+      "diagram": "Open personal bill → Calculate position → Review itemised totals",
+      "specificationIds": [
+        "S5",
+        "S8"
+      ],
+      "acceptanceIds": [
+        "A8",
+        "A11"
+      ],
+      "actions": [
+        {
+          "id": "view-personal-bill",
+          "title": "View a personal bill",
+          "summary": "A member views their allocations, paid-into-pool total, personal payer credit, and net due or credit.",
+          "contextId": "member-position",
+          "steps": [
+            "Confirm the viewer is an active trip member.",
+            "Read the viewer's allocations, contributions, and personally paid shared expenses.",
+            "Calculate an itemised shared-cost total, pool contribution total, payer credit, and net position.",
+            "Display the itemised bill with a clear due or credit label and a separate “Paid personally” credit row when applicable."
+          ],
+          "businessRules": [
+            "A bill total must be traceable to ledger entries.",
+            "The MVP presents settlement information but never initiates payment."
+          ],
+          "specificationIds": [
+            "S5",
+            "S8"
+          ],
+          "acceptanceIds": [
+            "A8",
+            "A11"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Calculates and renders an authorised member's explainable view of the trip ledger."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Uses an authenticated trip route to load and render the bill."
+            },
+            {
+              "infrastructureId": "tailwind",
+              "relationship": "Styles with",
+              "description": "Keeps the bill readable from narrow phone screens through desktop widths."
+            },
+            {
+              "infrastructureId": "supabase-postgres",
+              "relationship": "Reads through",
+              "description": "Reads only ledger records visible to the authenticated member through Row Level Security."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "contribution",
+              "use": "reads"
+            },
+            {
+              "modelId": "expense",
+              "use": "reads"
+            },
+            {
+              "modelId": "allocation",
+              "use": "reads"
+            },
+            {
+              "modelId": "personal-bill",
+              "use": "renders"
+            }
+          ]
+        },
+        {
+          "id": "review-shared-context",
+          "title": "Review shared context",
+          "summary": "A member returns to the active ledger to reconcile bill line items with the trip's shared activity.",
+          "contextId": "member-position",
+          "steps": [
+            "Open the active ledger from the bill.",
+            "Match bill items to visible activity and expense details.",
+            "Return to the bill with the shared context understood."
+          ],
+          "specificationIds": [
+            "S5"
+          ],
+          "acceptanceIds": [
+            "A8"
+          ],
+          "boundaryIds": [
+            "web-app"
+          ],
+          "serviceRoles": [
+            {
+              "boundaryId": "web-app",
+              "description": "Connects the personal bill and ledger views without creating a settlement transaction."
+            }
+          ],
+          "infrastructureLinks": [
+            {
+              "infrastructureId": "nextjs",
+              "relationship": "Executes on",
+              "description": "Provides the protected navigation and data views."
+            },
+            {
+              "infrastructureId": "iconify",
+              "relationship": "Renders with",
+              "description": "Provides labelled navigation and information icons where helpful."
+            }
+          ],
+          "modelLinks": [
+            {
+              "modelId": "ledger-summary",
+              "use": "renders"
+            },
+            {
+              "modelId": "personal-bill",
+              "use": "renders"
+            }
+          ]
+        }
+      ],
+      "actionFlow": {
+        "entries": [
+          {
+            "actionId": "view-personal-bill",
+            "trigger": "member opens bill"
+          },
+          {
+            "actionId": "review-shared-context",
+            "trigger": "member investigates total"
+          }
+        ],
+        "edges": [
+          {
+            "from": "view-personal-bill",
+            "to": "review-shared-context",
+            "kind": "if",
+            "label": "needs context"
+          },
+          {
+            "from": "review-shared-context",
+            "to": "view-personal-bill",
+            "kind": "then",
+            "label": "return to bill"
+          }
+        ],
+        "records": [
+          {
+            "id": "member-bill",
+            "title": "Member bill",
+            "summary": "A derived view built from ledger records for one active member.",
+            "actionIds": [
+              "view-personal-bill",
+              "review-shared-context"
+            ],
+            "modelId": "personal-bill"
+          }
+        ]
+      },
+      "verification": "Plan unit tests for net-position calculations and no-payment boundaries; integration tests for member-scoped bill reads; E2E coverage for an itemised bill that traces back to ledger activity across phone and desktop widths."
+    }
+  ],
+  "testCases": [
+    {
+      "id": "TC1",
+      "title": "Create a valid THB trip and invitation",
+      "acceptanceIds": [
+        "A1"
+      ],
+      "kind": "core",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "create-trip",
+          "step": 3
+        }
+      ],
+      "given": "An authenticated organiser enters complete valid details.",
+      "when": "They create the trip.",
+      "then": "A draft THB trip, organiser membership, and active invitation exist."
+    },
+    {
+      "id": "TC2",
+      "title": "Reject invalid trip dates",
+      "acceptanceIds": [
+        "A1"
+      ],
+      "kind": "failure",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "create-trip",
+          "step": 2
+        }
+      ],
+      "given": "The end date precedes the start date.",
+      "when": "Trip validation runs.",
+      "then": "It reports the date error and creates no trip."
+    },
+    {
+      "id": "TC3",
+      "title": "Join once with a valid invitation",
+      "acceptanceIds": [
+        "A2"
+      ],
+      "kind": "core",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "join-trip",
+          "step": 3
+        }
+      ],
+      "given": "An authenticated person has an active invitation.",
+      "when": "They join with a display name.",
+      "then": "Exactly one active membership is created."
+    },
+    {
+      "id": "TC4",
+      "title": "Refuse unusable invitation joins",
+      "acceptanceIds": [
+        "A2"
+      ],
+      "kind": "failure",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "join-trip",
+          "step": 2
+        }
+      ],
+      "given": "A new join uses an invalid, expired, or revoked invitation.",
+      "when": "They try to join.",
+      "then": "No membership is created; show: This invitation is no longer valid. Ask the organiser for a new link."
+    },
+    {
+      "id": "TC5",
+      "title": "Require two members and organiser authority to start",
+      "acceptanceIds": [
+        "A3"
+      ],
+      "kind": "failure",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "configure-group",
+          "step": 3
+        }
+      ],
+      "given": "The request is from a non-organiser or the trip has fewer than two members.",
+      "when": "Start is requested.",
+      "then": "The status remains draft."
+    },
+    {
+      "id": "TC6",
+      "title": "Save a valid contribution",
+      "acceptanceIds": [
+        "A4"
+      ],
+      "kind": "core",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "add-contribution",
+          "step": 3
+        }
+      ],
+      "given": "An authorised member enters a positive THB amount.",
+      "when": "They save the contribution.",
+      "then": "The record, pool balance, contributor total, and activity update together."
+    },
+    {
+      "id": "TC7",
+      "title": "Reject non-positive contribution amounts",
+      "acceptanceIds": [
+        "A4"
+      ],
+      "kind": "failure",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "add-contribution",
+          "step": 2
+        }
+      ],
+      "given": "An amount is zero, negative, or malformed.",
+      "when": "Contribution validation runs.",
+      "then": "No contribution is saved."
+    },
+    {
+      "id": "TC8",
+      "title": "Record a personal shared expense",
+      "acceptanceIds": [
+        "A5",
+        "A7"
+      ],
+      "kind": "core",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "record-expense",
+          "step": 5
+        }
+      ],
+      "given": "A member paid a positive personal expense for the group.",
+      "when": "They save a valid split.",
+      "then": "The expense retains its personal source and payer without reducing pool balance."
+    },
+    {
+      "id": "TC9",
+      "title": "Require confirmation for a negative shared pool",
+      "acceptanceIds": [
+        "A5"
+      ],
+      "kind": "failure",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "record-expense",
+          "step": 4
+        }
+      ],
+      "given": "A shared-pool expense exceeds the available balance.",
+      "when": "The expense is prepared.",
+      "then": "Show the resulting shortfall and require Save anyway; Cancel or absence of confirmation does not save."
+    },
+    {
+      "id": "TC10",
+      "title": "Split equally with deterministic rounding",
+      "acceptanceIds": [
+        "A6"
+      ],
+      "kind": "core",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "record-expense",
+          "step": 2
+        }
+      ],
+      "given": "฿121 is split equally among three active members.",
+      "when": "Everyone split is calculated.",
+      "then": "Shares are ฿40.34, ฿40.33 and ฿40.33 in deterministic order, and the exact shares are shown before save."
+    },
+    {
+      "id": "TC11",
+      "title": "Reject invalid selected and mixed splits",
+      "acceptanceIds": [
+        "A6"
+      ],
+      "kind": "failure",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "record-expense",
+          "step": 3
+        }
+      ],
+      "given": "A split has no selected people, a negative allocation, or allocations not equal to the total.",
+      "when": "The split is validated.",
+      "then": "The expense cannot be saved."
+    },
+    {
+      "id": "TC12",
+      "title": "Show an authorised live ledger",
+      "acceptanceIds": [
+        "A7",
+        "A10"
+      ],
+      "kind": "core",
+      "level": "e2e",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "review-active-ledger",
+          "step": 4
+        }
+      ],
+      "given": "Two authorised members have an active trip.",
+      "when": "One records a ledger entry.",
+      "then": "The other sees the authorised updated ledger state."
+    },
+    {
+      "id": "TC13",
+      "title": "Block non-member trip access",
+      "acceptanceIds": [
+        "A10"
+      ],
+      "kind": "failure",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "join-trip",
+          "step": 2
+        },
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "review-active-ledger",
+          "step": 1
+        }
+      ],
+      "given": "An authenticated user is not a trip member.",
+      "when": "They attempt a protected read or write.",
+      "then": "Row Level Security and the application deny access."
+    },
+    {
+      "id": "TC14",
+      "title": "Calculate an explainable personal bill",
+      "acceptanceIds": [
+        "A8"
+      ],
+      "kind": "core",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "understand-member-position",
+          "actionId": "view-personal-bill",
+          "step": 3
+        }
+      ],
+      "given": "A ledger with shared allocations, contributions, and personal payer credits.",
+      "when": "A member bill is calculated.",
+      "then": "It returns itemised totals and the correct net due or credit."
+    },
+    {
+      "id": "TC15",
+      "title": "Keep settlement display-only",
+      "acceptanceIds": [
+        "A11"
+      ],
+      "kind": "core",
+      "level": "inspection",
+      "targets": [
+        {
+          "workflowId": "understand-member-position",
+          "actionId": "view-personal-bill",
+          "step": 4
+        },
+        {
+          "workflowId": "understand-member-position",
+          "actionId": "review-shared-context",
+          "step": 3
+        }
+      ],
+      "then": "The MVP exposes no payment transfer, currency conversion, or automated settlement control."
+    },
+    {
+      "id": "TC16",
+      "title": "Use the main flows across responsive widths",
+      "acceptanceIds": [
+        "A9"
+      ],
+      "kind": "core",
+      "level": "e2e",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "create-trip"
+        },
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "record-expense"
+        },
+        {
+          "workflowId": "understand-member-position",
+          "actionId": "view-personal-bill"
+        }
+      ],
+      "given": "Phone, tablet, and desktop viewport fixtures.",
+      "when": "A user completes core flows.",
+      "then": "Controls remain reachable, readable, and keyboard accessible at each viewport."
+    },
+    {
+      "id": "TC17",
+      "title": "Start a configured group with two members",
+      "acceptanceIds": [
+        "A3"
+      ],
+      "kind": "core",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "configure-group",
+          "step": 2
+        },
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "configure-group",
+          "step": 3
+        }
+      ],
+      "given": "An organiser has a draft trip with two active members.",
+      "when": "They select a cash holder and start the trip.",
+      "then": "The cash holder is saved and the trip becomes active."
+    },
+    {
+      "id": "TC18",
+      "title": "Returning anonymous member reopens their existing trip",
+      "acceptanceIds": [
+        "A2"
+      ],
+      "kind": "edge",
+      "level": "integration",
+      "targets": [
+        {
+          "workflowId": "set-up-trip",
+          "actionId": "join-trip",
+          "step": 2
+        }
+      ],
+      "given": "The same browser retains an anonymous session and active trip membership.",
+      "when": "The invitation is opened again.",
+      "then": "Return the existing trip without inserting another membership, even if the invitation is no longer usable for new joins."
+    },
+    {
+      "id": "TC19",
+      "title": "Preview selected-member and mixed shares exactly",
+      "acceptanceIds": [
+        "A6"
+      ],
+      "kind": "core",
+      "level": "unit",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "record-expense",
+          "step": 2
+        }
+      ],
+      "given": "Valid selected-member and mixed-part inputs.",
+      "when": "Allocations are prepared.",
+      "then": "Each included member has an exact share, excluded members are not charged, and every part and total reconcile."
+    },
+    {
+      "id": "TC20",
+      "title": "Present agreed ledger and bill details",
+      "acceptanceIds": [
+        "A7",
+        "A8",
+        "A9"
+      ],
+      "kind": "core",
+      "level": "e2e",
+      "targets": [
+        {
+          "workflowId": "maintain-trip-ledger",
+          "actionId": "review-active-ledger",
+          "step": 3
+        },
+        {
+          "workflowId": "understand-member-position",
+          "actionId": "view-personal-bill",
+          "step": 4
+        }
+      ],
+      "given": "฿2,000 contributed and ฿761 paid from the pool, plus a personal-payment fixture.",
+      "when": "The member reviews the ledger, opens an expense and views their bill.",
+      "then": "Ledger shows ฿1,239 remaining and ฿2,000 contributed separately; payer and source appear in details; bill shows Paid personally credit."
+    }
+  ],
+  "choices": [
+    "Selected: a single Next.js TypeScript responsive web application is the MVP delivery shape, rather than separate native apps, because the product must work conveniently on phone, tablet, and desktop web from one codebase.",
+    "Selected: Tailwind CSS provides mobile-first styling; unprefixed utilities target phones and breakpoint variants expand the layout for wider screens.",
+    "Selected: HeroUI supplies accessible UI primitives, customised with Tailwind to follow the supplied design rather than replacing it with a generic component-library appearance.",
+    "Selected: Iconify is used only where an icon improves comprehension; core icon collections are bundled locally to avoid a runtime dependency on an icon API.",
+    "Selected: Supabase supplies persistent authentication, Postgres, Row Level Security, and authorised realtime updates, avoiding a separate custom backend for the MVP.",
+    "Deferred: payment processing, payment-provider compliance, multi-currency, notifications, receipt capture, and settlement write actions remain outside this plan.",
+    "Confirmed UX: anonymous Supabase Auth behind a display-name-only join; same-browser members return directly to their existing trip.",
+    "Confirmed UX: remaining pool balance is primary, total contributed is separate; payer and source appear in expense details only.",
+    "Confirmed UX: preview exact per-person shares for all split modes; include Paid personally credit when applicable; allow pool overdraft only through explicit Save anyway confirmation."
+  ],
+  "constraints": [
+    "The repository currently contains the design and PRD but no application code; the plan therefore proposes the initial application architecture rather than extending an established implementation.",
+    "All persisted money values use THB decimal precision; calculations must preserve exact displayed totals and deterministic rounding.",
+    "Trip data is private. Database Row Level Security is a required enforcement layer, not just a UI convention.",
+    "Realtime delivery must never bypass membership authorisation.",
+    "No payments are initiated, requested, or processed in the MVP."
+  ]
+}

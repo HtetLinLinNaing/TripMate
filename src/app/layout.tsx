@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "TripMate — shared trips, simpler",
   description:
-    "Private shared-trip funds, expenses and explainable personal bills in Thai baht.",
+    "Public shared-trip funds, expenses and explainable personal bills in Thai baht.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

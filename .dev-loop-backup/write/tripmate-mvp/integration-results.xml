@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<testsuites name="vitest tests" tests="9" failures="0" errors="0" time="1.6132158">
+    <testsuite name="tests/integration/database.test.ts" timestamp="2026-11-10T09:16:46.847Z" hostname="admin" tests="9" failures="0" errors="0" skipped="0" time="1.6132158">
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC1 creates the trip, organiser and invitation atomically" time="0.0184775">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC3 joins exactly once and TC18 returns an existing trip" time="0.0119438">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC4 refuses revoked, expired and unknown invitations for new members" time="0.0086608">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC17 sets the cash holder and starts two members; non-organiser is denied" time="0.0060521">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC6 saves contributions and retries without duplicates" time="0.0068453">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC8 saves a personal expense and its exact allocations atomically" time="0.0103944">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation" time="0.0072317">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants" time="0.0115489">
+        </testcase>
+        <testcase classname="tests/integration/database.test.ts" name="isolated PostgreSQL schema, RLS and transactions &gt; TC13 prevents outsider reads, writes and protected RPC access" time="0.0152685">
+        </testcase>
+    </testsuite>
+</testsuites>

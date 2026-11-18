@@ -1,0 +1,221 @@
+{
+  "schemaVersion": 1,
+  "skill": "dev-loop-write",
+  "scope": "All workflows 1, 2 and 3 in confirmed TripMate plan revision 2",
+  "plan": {
+    "path": ".dev-loop/plans/tripmate-mvp/plan-preview.json",
+    "revision": "2",
+    "sha256": "9c22b982c8b850388d54ed525572d043f93147af2ba1e7166a801cc559db485e"
+  },
+  "specification": {
+    "path": ".dev-loop/write/tripmate-mvp/specification.json",
+    "sha256": "9bddae4bea8d48920d3174fe49c05bdc87dc8300fdc12042e9c21e67c3923dba"
+  },
+  "guidelines": {
+    "version": 6,
+    "path": "C:/Users/Administrator/.dev-loop/kit/bundles/0.14.0-preview-cebcf6ffc9cb64cf/.agent-workflow/GUIDELINES.md",
+    "sha256": "135f1b69ebee8f2eb7ae050c53ed49ce70e44b2e9b8f9f6147973317b5bcc201"
+  },
+  "approval": {
+    "reusedConfirmedPreview": true,
+    "userWords": "I confirmed our workflows . so approve to write for all the workflow 1 2 3",
+    "scope": "All three workflows including the individually confirmed revision-2 design decisions.",
+    "waiver": false
+  },
+  "implementationStatus": "implemented; locally verified; hosted setup and smoke test pending",
+  "changedFiles": [
+    "src/app/page.tsx",
+    "src/app/globals.css",
+    "src/app/layout.tsx",
+    "src/app/api/tripmate/route.ts",
+    "src/components/tripmate.tsx",
+    "src/components/confirmation.tsx",
+    "src/lib/accounting.ts",
+    "src/lib/request-origin.ts",
+    "src/lib/supabase-browser.ts",
+    "src/lib/supabase-server.ts",
+    "src/proxy.ts",
+    "supabase/migrations/202611100001_tripmate.sql",
+    "tests/accounting.test.ts",
+    "tests/request-origin.test.ts",
+    "tests/integration/database.test.ts",
+    "tests/browser/workflows.spec.ts",
+    "tests/support/supabase-fixture.mjs",
+    "playwright.config.ts",
+    "vitest.config.ts",
+    "vitest.integration.config.ts",
+    "package.json",
+    "package-lock.json",
+    "next.config.ts",
+    "eslint.config.mjs",
+    "tsconfig.json",
+    "docs/implementation.md"
+  ],
+  "verification": [
+    {
+      "command": "npm test",
+      "status": "passed",
+      "tests": 9,
+      "receipt": ".dev-loop/write/tripmate-mvp/unit-results.xml"
+    },
+    {
+      "command": "npm run test:integration",
+      "status": "passed",
+      "tests": 9,
+      "receipt": ".dev-loop/write/tripmate-mvp/integration-results.xml"
+    },
+    {
+      "command": "npm run test:e2e",
+      "status": "passed",
+      "tests": 4,
+      "boundaries": "Actual browser UI, Next API and PostgreSQL; loopback Supabase Auth/PostgREST substitute. No WebSocket delivery substitute asserted."
+    },
+    {
+      "command": "npm run lint",
+      "status": "passed"
+    },
+    {
+      "command": "npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "command": "npm run build",
+      "status": "passed"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    },
+    {
+      "command": "npm audit --omit=dev --json",
+      "status": "passed",
+      "productionVulnerabilities": 0
+    }
+  ],
+  "caseDispositions": {
+    "TC4": "Invitation lifecycle checked with real PostgreSQL function state at integration level rather than a duplicate unit mirror.",
+    "TC9": "Current-balance acknowledgement is transactional and checked in PostgreSQL integration and the browser confirmation journey.",
+    "TC12": "Pending live Supabase test for authorised realtime delivery and outsider subscription denial. Implemented subscription wiring is present; no passing claim.",
+    "TC15": "Allowlisted mutation API and UI inspected for absence of payment/settlement operations; browser absence assertion also passed.",
+    "TC16": "Phone and desktop verified; no separate tablet fixture executed.",
+    "TC18": "SQL returning-membership behavior verified even after revocation; retained browser-session returning journey passed."
+  },
+  "coverage": [
+    {
+      "specificationIds": ["S1"],
+      "acceptanceId": "A1",
+      "implementation": ["set-up-trip/create-trip"],
+      "unitCoverage": ["TC2"],
+      "integrationAcceptance": ["TC1"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S1", "S7"],
+      "acceptanceId": "A2",
+      "implementation": ["set-up-trip/join-trip"],
+      "unitCoverage": ["TC4"],
+      "integrationAcceptance": ["TC3", "TC18"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S1"],
+      "acceptanceId": "A3",
+      "implementation": ["set-up-trip/configure-group"],
+      "unitCoverage": ["TC5"],
+      "integrationAcceptance": ["TC17"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S2", "S5"],
+      "acceptanceId": "A4",
+      "implementation": ["maintain-trip-ledger/add-contribution"],
+      "unitCoverage": ["TC7"],
+      "integrationAcceptance": ["TC6"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S3", "S5"],
+      "acceptanceId": "A5",
+      "implementation": ["maintain-trip-ledger/record-expense"],
+      "unitCoverage": ["TC9"],
+      "integrationAcceptance": ["TC8"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S4"],
+      "acceptanceId": "A6",
+      "implementation": ["maintain-trip-ledger/record-expense"],
+      "unitCoverage": ["TC10", "TC11", "TC19"],
+      "integrationAcceptance": [],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S3", "S5"],
+      "acceptanceId": "A7",
+      "implementation": ["maintain-trip-ledger/review-active-ledger"],
+      "unitCoverage": [],
+      "integrationAcceptance": ["TC8", "TC12", "TC20"],
+      "execution": "Phone/desktop ledger journey passed through real Next API and embedded PostgreSQL; hosted realtime delivery pending.",
+      "gaps": "Hosted Supabase realtime authorization and delivery not exercised."
+    },
+    {
+      "specificationIds": ["S5"],
+      "acceptanceId": "A8",
+      "implementation": [
+        "understand-member-position/view-personal-bill",
+        "understand-member-position/review-shared-context"
+      ],
+      "unitCoverage": ["TC14"],
+      "integrationAcceptance": ["TC20"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S6"],
+      "acceptanceId": "A9",
+      "implementation": [],
+      "unitCoverage": [],
+      "integrationAcceptance": ["TC16", "TC20"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    },
+    {
+      "specificationIds": ["S7"],
+      "acceptanceId": "A10",
+      "implementation": [
+        "set-up-trip/join-trip",
+        "maintain-trip-ledger/review-active-ledger"
+      ],
+      "unitCoverage": [],
+      "integrationAcceptance": ["TC12", "TC13"],
+      "execution": "PostgreSQL member-only reads/writes and protected RPC denial passed; hosted realtime isolation pending.",
+      "gaps": "Hosted Supabase realtime authorization and delivery not exercised."
+    },
+    {
+      "specificationIds": ["S8"],
+      "acceptanceId": "A11",
+      "implementation": ["understand-member-position/view-personal-bill"],
+      "unitCoverage": [],
+      "integrationAcceptance": ["TC15"],
+      "execution": "Relevant unit, PostgreSQL and/or phone/desktop browser checks passed; see case dispositions.",
+      "gaps": "Hosted Auth/deployment smoke test remains pending for end-to-end production claims."
+    }
+  ],
+  "limitations": [
+    "Hosted migration has not been applied; enabling anonymous sign-ins and real-service setup is a deployment prerequisite.",
+    "Docker was unavailable; isolated PostgreSQL runs in PGlite, with controlled auth.uid fixtures and publication setup.",
+    "Hosted Auth, cookie refresh over deployment HTTPS, realtime delivery and provider rate limits are not verified.",
+    "Seven moderate dev-dependency advisories were reported by installation; production npm audit reports zero.",
+    "No independent reviewer was requested or dispatched.",
+    "User edits to design.pen, PRD and deleted PRD.html were preserved; framework generated AGENTS.md and test build TS includes were retained."
+  ],
+  "disputedFindings": [],
+  "map": ".dev-loop/maps/map-20261110T091606-a63d2f/plan-map.json",
+  "uncommitted": true
+}

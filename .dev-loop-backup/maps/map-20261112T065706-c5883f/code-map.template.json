@@ -1,0 +1,158 @@
+{
+  "summary": "",
+  "workflows": [
+    {
+      "workflowId": "finalize-trip-ledger",
+      "references": []
+    }
+  ],
+  "actions": [
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "complete-active-trip",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "view-completed-ledger",
+      "references": [],
+      "deviations": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "reject-closed-ledger-entry",
+      "references": [],
+      "deviations": []
+    }
+  ],
+  "steps": [
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "complete-active-trip",
+      "step": 1,
+      "text": "Show the organiser-only End trip control for an active trip.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "complete-active-trip",
+      "step": 2,
+      "text": "Ask the organiser to confirm that the ledger is final.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "complete-active-trip",
+      "step": 3,
+      "text": "Validate the authenticated organiser and active trip state.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "complete-active-trip",
+      "step": 4,
+      "text": "Persist the trip status as completed and refresh the snapshot.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "view-completed-ledger",
+      "step": 1,
+      "text": "Load the completed trip snapshot for a current member.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "view-completed-ledger",
+      "step": 2,
+      "text": "Display its completed state, ledger totals, and member bill.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "view-completed-ledger",
+      "step": 3,
+      "text": "Withhold controls that add funds or expenses.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "reject-closed-ledger-entry",
+      "step": 1,
+      "text": "Receive a contribution or expense command for the trip.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "reject-closed-ledger-entry",
+      "step": 2,
+      "text": "Read the authoritative trip lifecycle state.",
+      "status": null,
+      "references": []
+    },
+    {
+      "workflowId": "finalize-trip-ledger",
+      "actionId": "reject-closed-ledger-entry",
+      "step": 3,
+      "text": "Reject the command when the trip is completed without creating ledger records.",
+      "status": null,
+      "references": []
+    }
+  ],
+  "unplanned": [],
+  "relatedTests": [
+    {
+      "test": "T1",
+      "file": "tests/browser/workflows.spec.ts",
+      "tests": [
+        "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+        "TC15 exposes no payment/settlement controls; invalid invitation explains recovery"
+      ]
+    },
+    {
+      "test": "T2",
+      "file": "tests/integration/database.test.ts",
+      "tests": [
+        "TC1 creates the trip, organiser and invitation atomically",
+        "TC3 joins exactly once and TC18 returns an existing trip",
+        "TC4 refuses revoked, expired and unknown invitations for new members",
+        "TC17 sets the cash holder and starts two members; non-organiser is denied",
+        "TC6 saves contributions and retries without duplicates",
+        "TC8 saves a personal expense and its exact allocations atomically",
+        "TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation",
+        "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+        "TC5 completes an active trip for its organiser and TC2 rejects other completion attempts",
+        "TC4 rejects contributions and expenses after a trip is completed",
+        "TC13 prevents outsider reads, writes and protected RPC access"
+      ]
+    },
+    {
+      "test": "T3",
+      "file": "tests/support/supabase-fixture.mjs",
+      "tests": []
+    },
+    {
+      "test": "T4",
+      "file": "tests/accounting.test.ts",
+      "tests": [
+        "TC2 rejects missing names, impossible or reversed dates",
+        "TC5 requires organiser authority and two active members including organiser",
+        "TC7 rejects zero, negative, malformed, overflow and fractional satang",
+        "TC10 splits ฿121 exactly and assigns the remainder by stable ID",
+        "TC11 rejects empty, duplicate, foreign participants and non-positive shares",
+        "TC19 selected and mixed parts charge only their groups and reconcile",
+        "TC14 explains allocations, extras, contributions, personal credits and net",
+        "TC14 excludes personal payments from pool spending and includes all expenses in total used"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,177 @@
+{
+  "version": 1,
+  "title": "Build TripMate shared-trip expense tracker",
+  "summary": "A responsive, private trip ledger that lets groups record pooled funds and expenses, split costs fairly, and understand each member's balance without processing payments.",
+  "sources": [
+    {
+      "type": "context",
+      "reference": ".dev-loop/plans/tripmate-mvp/plan-preview.json revision 2",
+      "facts": [
+        "Selected: a single Next.js TypeScript responsive web application is the MVP delivery shape, rather than separate native apps, because the product must work conveniently on phone, tablet, and desktop web from one codebase.",
+        "Selected: Tailwind CSS provides mobile-first styling; unprefixed utilities target phones and breakpoint variants expand the layout for wider screens.",
+        "Selected: HeroUI supplies accessible UI primitives, customised with Tailwind to follow the supplied design rather than replacing it with a generic component-library appearance.",
+        "Selected: Iconify is used only where an icon improves comprehension; core icon collections are bundled locally to avoid a runtime dependency on an icon API.",
+        "Selected: Supabase supplies persistent authentication, Postgres, Row Level Security, and authorised realtime updates, avoiding a separate custom backend for the MVP.",
+        "Deferred: payment processing, payment-provider compliance, multi-currency, notifications, receipt capture, and settlement write actions remain outside this plan.",
+        "Confirmed UX: anonymous Supabase Auth behind a display-name-only join; same-browser members return directly to their existing trip.",
+        "Confirmed UX: remaining pool balance is primary, total contributed is separate; payer and source appear in expense details only.",
+        "Confirmed UX: preview exact per-person shares for all split modes; include Paid personally credit when applicable; allow pool overdraft only through explicit Save anyway confirmation."
+      ]
+    },
+    {
+      "type": "clarification",
+      "reference": "User approval in this chat",
+      "facts": [
+        "I confirmed our workflows. Approve to write for all workflow 1 2 3."
+      ]
+    }
+  ],
+  "current_behavior": [
+    "Starter Next.js page without trip workflows."
+  ],
+  "desired_behavior": [
+    "A private group has enough authorised members and configuration to start a shared trip ledger.",
+    "The group has an accurate shared-pool balance and visible record of spending.",
+    "Every member can explain their net trip position from recorded entries."
+  ],
+  "acceptance_criteria": [
+    {
+      "id": "A1",
+      "behavior": "An organiser creates a trip with valid required details and receives a private invitation.",
+      "qualification_ids": [
+        "S1"
+      ],
+      "verification": "TC1 integration: Create a valid THB trip and invitation; TC2 unit: Reject invalid trip dates"
+    },
+    {
+      "id": "A2",
+      "behavior": "A valid invite lets a person join once; invalid, expired, or revoked invitations show an actionable error. Existing members on the same browser return to their trip without another membership.",
+      "qualification_ids": [
+        "S1",
+        "S7"
+      ],
+      "verification": "TC3 integration: Join once with a valid invitation; TC4 unit: Refuse unusable invitation joins; TC18 integration: Returning anonymous member reopens their existing trip"
+    },
+    {
+      "id": "A3",
+      "behavior": "An organiser can assign a cash holder and start a trip only after at least two members join.",
+      "qualification_ids": [
+        "S1"
+      ],
+      "verification": "TC5 unit: Require two members and organiser authority to start; TC17 integration: Start a configured group with two members"
+    },
+    {
+      "id": "A4",
+      "behavior": "A positive contribution updates the pool balance, contributor total, and activity feed.",
+      "qualification_ids": [
+        "S2",
+        "S5"
+      ],
+      "verification": "TC6 integration: Save a valid contribution; TC7 unit: Reject non-positive contribution amounts"
+    },
+    {
+      "id": "A5",
+      "behavior": "A personal or shared-pool expense records its payer, source, and amount; a negative pool balance requires confirmation.",
+      "qualification_ids": [
+        "S3",
+        "S5"
+      ],
+      "verification": "TC8 integration: Record a personal shared expense; TC9 unit: Require confirmation for a negative shared pool"
+    },
+    {
+      "id": "A6",
+      "behavior": "Equal, selected-member, and mixed allocations total exactly to the expense amount and reject invalid participants or allocations.",
+      "qualification_ids": [
+        "S4"
+      ],
+      "verification": "TC10 unit: Split equally with deterministic rounding; TC11 unit: Reject invalid selected and mixed splits; TC19 unit: Preview selected-member and mixed shares exactly"
+    },
+    {
+      "id": "A7",
+      "behavior": "The active ledger shows current remaining pool balance, total contributed, recent activity, and total used; payer and payment source are available in expense details.",
+      "qualification_ids": [
+        "S3",
+        "S5"
+      ],
+      "verification": "TC8 integration: Record a personal shared expense; TC12 e2e: Show an authorised live ledger; TC20 e2e: Present agreed ledger and bill details"
+    },
+    {
+      "id": "A8",
+      "behavior": "A member's bill itemises allocations, contributions, personal-payment credit, and resulting due or credit position.",
+      "qualification_ids": [
+        "S5"
+      ],
+      "verification": "TC14 unit: Calculate an explainable personal bill; TC20 e2e: Present agreed ledger and bill details"
+    },
+    {
+      "id": "A9",
+      "behavior": "The primary flows remain usable on phone, tablet, and desktop widths with accessible controls.",
+      "qualification_ids": [
+        "S6"
+      ],
+      "verification": "TC16 e2e: Use the main flows across responsive widths; TC20 e2e: Present agreed ledger and bill details"
+    },
+    {
+      "id": "A10",
+      "behavior": "Unauthorised users cannot read or mutate a trip, including through realtime updates.",
+      "qualification_ids": [
+        "S7"
+      ],
+      "verification": "TC12 e2e: Show an authorised live ledger; TC13 integration: Block non-member trip access"
+    },
+    {
+      "id": "A11",
+      "behavior": "No payment transfer, currency conversion, or automated settlement action is exposed in the MVP.",
+      "qualification_ids": [
+        "S8"
+      ],
+      "verification": "TC15 inspection: Keep settlement display-only"
+    }
+  ],
+  "qualifications": [
+    {
+      "id": "S1",
+      "behavior": "Private groups can create, join, and configure a trip."
+    },
+    {
+      "id": "S2",
+      "behavior": "Members can record positive THB contributions into a shared pool."
+    },
+    {
+      "id": "S3",
+      "behavior": "Members can record personal or shared-pool expenses with an accountable payer."
+    },
+    {
+      "id": "S4",
+      "behavior": "Expenses can be split equally, among selected members, or as named mixed parts."
+    },
+    {
+      "id": "S5",
+      "behavior": "The ledger and personal bill show explainable, current balances."
+    },
+    {
+      "id": "S6",
+      "behavior": "The product is mobile-first and remains convenient on tablet and desktop web."
+    },
+    {
+      "id": "S7",
+      "behavior": "Only authorised trip members can access private trip data."
+    },
+    {
+      "id": "S8",
+      "behavior": "The MVP tracks settlements but does not process payments or support multi-currency."
+    }
+  ],
+  "constraints": [
+    "The repository currently contains the design and PRD but no application code; the plan therefore proposes the initial application architecture rather than extending an established implementation.",
+    "All persisted money values use THB decimal precision; calculations must preserve exact displayed totals and deterministic rounding.",
+    "Trip data is private. Database Row Level Security is a required enforcement layer, not just a UI convention.",
+    "Realtime delivery must never bypass membership authorisation.",
+    "No payments are initiated, requested, or processed in the MVP."
+  ],
+  "non_goals": [
+    "Payments, settlement writes, multi-currency, receipt capture and outbound notifications."
+  ],
+  "assumptions": [],
+  "open_questions": []
+}

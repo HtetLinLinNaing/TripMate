@@ -1,0 +1,1931 @@
+{
+  "kind": "plan-map-request",
+  "schemaVersion": 1,
+  "id": "map-20261110T091606-a63d2f",
+  "createdAt": "2026-11-10T09:16:08.619Z",
+  "projectRoot": "C:\\Users\\Administrator\\Desktop\\TripMateV3",
+  "output": "C:\\Users\\Administrator\\Desktop\\TripMateV3\\.dev-loop\\maps\\map-20261110T091606-a63d2f",
+  "plan": {
+    "path": "C:\\Users\\Administrator\\Desktop\\TripMateV3\\.dev-loop\\plans\\tripmate-mvp\\plan-preview.json",
+    "sha256": "9c22b982c8b850388d54ed525572d043f93147af2ba1e7166a801cc559db485e",
+    "revision": "2",
+    "id": "tripmate-mvp",
+    "title": "Build TripMate shared-trip expense tracker",
+    "selectedFrom": "path",
+    "alternatives": []
+  },
+  "scope": {
+    "type": "working-tree",
+    "baseRevision": "cd175fb5ce5e40aac6c8d57ab7ed80b7abd57538",
+    "headRevision": "workspace:9400fbc44932adb9f97561841567b615d2cfcb2bef6c5baa8cedbc8f1a1551d3",
+    "snapshotId": "9400fbc44932adb9f97561841567b615d2cfcb2bef6c5baa8cedbc8f1a1551d3",
+    "inferredFrom": "explicit",
+    "request": "Implement approved workflows 1, 2 and 3",
+    "focus": []
+  },
+  "changes": [
+    {
+      "file": ".gitignore",
+      "status": "modified",
+      "headSourceId": "head-bc37d034bad56458",
+      "baseSourceId": "base-bc37d034bad56458",
+      "hunks": [
+        {
+          "id": "H1",
+          "headAt": 4,
+          "headFrom": 4,
+          "headTo": 4
+        },
+        {
+          "id": "H2",
+          "headAt": 7,
+          "headFrom": 7,
+          "headTo": 8
+        },
+        {
+          "id": "H3",
+          "headAt": 11,
+          "headFrom": 11,
+          "headTo": 14
+        }
+      ]
+    },
+    {
+      "file": "AGENTS.md",
+      "status": "added",
+      "headSourceId": "head-a54ff182c7e8acf5",
+      "hunks": [
+        {
+          "id": "H4",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 9
+        }
+      ]
+    },
+    {
+      "file": "design.pen",
+      "status": "modified",
+      "headSourceId": "head-5a2c52e086ae1a9e",
+      "baseSourceId": "base-5a2c52e086ae1a9e",
+      "hunks": [
+        {
+          "id": "H5",
+          "headAt": 538,
+          "baseFrom": 538,
+          "baseTo": 538,
+          "headFrom": 538,
+          "headTo": 538
+        },
+        {
+          "id": "H6",
+          "headAt": 550,
+          "baseFrom": 550,
+          "baseTo": 550,
+          "headFrom": 550,
+          "headTo": 550
+        },
+        {
+          "id": "H7",
+          "headAt": 1007,
+          "baseFrom": 1007,
+          "baseTo": 1007,
+          "headFrom": 1007,
+          "headTo": 1007
+        },
+        {
+          "id": "H8",
+          "headAt": 1170,
+          "baseFrom": 1170,
+          "baseTo": 1170,
+          "headFrom": 1170,
+          "headTo": 1170
+        },
+        {
+          "id": "H9",
+          "headAt": 1182,
+          "baseFrom": 1182,
+          "baseTo": 1182,
+          "headFrom": 1182,
+          "headTo": 1182
+        },
+        {
+          "id": "H10",
+          "headAt": 1193,
+          "baseFrom": 1193,
+          "baseTo": 1193,
+          "headFrom": 1193,
+          "headTo": 1193
+        },
+        {
+          "id": "H11",
+          "headAt": 1213,
+          "baseFrom": 1213,
+          "baseTo": 1213,
+          "headFrom": 1213,
+          "headTo": 1213
+        },
+        {
+          "id": "H12",
+          "headAt": 1333,
+          "baseFrom": 1333,
+          "baseTo": 1333,
+          "headFrom": 1333,
+          "headTo": 1333
+        },
+        {
+          "id": "H13",
+          "headAt": 1344,
+          "baseFrom": 1344,
+          "baseTo": 1344,
+          "headFrom": 1344,
+          "headTo": 1344
+        },
+        {
+          "id": "H14",
+          "headAt": 1599,
+          "baseFrom": 1599,
+          "baseTo": 1599,
+          "headFrom": 1599,
+          "headTo": 1599
+        },
+        {
+          "id": "H15",
+          "headAt": 1648,
+          "baseFrom": 1648,
+          "baseTo": 1648,
+          "headFrom": 1648,
+          "headTo": 1648
+        },
+        {
+          "id": "H16",
+          "headAt": 1660,
+          "baseFrom": 1660,
+          "baseTo": 1660,
+          "headFrom": 1660,
+          "headTo": 1660
+        },
+        {
+          "id": "H17",
+          "headAt": 1710,
+          "baseFrom": 1710,
+          "baseTo": 1710,
+          "headFrom": 1710,
+          "headTo": 1710
+        },
+        {
+          "id": "H18",
+          "headAt": 1754,
+          "baseFrom": 1754,
+          "baseTo": 1754,
+          "headFrom": 1754,
+          "headTo": 1754
+        },
+        {
+          "id": "H19",
+          "headAt": 1806,
+          "baseFrom": 1806,
+          "baseTo": 1806,
+          "headFrom": 1806,
+          "headTo": 1806
+        },
+        {
+          "id": "H20",
+          "headAt": 1831,
+          "baseFrom": 1831,
+          "baseTo": 1831,
+          "headFrom": 1831,
+          "headTo": 1831
+        },
+        {
+          "id": "H21",
+          "headAt": 1841,
+          "baseFrom": 1841,
+          "baseTo": 1841,
+          "headFrom": 1841,
+          "headTo": 1874
+        },
+        {
+          "id": "H22",
+          "headAt": 1909,
+          "baseFrom": 1876,
+          "baseTo": 1876,
+          "headFrom": 1909,
+          "headTo": 1909
+        },
+        {
+          "id": "H23",
+          "headAt": 2199,
+          "baseFrom": 2166,
+          "baseTo": 2166,
+          "headFrom": 2199,
+          "headTo": 2199
+        },
+        {
+          "id": "H24",
+          "headAt": 2560,
+          "baseFrom": 2527,
+          "baseTo": 2527,
+          "headFrom": 2560,
+          "headTo": 2560
+        },
+        {
+          "id": "H25",
+          "headAt": 2646,
+          "headFrom": 2646,
+          "headTo": 2681
+        },
+        {
+          "id": "H26",
+          "headAt": 3121,
+          "baseFrom": 3052,
+          "baseTo": 3052,
+          "headFrom": 3121,
+          "headTo": 3121
+        },
+        {
+          "id": "H27",
+          "headAt": 3138,
+          "baseFrom": 3069,
+          "baseTo": 3069,
+          "headFrom": 3138,
+          "headTo": 3138
+        },
+        {
+          "id": "H28",
+          "headAt": 3491,
+          "headFrom": 3491,
+          "headTo": 3491
+        },
+        {
+          "id": "H29",
+          "headAt": 3522,
+          "headFrom": 3522,
+          "headTo": 3533
+        },
+        {
+          "id": "H30",
+          "headAt": 3542,
+          "headFrom": 3542,
+          "headTo": 3542
+        },
+        {
+          "id": "H31",
+          "headAt": 3573,
+          "headFrom": 3573,
+          "headTo": 4490
+        }
+      ]
+    },
+    {
+      "file": "docs/implementation.md",
+      "status": "added",
+      "headSourceId": "head-5bd98433bbf0bc3e",
+      "hunks": [
+        {
+          "id": "H32",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 23
+        }
+      ]
+    },
+    {
+      "file": "docs/PRD.html",
+      "status": "deleted",
+      "baseSourceId": "base-6cae160a37f03acc",
+      "hunks": [
+        {
+          "id": "H33",
+          "headAt": 1,
+          "baseFrom": 1,
+          "baseTo": 70
+        }
+      ]
+    },
+    {
+      "file": "docs/PRD.md",
+      "status": "modified",
+      "headSourceId": "head-487b79d1751c30f1",
+      "baseSourceId": "base-487b79d1751c30f1",
+      "hunks": [
+        {
+          "id": "H34",
+          "headAt": 3,
+          "baseFrom": 3,
+          "baseTo": 3,
+          "headFrom": 3,
+          "headTo": 3
+        },
+        {
+          "id": "H35",
+          "headAt": 8,
+          "headFrom": 8,
+          "headTo": 9
+        },
+        {
+          "id": "H36",
+          "headAt": 72,
+          "baseFrom": 70,
+          "baseTo": 71,
+          "headFrom": 72,
+          "headTo": 73
+        },
+        {
+          "id": "H37",
+          "headAt": 77,
+          "baseFrom": 75,
+          "baseTo": 77,
+          "headFrom": 77,
+          "headTo": 79
+        },
+        {
+          "id": "H38",
+          "headAt": 104,
+          "baseFrom": 102,
+          "baseTo": 102,
+          "headFrom": 104,
+          "headTo": 104
+        },
+        {
+          "id": "H39",
+          "headAt": 106,
+          "baseFrom": 104,
+          "baseTo": 104,
+          "headFrom": 106,
+          "headTo": 106
+        },
+        {
+          "id": "H40",
+          "headAt": 110,
+          "baseFrom": 108,
+          "baseTo": 111,
+          "headFrom": 110,
+          "headTo": 113
+        },
+        {
+          "id": "H41",
+          "headAt": 118,
+          "baseFrom": 116,
+          "baseTo": 116,
+          "headFrom": 118,
+          "headTo": 119
+        },
+        {
+          "id": "H42",
+          "headAt": 127,
+          "baseFrom": 124,
+          "baseTo": 124,
+          "headFrom": 127,
+          "headTo": 127
+        },
+        {
+          "id": "H43",
+          "headAt": 138,
+          "baseFrom": 135,
+          "baseTo": 135,
+          "headFrom": 138,
+          "headTo": 138
+        },
+        {
+          "id": "H44",
+          "headAt": 158,
+          "baseFrom": 155,
+          "baseTo": 155,
+          "headFrom": 158,
+          "headTo": 158
+        },
+        {
+          "id": "H45",
+          "headAt": 162,
+          "baseFrom": 159,
+          "baseTo": 161,
+          "headFrom": 162,
+          "headTo": 164
+        },
+        {
+          "id": "H46",
+          "headAt": 186,
+          "baseFrom": 183,
+          "baseTo": 183,
+          "headFrom": 186,
+          "headTo": 207
+        }
+      ]
+    },
+    {
+      "file": "eslint.config.mjs",
+      "status": "modified",
+      "headSourceId": "head-9601a8f6c734c200",
+      "baseSourceId": "base-9601a8f6c734c200",
+      "hunks": [
+        {
+          "id": "H47",
+          "headAt": 12,
+          "headFrom": 12,
+          "headTo": 14
+        }
+      ]
+    },
+    {
+      "file": "next-env.d.ts",
+      "status": "modified",
+      "headSourceId": "head-45e6f9a5acfadb47",
+      "baseSourceId": "base-45e6f9a5acfadb47",
+      "hunks": [
+        {
+          "id": "H48",
+          "headAt": 3,
+          "baseFrom": 3,
+          "baseTo": 3,
+          "headFrom": 3,
+          "headTo": 4
+        }
+      ]
+    },
+    {
+      "file": "next.config.ts",
+      "status": "modified",
+      "headSourceId": "head-e3f38f2f0e7ba92f",
+      "baseSourceId": "base-e3f38f2f0e7ba92f",
+      "hunks": [
+        {
+          "id": "H49",
+          "headAt": 4,
+          "headFrom": 4,
+          "headTo": 4
+        }
+      ]
+    },
+    {
+      "file": "package-lock.json",
+      "status": "modified",
+      "headSourceId": "head-053150b640a7ce75",
+      "baseSourceId": "base-053150b640a7ce75",
+      "hunks": [
+        {
+          "id": "H50",
+          "headAt": 14,
+          "headFrom": 14,
+          "headTo": 14
+        },
+        {
+          "id": "H51",
+          "headAt": 22,
+          "headFrom": 22,
+          "headTo": 23
+        },
+        {
+          "id": "H52",
+          "headAt": 30,
+          "headFrom": 30,
+          "headTo": 30
+        },
+        {
+          "id": "H53",
+          "headAt": 32,
+          "baseFrom": 28,
+          "baseTo": 28,
+          "headFrom": 32,
+          "headTo": 33
+        },
+        {
+          "id": "H54",
+          "headAt": 93,
+          "headFrom": 93,
+          "headTo": 94
+        },
+        {
+          "id": "H55",
+          "headAt": 108,
+          "headFrom": 108,
+          "headTo": 109
+        },
+        {
+          "id": "H56",
+          "headAt": 117,
+          "headFrom": 117,
+          "headTo": 150
+        },
+        {
+          "id": "H57",
+          "headAt": 152,
+          "baseFrom": 109,
+          "baseTo": 109,
+          "headFrom": 152,
+          "headTo": 162
+        },
+        {
+          "id": "H58",
+          "headAt": 166,
+          "headFrom": 166,
+          "headTo": 167
+        },
+        {
+          "id": "H59",
+          "headAt": 183,
+          "headFrom": 183,
+          "headTo": 184
+        },
+        {
+          "id": "H60",
+          "headAt": 193,
+          "headFrom": 193,
+          "headTo": 194
+        },
+        {
+          "id": "H61",
+          "headAt": 207,
+          "headFrom": 207,
+          "headTo": 208
+        },
+        {
+          "id": "H62",
+          "headAt": 225,
+          "headFrom": 225,
+          "headTo": 226
+        },
+        {
+          "id": "H63",
+          "headAt": 243,
+          "headFrom": 243,
+          "headTo": 254
+        },
+        {
+          "id": "H64",
+          "headAt": 257,
+          "headFrom": 257,
+          "headTo": 260
+        },
+        {
+          "id": "H65",
+          "headAt": 266,
+          "baseFrom": 187,
+          "baseTo": 187,
+          "headFrom": 266,
+          "headTo": 279
+        },
+        {
+          "id": "H66",
+          "headAt": 292,
+          "headFrom": 292,
+          "headTo": 293
+        },
+        {
+          "id": "H67",
+          "headAt": 306,
+          "baseFrom": 212,
+          "baseTo": 212,
+          "headFrom": 306,
+          "headTo": 322
+        },
+        {
+          "id": "H68",
+          "headAt": 325,
+          "baseFrom": 215,
+          "baseTo": 215,
+          "headFrom": 325,
+          "headTo": 343
+        },
+        {
+          "id": "H69",
+          "headAt": 446,
+          "headFrom": 446,
+          "headTo": 468
+        },
+        {
+          "id": "H70",
+          "headAt": 609,
+          "headFrom": 609,
+          "headTo": 617
+        },
+        {
+          "id": "H71",
+          "headAt": 1401,
+          "headFrom": 1401,
+          "headTo": 1426
+        },
+        {
+          "id": "H72",
+          "headAt": 1711,
+          "baseFrom": 1525,
+          "baseTo": 1526,
+          "headFrom": 1711,
+          "headTo": 1717
+        },
+        {
+          "id": "H73",
+          "headAt": 1719,
+          "baseFrom": 1528,
+          "baseTo": 1543,
+          "headFrom": 1719,
+          "headTo": 1725
+        },
+        {
+          "id": "H74",
+          "headAt": 1728,
+          "baseFrom": 1546,
+          "baseTo": 1558,
+          "headFrom": 1728,
+          "headTo": 1742
+        },
+        {
+          "id": "H75",
+          "headAt": 1745,
+          "baseFrom": 1561,
+          "baseTo": 1564,
+          "headFrom": 1745,
+          "headTo": 1752
+        },
+        {
+          "id": "H76",
+          "headAt": 1754,
+          "baseFrom": 1566,
+          "baseTo": 1568,
+          "headFrom": 1754,
+          "headTo": 1757
+        },
+        {
+          "id": "H77",
+          "headAt": 1759,
+          "baseFrom": 1570,
+          "baseTo": 1570,
+          "headFrom": 1759,
+          "headTo": 1759
+        },
+        {
+          "id": "H78",
+          "headAt": 1762,
+          "baseFrom": 1573,
+          "baseTo": 1582,
+          "headFrom": 1762,
+          "headTo": 1769
+        },
+        {
+          "id": "H79",
+          "headAt": 1771,
+          "baseFrom": 1584,
+          "baseTo": 1586,
+          "headFrom": 1771,
+          "headTo": 1774
+        },
+        {
+          "id": "H80",
+          "headAt": 1776,
+          "baseFrom": 1588,
+          "baseTo": 1588,
+          "headFrom": 1776,
+          "headTo": 1776
+        },
+        {
+          "id": "H81",
+          "headAt": 1779,
+          "baseFrom": 1591,
+          "baseTo": 1606,
+          "headFrom": 1779,
+          "headTo": 1786
+        },
+        {
+          "id": "H82",
+          "headAt": 1788,
+          "baseFrom": 1608,
+          "baseTo": 1610,
+          "headFrom": 1788,
+          "headTo": 1791
+        },
+        {
+          "id": "H83",
+          "headAt": 1793,
+          "baseFrom": 1612,
+          "baseTo": 1612,
+          "headFrom": 1793,
+          "headTo": 1793
+        },
+        {
+          "id": "H84",
+          "headAt": 1796,
+          "baseFrom": 1615,
+          "baseTo": 1617,
+          "headFrom": 1796,
+          "headTo": 2090
+        },
+        {
+          "id": "H85",
+          "headAt": 2526,
+          "headFrom": 2526,
+          "headTo": 2543
+        },
+        {
+          "id": "H86",
+          "headAt": 2608,
+          "baseFrom": 2117,
+          "baseTo": 2117,
+          "headFrom": 2608,
+          "headTo": 2608
+        },
+        {
+          "id": "H87",
+          "headAt": 2610,
+          "baseFrom": 2119,
+          "baseTo": 2120,
+          "headFrom": 2610,
+          "headTo": 2611
+        },
+        {
+          "id": "H88",
+          "headAt": 2615,
+          "baseFrom": 2124,
+          "baseTo": 2143,
+          "headFrom": 2615,
+          "headTo": 2616
+        },
+        {
+          "id": "H89",
+          "headAt": 2708,
+          "headFrom": 2708,
+          "headTo": 2725
+        },
+        {
+          "id": "H90",
+          "headAt": 2764,
+          "baseFrom": 2273,
+          "baseTo": 2273,
+          "headFrom": 2764,
+          "headTo": 2792
+        },
+        {
+          "id": "H91",
+          "headAt": 2794,
+          "headFrom": 2794,
+          "headTo": 2795
+        },
+        {
+          "id": "H92",
+          "headAt": 2798,
+          "headFrom": 2798,
+          "headTo": 2803
+        },
+        {
+          "id": "H93",
+          "headAt": 2810,
+          "headFrom": 2810,
+          "headTo": 2852
+        },
+        {
+          "id": "H94",
+          "headAt": 2855,
+          "baseFrom": 2285,
+          "baseTo": 2286,
+          "headFrom": 2855,
+          "headTo": 2866
+        },
+        {
+          "id": "H95",
+          "headAt": 2868,
+          "baseFrom": 2288,
+          "baseTo": 2289,
+          "headFrom": 2868,
+          "headTo": 2878
+        },
+        {
+          "id": "H96",
+          "headAt": 3229,
+          "headFrom": 3229,
+          "headTo": 3361
+        },
+        {
+          "id": "H97",
+          "headAt": 3412,
+          "headFrom": 3412,
+          "headTo": 3418
+        },
+        {
+          "id": "H98",
+          "headAt": 3467,
+          "baseFrom": 2738,
+          "baseTo": 2758,
+          "headFrom": 3467,
+          "headTo": 3470
+        },
+        {
+          "id": "H99",
+          "headAt": 3474,
+          "headFrom": 3474,
+          "headTo": 3476
+        },
+        {
+          "id": "H100",
+          "headAt": 3479,
+          "baseFrom": 2764,
+          "baseTo": 2765,
+          "headFrom": 3479,
+          "headTo": 3482
+        },
+        {
+          "id": "H101",
+          "headAt": 3485,
+          "baseFrom": 2768,
+          "baseTo": 2787,
+          "headFrom": 3485,
+          "headTo": 3962
+        },
+        {
+          "id": "H102",
+          "headAt": 3969,
+          "baseFrom": 2794,
+          "baseTo": 2795,
+          "headFrom": 3969,
+          "headTo": 3970
+        },
+        {
+          "id": "H103",
+          "headAt": 3974,
+          "headFrom": 3974,
+          "headTo": 3974
+        },
+        {
+          "id": "H104",
+          "headAt": 3978,
+          "baseFrom": 2802,
+          "baseTo": 2802,
+          "headFrom": 3978,
+          "headTo": 3980
+        },
+        {
+          "id": "H105",
+          "headAt": 3989,
+          "baseFrom": 2811,
+          "baseTo": 2812,
+          "headFrom": 3989,
+          "headTo": 3992
+        },
+        {
+          "id": "H106",
+          "headAt": 3996,
+          "baseFrom": 2816,
+          "baseTo": 2818,
+          "headFrom": 3996,
+          "headTo": 4004
+        },
+        {
+          "id": "H107",
+          "headAt": 4006,
+          "baseFrom": 2820,
+          "baseTo": 2820,
+          "headFrom": 4006,
+          "headTo": 4049
+        },
+        {
+          "id": "H108",
+          "headAt": 4053,
+          "headFrom": 4053,
+          "headTo": 4055
+        },
+        {
+          "id": "H109",
+          "headAt": 4058,
+          "baseFrom": 2826,
+          "baseTo": 2827,
+          "headFrom": 4058,
+          "headTo": 4061
+        },
+        {
+          "id": "H110",
+          "headAt": 4064,
+          "baseFrom": 2830,
+          "baseTo": 2838
+        },
+        {
+          "id": "H111",
+          "headAt": 4065,
+          "baseFrom": 2840,
+          "baseTo": 2843,
+          "headFrom": 4065,
+          "headTo": 4065
+        },
+        {
+          "id": "H112",
+          "headAt": 4132,
+          "headFrom": 4132,
+          "headTo": 4133
+        },
+        {
+          "id": "H113",
+          "headAt": 4236,
+          "headFrom": 4236,
+          "headTo": 4245
+        },
+        {
+          "id": "H114",
+          "headAt": 4297,
+          "headFrom": 4297,
+          "headTo": 4298
+        },
+        {
+          "id": "H115",
+          "headAt": 4481,
+          "baseFrom": 3245,
+          "baseTo": 3245,
+          "headFrom": 4481,
+          "headTo": 4483
+        },
+        {
+          "id": "H116",
+          "headAt": 4492,
+          "baseFrom": 3254,
+          "baseTo": 3256
+        },
+        {
+          "id": "H117",
+          "headAt": 4525,
+          "headFrom": 4525,
+          "headTo": 4531
+        },
+        {
+          "id": "H118",
+          "headAt": 4589,
+          "headFrom": 4589,
+          "headTo": 4590
+        },
+        {
+          "id": "H119",
+          "headAt": 4682,
+          "baseFrom": 3438,
+          "baseTo": 3572,
+          "headFrom": 4682,
+          "headTo": 4682
+        },
+        {
+          "id": "H120",
+          "headAt": 4684,
+          "baseFrom": 3574,
+          "baseTo": 3575,
+          "headFrom": 4684,
+          "headTo": 4686
+        },
+        {
+          "id": "H121",
+          "headAt": 4689,
+          "baseFrom": 3578,
+          "baseTo": 3578,
+          "headFrom": 4689,
+          "headTo": 4689
+        },
+        {
+          "id": "H122",
+          "headAt": 4694,
+          "baseFrom": 3583,
+          "baseTo": 3596
+        },
+        {
+          "id": "H123",
+          "headAt": 5072,
+          "baseFrom": 3975,
+          "baseTo": 3984
+        },
+        {
+          "id": "H124",
+          "headAt": 5243,
+          "headFrom": 5243,
+          "headTo": 5252
+        },
+        {
+          "id": "H125",
+          "headAt": 5261,
+          "headFrom": 5261,
+          "headTo": 5270
+        },
+        {
+          "id": "H126",
+          "headAt": 5362,
+          "headFrom": 5362,
+          "headTo": 5376
+        },
+        {
+          "id": "H127",
+          "headAt": 5425,
+          "headFrom": 5425,
+          "headTo": 5426
+        },
+        {
+          "id": "H128",
+          "headAt": 6131,
+          "baseFrom": 5007,
+          "baseTo": 5009
+        },
+        {
+          "id": "H129",
+          "headAt": 6133,
+          "headFrom": 6133,
+          "headTo": 6134
+        },
+        {
+          "id": "H130",
+          "headAt": 6161,
+          "headFrom": 6161,
+          "headTo": 6162
+        },
+        {
+          "id": "H131",
+          "headAt": 6508,
+          "headFrom": 6508,
+          "headTo": 6509
+        },
+        {
+          "id": "H132",
+          "headAt": 6693,
+          "headFrom": 6693,
+          "headTo": 6694
+        },
+        {
+          "id": "H133",
+          "headAt": 6777,
+          "headFrom": 6777,
+          "headTo": 6845
+        },
+        {
+          "id": "H134",
+          "headAt": 6859,
+          "headFrom": 6859,
+          "headTo": 6927
+        },
+        {
+          "id": "H135",
+          "headAt": 6945,
+          "headFrom": 6945,
+          "headTo": 6958
+        },
+        {
+          "id": "H136",
+          "headAt": 7052,
+          "headFrom": 7052,
+          "headTo": 7058
+        },
+        {
+          "id": "H137",
+          "headAt": 7074,
+          "headFrom": 7074,
+          "headTo": 7102
+        },
+        {
+          "id": "H138",
+          "headAt": 7145,
+          "headFrom": 7145,
+          "headTo": 7160
+        },
+        {
+          "id": "H139",
+          "headAt": 7315,
+          "headFrom": 7315,
+          "headTo": 7383
+        },
+        {
+          "id": "H140",
+          "headAt": 7428,
+          "headFrom": 7428,
+          "headTo": 7461
+        },
+        {
+          "id": "H141",
+          "headAt": 7757,
+          "headFrom": 7757,
+          "headTo": 7763
+        },
+        {
+          "id": "H142",
+          "headAt": 7776,
+          "headFrom": 7776,
+          "headTo": 7789
+        },
+        {
+          "id": "H143",
+          "headAt": 7815,
+          "headFrom": 7815,
+          "headTo": 7883
+        },
+        {
+          "id": "H144",
+          "headAt": 7910,
+          "headFrom": 7910,
+          "headTo": 7978
+        },
+        {
+          "id": "H145",
+          "headAt": 7988,
+          "headFrom": 7988,
+          "headTo": 8056
+        },
+        {
+          "id": "H146",
+          "headAt": 8078,
+          "headFrom": 8078,
+          "headTo": 8146
+        },
+        {
+          "id": "H147",
+          "headAt": 8280,
+          "headFrom": 8280,
+          "headTo": 8296
+        },
+        {
+          "id": "H148",
+          "headAt": 8339,
+          "headFrom": 8339,
+          "headTo": 8348
+        },
+        {
+          "id": "H149",
+          "headAt": 8551,
+          "baseFrom": 6791,
+          "baseTo": 6808
+        },
+        {
+          "id": "H150",
+          "headAt": 8723,
+          "headFrom": 8723,
+          "headTo": 8724
+        },
+        {
+          "id": "H151",
+          "headAt": 8769,
+          "headFrom": 8769,
+          "headTo": 9001
+        },
+        {
+          "id": "H152",
+          "headAt": 9097,
+          "headFrom": 9097,
+          "headTo": 9113
+        },
+        {
+          "id": "H153",
+          "headAt": 9124,
+          "headFrom": 9124,
+          "headTo": 9125
+        },
+        {
+          "id": "H154",
+          "headAt": 9141,
+          "headFrom": 9141,
+          "headTo": 9143
+        },
+        {
+          "id": "H155",
+          "headAt": 9145,
+          "baseFrom": 7146,
+          "baseTo": 7146,
+          "headFrom": 9145,
+          "headTo": 9148
+        }
+      ]
+    },
+    {
+      "file": "package.json",
+      "status": "modified",
+      "headSourceId": "head-7ae45ad102eab3b6",
+      "baseSourceId": "base-7ae45ad102eab3b6",
+      "hunks": [
+        {
+          "id": "H156",
+          "headAt": 9,
+          "baseFrom": 9,
+          "baseTo": 9,
+          "headFrom": 9,
+          "headTo": 14
+        },
+        {
+          "id": "H157",
+          "headAt": 20,
+          "headFrom": 20,
+          "headTo": 20
+        },
+        {
+          "id": "H158",
+          "headAt": 28,
+          "headFrom": 28,
+          "headTo": 29
+        },
+        {
+          "id": "H159",
+          "headAt": 36,
+          "headFrom": 36,
+          "headTo": 36
+        },
+        {
+          "id": "H160",
+          "headAt": 38,
+          "baseFrom": 29,
+          "baseTo": 29,
+          "headFrom": 38,
+          "headTo": 39
+        }
+      ]
+    },
+    {
+      "file": "playwright.config.ts",
+      "status": "added",
+      "headSourceId": "head-f679bf1e58e8dddf",
+      "hunks": [
+        {
+          "id": "H161",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 35
+        }
+      ]
+    },
+    {
+      "file": "src/app/api/tripmate/route.ts",
+      "status": "added",
+      "headSourceId": "head-3758ad602f4cae09",
+      "hunks": [
+        {
+          "id": "H162",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 138
+        }
+      ]
+    },
+    {
+      "file": "src/app/globals.css",
+      "status": "modified",
+      "headSourceId": "head-4f206759c961f544",
+      "baseSourceId": "base-4f206759c961f544",
+      "hunks": [
+        {
+          "id": "H163",
+          "headAt": 2,
+          "baseFrom": 2,
+          "baseTo": 2,
+          "headFrom": 2,
+          "headTo": 2
+        },
+        {
+          "id": "H164",
+          "headAt": 4,
+          "baseFrom": 4,
+          "baseTo": 5,
+          "headFrom": 4,
+          "headTo": 9
+        },
+        {
+          "id": "H165",
+          "headAt": 11,
+          "baseFrom": 7,
+          "baseTo": 7
+        },
+        {
+          "id": "H166",
+          "headAt": 17,
+          "baseFrom": 14,
+          "baseTo": 19,
+          "headFrom": 17,
+          "headTo": 18
+        },
+        {
+          "id": "H167",
+          "headAt": 20,
+          "baseFrom": 21,
+          "baseTo": 21
+        },
+        {
+          "id": "H168",
+          "headAt": 21,
+          "headFrom": 21,
+          "headTo": 21
+        },
+        {
+          "id": "H169",
+          "headAt": 25,
+          "headFrom": 25,
+          "headTo": 530
+        }
+      ]
+    },
+    {
+      "file": "src/app/layout.tsx",
+      "status": "modified",
+      "headSourceId": "head-29d0a55f5ca1a995",
+      "baseSourceId": "base-29d0a55f5ca1a995",
+      "hunks": [
+        {
+          "id": "H170",
+          "headAt": 16,
+          "baseFrom": 16,
+          "baseTo": 17,
+          "headFrom": 16,
+          "headTo": 18
+        }
+      ]
+    },
+    {
+      "file": "src/app/page.tsx",
+      "status": "modified",
+      "headSourceId": "head-73d7a23e5015801b",
+      "baseSourceId": "base-73d7a23e5015801b",
+      "hunks": [
+        {
+          "id": "H171",
+          "headAt": 1,
+          "baseFrom": 1,
+          "baseTo": 2,
+          "headFrom": 1,
+          "headTo": 1
+        },
+        {
+          "id": "H172",
+          "headAt": 3,
+          "baseFrom": 4,
+          "baseTo": 68,
+          "headFrom": 3,
+          "headTo": 3
+        }
+      ]
+    },
+    {
+      "file": "src/components/confirmation.tsx",
+      "status": "added",
+      "headSourceId": "head-b6c951804e7b673f",
+      "hunks": [
+        {
+          "id": "H173",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 32
+        }
+      ]
+    },
+    {
+      "file": "src/components/tripmate.tsx",
+      "status": "added",
+      "headSourceId": "head-19f6eb1239bfeaec",
+      "hunks": [
+        {
+          "id": "H174",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 1246
+        }
+      ]
+    },
+    {
+      "file": "src/lib/accounting.ts",
+      "status": "added",
+      "headSourceId": "head-a77df85de2e19173",
+      "hunks": [
+        {
+          "id": "H175",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 160
+        }
+      ]
+    },
+    {
+      "file": "src/lib/request-origin.ts",
+      "status": "added",
+      "headSourceId": "head-c718619a882d3367",
+      "hunks": [
+        {
+          "id": "H176",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 14
+        }
+      ]
+    },
+    {
+      "file": "src/lib/supabase-browser.ts",
+      "status": "added",
+      "headSourceId": "head-0d26805b56742279",
+      "hunks": [
+        {
+          "id": "H177",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 38
+        }
+      ]
+    },
+    {
+      "file": "src/lib/supabase-server.ts",
+      "status": "added",
+      "headSourceId": "head-d94a11d6b5c5fde3",
+      "hunks": [
+        {
+          "id": "H178",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 17
+        }
+      ]
+    },
+    {
+      "file": "src/proxy.ts",
+      "status": "added",
+      "headSourceId": "head-78bb005ca7520864",
+      "hunks": [
+        {
+          "id": "H179",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 24
+        }
+      ]
+    },
+    {
+      "file": "supabase/migrations/202611100001_tripmate.sql",
+      "status": "added",
+      "headSourceId": "head-c65ab30c9effdf02",
+      "hunks": [
+        {
+          "id": "H180",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 196
+        }
+      ]
+    },
+    {
+      "file": "tests/accounting.test.ts",
+      "status": "added",
+      "headSourceId": "head-0074600f6fd57ccf",
+      "hunks": [
+        {
+          "id": "H181",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 135
+        }
+      ]
+    },
+    {
+      "file": "tests/browser/workflows.spec.ts",
+      "status": "added",
+      "headSourceId": "head-9421ebb2c72b20db",
+      "hunks": [
+        {
+          "id": "H182",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 136
+        }
+      ]
+    },
+    {
+      "file": "tests/integration/database.test.ts",
+      "status": "added",
+      "headSourceId": "head-4cb385ba012d8af8",
+      "hunks": [
+        {
+          "id": "H183",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 247
+        }
+      ]
+    },
+    {
+      "file": "tests/request-origin.test.ts",
+      "status": "added",
+      "headSourceId": "head-0ba8e87cabe9e086",
+      "hunks": [
+        {
+          "id": "H184",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 14
+        }
+      ]
+    },
+    {
+      "file": "tests/support/supabase-fixture.mjs",
+      "status": "added",
+      "headSourceId": "head-97416c74c9848d1f",
+      "hunks": [
+        {
+          "id": "H185",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 171
+        }
+      ]
+    },
+    {
+      "file": "tsconfig.json",
+      "status": "modified",
+      "headSourceId": "head-b55cdbef4907b704",
+      "baseSourceId": "base-b55cdbef4907b704",
+      "hunks": [
+        {
+          "id": "H186",
+          "headAt": 4,
+          "baseFrom": 4,
+          "baseTo": 4,
+          "headFrom": 4,
+          "headTo": 8
+        },
+        {
+          "id": "H187",
+          "headAt": 26,
+          "baseFrom": 22,
+          "baseTo": 22,
+          "headFrom": 26,
+          "headTo": 28
+        },
+        {
+          "id": "H188",
+          "headAt": 37,
+          "baseFrom": 31,
+          "baseTo": 31,
+          "headFrom": 37,
+          "headTo": 39
+        },
+        {
+          "id": "H189",
+          "headAt": 41,
+          "baseFrom": 33,
+          "baseTo": 33,
+          "headFrom": 41,
+          "headTo": 43
+        }
+      ]
+    },
+    {
+      "file": "vitest.config.ts",
+      "status": "added",
+      "headSourceId": "head-2ee894bf23aa44ff",
+      "hunks": [
+        {
+          "id": "H190",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 8
+        }
+      ]
+    },
+    {
+      "file": "vitest.integration.config.ts",
+      "status": "added",
+      "headSourceId": "head-3c8d49f04351b39c",
+      "hunks": [
+        {
+          "id": "H191",
+          "headAt": 1,
+          "headFrom": 1,
+          "headTo": 8
+        }
+      ]
+    }
+  ],
+  "omittedHunks": [],
+  "inventory": {
+    "testPaths": {
+      "from": "conventions",
+      "paths": []
+    },
+    "requestWords": [
+      "implement",
+      "approved",
+      "workflow"
+    ],
+    "code": [
+      {
+        "file": "docs/implementation.md",
+        "why": [
+          "changed",
+          "request-match:implement"
+        ],
+        "lines": 23
+      },
+      {
+        "file": ".gitignore",
+        "why": [
+          "changed"
+        ],
+        "lines": 14
+      },
+      {
+        "file": "AGENTS.md",
+        "why": [
+          "changed"
+        ],
+        "lines": 9
+      },
+      {
+        "file": "design.pen",
+        "why": [
+          "changed"
+        ],
+        "lines": 4542
+      },
+      {
+        "file": "docs/PRD.md",
+        "why": [
+          "changed"
+        ],
+        "lines": 207
+      },
+      {
+        "file": "eslint.config.mjs",
+        "why": [
+          "changed"
+        ],
+        "lines": 21
+      },
+      {
+        "file": "next-env.d.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 7
+      },
+      {
+        "file": "next.config.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 18
+      },
+      {
+        "file": "package-lock.json",
+        "why": [
+          "changed"
+        ],
+        "lines": 9162
+      },
+      {
+        "file": "package.json",
+        "why": [
+          "changed"
+        ],
+        "lines": 41
+      },
+      {
+        "file": "playwright.config.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 35
+      },
+      {
+        "file": "src/app/api/tripmate/route.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 138
+      },
+      {
+        "file": "src/app/globals.css",
+        "why": [
+          "changed"
+        ],
+        "lines": 531
+      },
+      {
+        "file": "src/app/layout.tsx",
+        "why": [
+          "changed"
+        ],
+        "lines": 30
+      },
+      {
+        "file": "src/app/page.tsx",
+        "why": [
+          "changed"
+        ],
+        "lines": 4
+      },
+      {
+        "file": "src/components/confirmation.tsx",
+        "why": [
+          "changed"
+        ],
+        "lines": 32
+      },
+      {
+        "file": "src/components/tripmate.tsx",
+        "why": [
+          "changed"
+        ],
+        "lines": 1246
+      },
+      {
+        "file": "src/lib/accounting.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 160
+      },
+      {
+        "file": "src/lib/request-origin.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 14
+      },
+      {
+        "file": "src/lib/supabase-browser.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 38
+      },
+      {
+        "file": "src/lib/supabase-server.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 17
+      },
+      {
+        "file": "src/proxy.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 24
+      },
+      {
+        "file": "supabase/migrations/202611100001_tripmate.sql",
+        "why": [
+          "changed"
+        ],
+        "lines": 196
+      },
+      {
+        "file": "tsconfig.json",
+        "why": [
+          "changed"
+        ],
+        "lines": 44
+      },
+      {
+        "file": "vitest.config.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 8
+      },
+      {
+        "file": "vitest.integration.config.ts",
+        "why": [
+          "changed"
+        ],
+        "lines": 8
+      }
+    ],
+    "tests": [
+      {
+        "id": "T1",
+        "file": "tests/browser/workflows.spec.ts",
+        "framework": "playwright",
+        "level": "e2e",
+        "why": [
+          "changed",
+          "request-match:workflow"
+        ],
+        "changed": true,
+        "tests": [
+          {
+            "name": "TC16 TC20 complete all three workflows across browser presentation, Next API and real PostgreSQL (Auth/realtime substituted)",
+            "line": 5
+          },
+          {
+            "name": "TC15 exposes no payment/settlement controls; invalid invitation explains recovery",
+            "line": 126
+          }
+        ]
+      },
+      {
+        "id": "T2",
+        "file": "tests/accounting.test.ts",
+        "framework": "vitest",
+        "level": "unit",
+        "why": [
+          "changed"
+        ],
+        "changed": true,
+        "tests": [
+          {
+            "name": "TC2 rejects missing names, impossible or reversed dates",
+            "line": 13
+          },
+          {
+            "name": "TC5 requires organiser authority and two active members including organiser",
+            "line": 36
+          },
+          {
+            "name": "TC7 rejects zero, negative, malformed, overflow and fractional satang",
+            "line": 43
+          },
+          {
+            "name": "TC10 splits ฿121 exactly and assigns the remainder by stable ID",
+            "line": 58
+          },
+          {
+            "name": "TC11 rejects empty, duplicate, foreign participants and non-positive shares",
+            "line": 65
+          },
+          {
+            "name": "TC19 selected and mixed parts charge only their groups and reconcile",
+            "line": 70
+          },
+          {
+            "name": "TC14 explains allocations, extras, contributions, personal credits and net",
+            "line": 114
+          },
+          {
+            "name": "TC14 excludes personal payments from pool spending and includes all expenses in total used",
+            "line": 127
+          }
+        ]
+      },
+      {
+        "id": "T3",
+        "file": "tests/integration/database.test.ts",
+        "framework": "vitest",
+        "level": "integration",
+        "why": [
+          "changed"
+        ],
+        "changed": true,
+        "tests": [
+          {
+            "name": "TC1 creates the trip, organiser and invitation atomically",
+            "line": 60
+          },
+          {
+            "name": "TC3 joins exactly once and TC18 returns an existing trip",
+            "line": 83
+          },
+          {
+            "name": "TC4 refuses revoked, expired and unknown invitations for new members",
+            "line": 101
+          },
+          {
+            "name": "TC17 sets the cash holder and starts two members; non-organiser is denied",
+            "line": 120
+          },
+          {
+            "name": "TC6 saves contributions and retries without duplicates",
+            "line": 129
+          },
+          {
+            "name": "TC8 saves a personal expense and its exact allocations atomically",
+            "line": 158
+          },
+          {
+            "name": "TC9 requires fresh overdraft acknowledgement and saves only after explicit confirmation",
+            "line": 173
+          },
+          {
+            "name": "TC19 persists mixed parts and TC11 rolls back invalid total or foreign participants",
+            "line": 186
+          },
+          {
+            "name": "TC13 prevents outsider reads, writes and protected RPC access",
+            "line": 221
+          }
+        ]
+      },
+      {
+        "id": "T4",
+        "file": "tests/request-origin.test.ts",
+        "framework": "vitest",
+        "level": "unit",
+        "why": [
+          "changed"
+        ],
+        "changed": true,
+        "tests": [
+          {
+            "name": "SEC7 accepts the incoming host behind a local proxy but rejects cross-origin mutations",
+            "line": 3
+          }
+        ]
+      },
+      {
+        "id": "T5",
+        "file": "tests/support/supabase-fixture.mjs",
+        "framework": "unknown",
+        "level": "unit",
+        "why": [
+          "changed"
+        ],
+        "changed": true,
+        "tests": []
+      }
+    ],
+    "cut": {
+      "code": 0,
+      "tests": 0
+    },
+    "warnings": []
+  },
+  "declaredTags": [],
+  "evidence": {
+    "specifications": []
+  },
+  "warnings": []
+}
